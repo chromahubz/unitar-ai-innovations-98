@@ -46,67 +46,86 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white font-montserrat">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-900 font-montserrat relative overflow-hidden">
+      {/* Animated Background Orbs */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/3 -left-32 w-80 h-80 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
+      </div>
+
+      {/* Giant Animated Sphere Background */}
+      <AnimatedSphere className="top-0 right-0 w-[150vh] h-[150vh] z-0" />
+
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
-        <div className="container mx-auto px-4 py-4">
+      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/5 border-b border-white/10 shadow-2xl">
+        <div className="container mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <AnimatedSphere className="w-8 h-8" />
-              <div className="text-2xl font-black text-unitar-blue tracking-tight">UNITAR</div>
+              <div className="w-10 h-10 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-xl flex items-center justify-center shadow-xl">
+                <div className="w-6 h-6 bg-white rounded-lg"></div>
+              </div>
+              <div className="text-3xl font-black bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent tracking-tight">UNITAR</div>
             </div>
             <div className="hidden md:flex space-x-8">
-              <a href="#services" className="text-unitar-gray hover:text-unitar-blue transition-all duration-300 font-medium">Services</a>
-              <a href="#portfolio" className="text-unitar-gray hover:text-unitar-blue transition-all duration-300 font-medium">Portfolio</a>
-              <a href="#about" className="text-unitar-gray hover:text-unitar-blue transition-all duration-300 font-medium">About</a>
-              <a href="#contact" className="text-unitar-gray hover:text-unitar-blue transition-all duration-300 font-medium">Contact</a>
+              <a href="#services" className="text-white/80 hover:text-cyan-400 transition-all duration-300 font-medium backdrop-blur-sm px-4 py-2 rounded-full hover:bg-white/10 border border-transparent hover:border-white/20">Services</a>
+              <a href="#portfolio" className="text-white/80 hover:text-cyan-400 transition-all duration-300 font-medium backdrop-blur-sm px-4 py-2 rounded-full hover:bg-white/10 border border-transparent hover:border-white/20">Portfolio</a>
+              <a href="#about" className="text-white/80 hover:text-cyan-400 transition-all duration-300 font-medium backdrop-blur-sm px-4 py-2 rounded-full hover:bg-white/10 border border-transparent hover:border-white/20">About</a>
+              <a href="#contact" className="text-white/80 hover:text-cyan-400 transition-all duration-300 font-medium backdrop-blur-sm px-4 py-2 rounded-full hover:bg-white/10 border border-transparent hover:border-white/20">Contact</a>
             </div>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
-        <div className="absolute top-20 right-10 opacity-20 pointer-events-none">
-          <AnimatedSphere className="w-64 h-64" />
-        </div>
-        <div className="container mx-auto px-4 relative">
-          <div className="max-w-5xl mx-auto text-center animate-fade-in">
-            <div className="flex items-center justify-center mb-6">
-              <div className="flex items-center space-x-1">
+      <section className="pt-40 pb-32 relative overflow-hidden min-h-screen flex items-center">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-6xl mx-auto text-center">
+            <div className="flex items-center justify-center mb-8">
+              <div className="flex items-center space-x-1 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 backdrop-blur-sm border border-yellow-400/30 rounded-full px-6 py-3">
                 <Star className="h-5 w-5 text-yellow-400 fill-current" />
                 <Star className="h-5 w-5 text-yellow-400 fill-current" />
                 <Star className="h-5 w-5 text-yellow-400 fill-current" />
                 <Star className="h-5 w-5 text-yellow-400 fill-current" />
                 <Star className="h-5 w-5 text-yellow-400 fill-current" />
+                <span className="ml-3 text-sm font-bold text-yellow-300">Trusted by innovative companies worldwide</span>
               </div>
-              <span className="ml-3 text-sm font-semibold text-unitar-gray">Trusted by innovative companies worldwide</span>
             </div>
-            <h1 className="text-6xl md:text-8xl font-black text-unitar-gray-dark mb-8 leading-[0.9] tracking-tight">
-              Building the Future of
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-unitar-blue via-unitar-blue-light to-purple-600"> Software</span>
+            
+            <h1 className="text-7xl md:text-9xl font-black mb-8 leading-[0.85] tracking-tight">
+              <span className="text-white">Building the</span>
+              <br />
+              <span className="text-white">Future of</span>
+              <br />
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-pulse">Software</span>
             </h1>
-            <p className="text-xl md:text-2xl text-unitar-gray mb-10 max-w-4xl mx-auto leading-relaxed font-medium">
-              We create AI-first mobile and web applications that transform ideas into powerful digital solutions. 
+            
+            <p className="text-2xl md:text-3xl text-white/80 mb-12 max-w-5xl mx-auto leading-relaxed font-light">
+              We create AI-first mobile and web applications that transform ideas into 
+              <span className="text-cyan-400 font-semibold"> powerful digital solutions</span>. 
               From rapid prototypes to enterprise-grade systems that scale with your ambitions.
             </p>
+            
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button 
                 size="lg" 
-                className="bg-gradient-to-r from-unitar-blue to-unitar-blue-dark hover:from-unitar-blue-dark hover:to-slate-800 text-white px-10 py-6 text-lg font-semibold shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
+                className="group relative bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white px-12 py-8 text-xl font-bold shadow-2xl hover:shadow-cyan-500/25 transform hover:-translate-y-2 transition-all duration-500 backdrop-blur-sm border border-white/20 hover:border-cyan-400/50 rounded-2xl overflow-hidden"
                 onClick={() => scrollToSection('portfolio')}
               >
-                <Rocket className="mr-3 h-6 w-6" />
-                Explore Our Apps
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <Rocket className="mr-4 h-7 w-7 group-hover:rotate-12 transition-transform duration-300" />
+                <span className="relative z-10">Explore Our Apps</span>
               </Button>
+              
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-2 border-unitar-blue text-unitar-blue hover:bg-unitar-blue hover:text-white px-10 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                className="group relative backdrop-blur-xl bg-white/5 border-2 border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 hover:text-white px-12 py-8 text-xl font-bold shadow-2xl hover:shadow-cyan-500/25 transform hover:-translate-y-2 transition-all duration-500 rounded-2xl overflow-hidden"
                 onClick={() => scrollToSection('contact')}
               >
-                <Mail className="mr-3 h-6 w-6" />
-                Request a Project
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 to-purple-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <Mail className="mr-4 h-7 w-7 group-hover:scale-110 transition-transform duration-300" />
+                <span className="relative z-10">Request a Project</span>
               </Button>
             </div>
           </div>
@@ -114,89 +133,89 @@ const Index = () => {
       </section>
 
       {/* What We Do Section */}
-      <section id="services" className="py-24 bg-white relative">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-black text-unitar-gray-dark mb-6 tracking-tight">What We Do</h2>
-            <p className="text-xl text-unitar-gray max-w-3xl mx-auto font-medium leading-relaxed">
+      <section id="services" className="py-32 relative">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="text-center mb-24">
+            <h2 className="text-6xl md:text-7xl font-black text-white mb-8 tracking-tight">What We Do</h2>
+            <p className="text-2xl text-white/70 max-w-4xl mx-auto font-light leading-relaxed">
               We specialize in cutting-edge software development with AI at the core of everything we build.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            <Card className="group p-10 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-gradient-to-br from-white to-slate-50 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-unitar-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative">
-                <div className="bg-gradient-to-br from-unitar-blue/10 to-unitar-blue/20 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
-                  <Globe className="h-10 w-10 text-unitar-blue" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+            <Card className="group relative backdrop-blur-xl bg-white/5 border border-white/20 p-12 hover:bg-white/10 transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-cyan-500/20 rounded-3xl overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
+                <div className="bg-gradient-to-br from-cyan-400/20 to-blue-500/20 w-24 h-24 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm border border-cyan-400/30">
+                  <Globe className="h-12 w-12 text-cyan-400" />
                 </div>
-                <h3 className="text-2xl font-bold mb-6 text-unitar-gray-dark">Web App Development</h3>
-                <p className="text-unitar-gray leading-relaxed text-lg">
+                <h3 className="text-3xl font-bold mb-6 text-white">Web App Development</h3>
+                <p className="text-white/70 leading-relaxed text-lg">
                   Modern, responsive web applications built with the latest technologies. From single-page apps to complex enterprise platforms.
                 </p>
               </div>
             </Card>
 
-            <Card className="group p-10 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-gradient-to-br from-white to-slate-50 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-unitar-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative">
-                <div className="bg-gradient-to-br from-purple-100 to-purple-200 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
-                  <Smartphone className="h-10 w-10 text-purple-600" />
+            <Card className="group relative backdrop-blur-xl bg-white/5 border border-white/20 p-12 hover:bg-white/10 transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-purple-500/20 rounded-3xl overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
+                <div className="bg-gradient-to-br from-purple-400/20 to-pink-500/20 w-24 h-24 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm border border-purple-400/30">
+                  <Smartphone className="h-12 w-12 text-purple-400" />
                 </div>
-                <h3 className="text-2xl font-bold mb-6 text-unitar-gray-dark">Mobile App Development</h3>
-                <p className="text-unitar-gray leading-relaxed text-lg">
+                <h3 className="text-3xl font-bold mb-6 text-white">Mobile App Development</h3>
+                <p className="text-white/70 leading-relaxed text-lg">
                   Native iOS and Android applications that deliver exceptional user experiences. Cross-platform solutions that work seamlessly everywhere.
                 </p>
               </div>
             </Card>
 
-            <Card className="group p-10 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-gradient-to-br from-white to-slate-50 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-unitar-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative">
-                <div className="bg-gradient-to-br from-emerald-100 to-emerald-200 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
-                  <Brain className="h-10 w-10 text-emerald-600" />
+            <Card className="group relative backdrop-blur-xl bg-white/5 border border-white/20 p-12 hover:bg-white/10 transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-emerald-500/20 rounded-3xl overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
+                <div className="bg-gradient-to-br from-emerald-400/20 to-green-500/20 w-24 h-24 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm border border-emerald-400/30">
+                  <Brain className="h-12 w-12 text-emerald-400" />
                 </div>
-                <h3 className="text-2xl font-bold mb-6 text-unitar-gray-dark">AI-Powered Solutions</h3>
-                <p className="text-unitar-gray leading-relaxed text-lg">
+                <h3 className="text-3xl font-bold mb-6 text-white">AI-Powered Solutions</h3>
+                <p className="text-white/70 leading-relaxed text-lg">
                   Intelligent software that learns and adapts. Machine learning, natural language processing, and predictive analytics.
                 </p>
               </div>
             </Card>
 
-            <Card className="group p-10 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-gradient-to-br from-white to-slate-50 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-unitar-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative">
-                <div className="bg-gradient-to-br from-orange-100 to-orange-200 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
-                  <Building2 className="h-10 w-10 text-orange-600" />
+            <Card className="group relative backdrop-blur-xl bg-white/5 border border-white/20 p-12 hover:bg-white/10 transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-orange-500/20 rounded-3xl overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
+                <div className="bg-gradient-to-br from-orange-400/20 to-red-500/20 w-24 h-24 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm border border-orange-400/30">
+                  <Building2 className="h-12 w-12 text-orange-400" />
                 </div>
-                <h3 className="text-2xl font-bold mb-6 text-unitar-gray-dark">B2B App Development</h3>
-                <p className="text-unitar-gray leading-relaxed text-lg">
+                <h3 className="text-3xl font-bold mb-6 text-white">B2B App Development</h3>
+                <p className="text-white/70 leading-relaxed text-lg">
                   Enterprise-grade business applications that streamline operations and drive growth. Custom solutions for unique business needs.
                 </p>
               </div>
             </Card>
 
-            <Card className="group p-10 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-gradient-to-br from-white to-slate-50 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-unitar-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative">
-                <div className="bg-gradient-to-br from-red-100 to-red-200 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
-                  <Target className="h-10 w-10 text-red-600" />
+            <Card className="group relative backdrop-blur-xl bg-white/5 border border-white/20 p-12 hover:bg-white/10 transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-red-500/20 rounded-3xl overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
+                <div className="bg-gradient-to-br from-red-400/20 to-pink-500/20 w-24 h-24 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm border border-red-400/30">
+                  <Target className="h-12 w-12 text-red-400" />
                 </div>
-                <h3 className="text-2xl font-bold mb-6 text-unitar-gray-dark">MVP Launches</h3>
-                <p className="text-unitar-gray leading-relaxed text-lg">
+                <h3 className="text-3xl font-bold mb-6 text-white">MVP Launches</h3>
+                <p className="text-white/70 leading-relaxed text-lg">
                   Rapid prototyping and MVP development to validate your ideas quickly. Get to market faster with lean, focused solutions.
                 </p>
               </div>
             </Card>
 
-            <Card className="group p-10 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-gradient-to-br from-white to-slate-50 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-unitar-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative">
-                <div className="bg-gradient-to-br from-indigo-100 to-indigo-200 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
-                  <Users className="h-10 w-10 text-indigo-600" />
+            <Card className="group relative backdrop-blur-xl bg-white/5 border border-white/20 p-12 hover:bg-white/10 transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-indigo-500/20 rounded-3xl overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
+                <div className="bg-gradient-to-br from-indigo-400/20 to-blue-500/20 w-24 h-24 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm border border-indigo-400/30">
+                  <Users className="h-12 w-12 text-indigo-400" />
                 </div>
-                <h3 className="text-2xl font-bold mb-6 text-unitar-gray-dark">Consulting & Strategy</h3>
-                <p className="text-unitar-gray leading-relaxed text-lg">
+                <h3 className="text-3xl font-bold mb-6 text-white">Consulting & Strategy</h3>
+                <p className="text-white/70 leading-relaxed text-lg">
                   Strategic guidance for your digital transformation. Product planning, architecture design, and technology consulting.
                 </p>
               </div>
@@ -206,81 +225,82 @@ const Index = () => {
       </section>
 
       {/* App Catalogue Preview */}
-      <section className="py-24 bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 relative overflow-hidden">
-        <div className="container mx-auto px-4 text-center relative">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-5xl md:text-6xl font-black text-unitar-gray-dark mb-8 tracking-tight">App Catalogue Coming Soon</h2>
-            <p className="text-xl text-unitar-gray mb-12 leading-relaxed font-medium">
+      <section className="py-32 relative">
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-6xl md:text-7xl font-black text-white mb-12 tracking-tight">App Catalogue Coming Soon</h2>
+            <p className="text-2xl text-white/70 mb-16 leading-relaxed font-light">
               We're preparing to launch a comprehensive catalogue of cutting-edge applications that showcase the power of AI-driven development. 
               Stay tuned for revolutionary tools that will transform how you work and create.
             </p>
-            <Button className="bg-gradient-to-r from-purple-600 to-unitar-blue hover:from-purple-700 hover:to-unitar-blue-dark text-white px-10 py-6 text-lg font-semibold shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
-              <Sparkles className="mr-3 h-6 w-6" />
-              Get Early Access
+            <Button className="group relative bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-400 hover:to-pink-500 text-white px-12 py-8 text-xl font-bold shadow-2xl hover:shadow-purple-500/25 transform hover:-translate-y-2 transition-all duration-500 backdrop-blur-sm border border-white/20 hover:border-purple-400/50 rounded-2xl overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-pink-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <Sparkles className="mr-4 h-7 w-7 group-hover:rotate-12 transition-transform duration-300" />
+              <span className="relative z-10">Get Early Access</span>
             </Button>
           </div>
         </div>
       </section>
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-black text-unitar-gray-dark mb-6 tracking-tight">Featured Projects</h2>
-            <p className="text-xl text-unitar-gray max-w-3xl mx-auto font-medium leading-relaxed">
+      <section id="portfolio" className="py-32 relative">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="text-center mb-24">
+            <h2 className="text-6xl md:text-7xl font-black text-white mb-8 tracking-tight">Featured Projects</h2>
+            <p className="text-2xl text-white/70 max-w-4xl mx-auto font-light leading-relaxed">
               Get a sneak peek at our upcoming applications that will revolutionize their respective industries.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-10 max-w-7xl mx-auto">
-            <Card className="group p-10 text-center hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-4 bg-gradient-to-br from-white via-blue-50/30 to-blue-100/50 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative">
-                <div className="bg-gradient-to-br from-unitar-blue to-blue-600 w-24 h-24 rounded-3xl flex items-center justify-center mb-8 mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
-                  <Video className="h-12 w-12 text-white" />
+          <div className="grid md:grid-cols-3 gap-12 max-w-7xl mx-auto">
+            <Card className="group relative backdrop-blur-xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-400/30 p-12 text-center hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-purple-500/20 transition-all duration-500 hover:-translate-y-6 hover:shadow-2xl hover:shadow-blue-500/25 rounded-3xl overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-400/5 to-purple-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
+                <div className="bg-gradient-to-br from-blue-500 to-purple-600 w-28 h-28 rounded-3xl flex items-center justify-center mb-10 mx-auto shadow-2xl group-hover:scale-110 transition-transform duration-300 border border-blue-400/50">
+                  <Video className="h-14 w-14 text-white" />
                 </div>
-                <h3 className="text-3xl font-black mb-6 text-unitar-gray-dark">VIDEYE</h3>
-                <p className="text-unitar-gray mb-8 leading-relaxed text-lg font-medium">
+                <h3 className="text-4xl font-black mb-8 text-white">VIDEYE</h3>
+                <p className="text-white/70 mb-10 leading-relaxed text-xl font-light">
                   Transform simple ideas into viral videos with AI-powered content creation. The future of mobile video production.
                 </p>
                 <div className="flex items-center justify-center">
-                  <span className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-6 py-3 rounded-full text-sm font-bold shadow-lg">
+                  <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-8 py-4 rounded-full text-lg font-bold shadow-xl backdrop-blur-sm">
                     Coming Soon
                   </span>
                 </div>
               </div>
             </Card>
 
-            <Card className="group p-10 text-center hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-4 bg-gradient-to-br from-white via-purple-50/30 to-purple-100/50 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative">
-                <div className="bg-gradient-to-br from-purple-500 to-purple-700 w-24 h-24 rounded-3xl flex items-center justify-center mb-8 mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
-                  <Music className="h-12 w-12 text-white" />
+            <Card className="group relative backdrop-blur-xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-400/30 p-12 text-center hover:bg-gradient-to-br hover:from-purple-500/20 hover:to-pink-500/20 transition-all duration-500 hover:-translate-y-6 hover:shadow-2xl hover:shadow-purple-500/25 rounded-3xl overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-400/5 to-pink-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
+                <div className="bg-gradient-to-br from-purple-500 to-pink-600 w-28 h-28 rounded-3xl flex items-center justify-center mb-10 mx-auto shadow-2xl group-hover:scale-110 transition-transform duration-300 border border-purple-400/50">
+                  <Music className="h-14 w-14 text-white" />
                 </div>
-                <h3 className="text-3xl font-black mb-6 text-unitar-gray-dark">INFIRADIO</h3>
-                <p className="text-unitar-gray mb-8 leading-relaxed text-lg font-medium">
+                <h3 className="text-4xl font-black mb-8 text-white">INFIRADIO</h3>
+                <p className="text-white/70 mb-10 leading-relaxed text-xl font-light">
                   Create professional music mixes with one click. AI-driven audio processing that understands rhythm and mood.
                 </p>
                 <div className="flex items-center justify-center">
-                  <span className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-6 py-3 rounded-full text-sm font-bold shadow-lg">
+                  <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-8 py-4 rounded-full text-lg font-bold shadow-xl backdrop-blur-sm">
                     Coming Soon
                   </span>
                 </div>
               </div>
             </Card>
 
-            <Card className="group p-10 text-center hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-4 bg-gradient-to-br from-white via-green-50/30 to-green-100/50 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative">
-                <div className="bg-gradient-to-br from-green-500 to-green-700 w-24 h-24 rounded-3xl flex items-center justify-center mb-8 mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
-                  <Scissors className="h-12 w-12 text-white" />
+            <Card className="group relative backdrop-blur-xl bg-gradient-to-br from-green-500/10 to-emerald-500/10 border border-green-400/30 p-12 text-center hover:bg-gradient-to-br hover:from-green-500/20 hover:to-emerald-500/20 transition-all duration-500 hover:-translate-y-6 hover:shadow-2xl hover:shadow-green-500/25 rounded-3xl overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-green-400/5 to-emerald-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
+                <div className="bg-gradient-to-br from-green-500 to-emerald-600 w-28 h-28 rounded-3xl flex items-center justify-center mb-10 mx-auto shadow-2xl group-hover:scale-110 transition-transform duration-300 border border-green-400/50">
+                  <Scissors className="h-14 w-14 text-white" />
                 </div>
-                <h3 className="text-3xl font-black mb-6 text-unitar-gray-dark">VIDEOBLADE</h3>
-                <p className="text-unitar-gray mb-8 leading-relaxed text-lg font-medium">
+                <h3 className="text-4xl font-black mb-8 text-white">VIDEOBLADE</h3>
+                <p className="text-white/70 mb-10 leading-relaxed text-xl font-light">
                   Lightning-fast web-based video editor that rivals desktop applications. Professional editing made simple and accessible.
                 </p>
                 <div className="flex items-center justify-center">
-                  <span className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-6 py-3 rounded-full text-sm font-bold shadow-lg">
+                  <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-8 py-4 rounded-full text-lg font-bold shadow-xl backdrop-blur-sm">
                     Coming Soon
                   </span>
                 </div>
@@ -291,72 +311,72 @@ const Index = () => {
       </section>
 
       {/* Why UNITAR Section */}
-      <section className="py-24 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 text-white relative overflow-hidden">
-        <div className="container mx-auto px-4 relative">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tight">Why Choose UNITAR?</h2>
-            <p className="text-xl text-slate-300 max-w-3xl mx-auto font-medium leading-relaxed">
+      <section className="py-32 relative">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="text-center mb-24">
+            <h2 className="text-6xl md:text-7xl font-black text-white mb-8 tracking-tight">Why Choose UNITAR?</h2>
+            <p className="text-2xl text-white/70 max-w-4xl mx-auto font-light leading-relaxed">
               We bring together cutting-edge technology, innovative thinking, and proven expertise to deliver exceptional results.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
-            <div className="group text-center p-8 rounded-2xl bg-slate-800/50 hover:bg-slate-800/80 transition-all duration-300 hover:-translate-y-2">
-              <div className="bg-gradient-to-br from-unitar-blue to-blue-600 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 mx-auto group-hover:scale-110 transition-transform duration-300">
-                <Brain className="h-10 w-10 text-white" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
+            <div className="group text-center p-10 rounded-3xl backdrop-blur-xl bg-white/5 border border-white/20 hover:bg-white/10 transition-all duration-300 hover:-translate-y-4 hover:shadow-2xl hover:shadow-cyan-500/20">
+              <div className="bg-gradient-to-br from-cyan-400/20 to-blue-500/20 w-24 h-24 rounded-3xl flex items-center justify-center mb-10 mx-auto group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm border border-cyan-400/30">
+                <Brain className="h-12 w-12 text-cyan-400" />
               </div>
-              <h3 className="text-2xl font-bold mb-6">AI-First Development</h3>
-              <p className="text-slate-300 leading-relaxed text-lg">
+              <h3 className="text-3xl font-bold mb-6 text-white">AI-First Development</h3>
+              <p className="text-white/70 leading-relaxed text-lg">
                 Every solution we build leverages artificial intelligence to create smarter, more efficient applications that adapt and learn.
               </p>
             </div>
 
-            <div className="group text-center p-8 rounded-2xl bg-slate-800/50 hover:bg-slate-800/80 transition-all duration-300 hover:-translate-y-2">
-              <div className="bg-gradient-to-br from-yellow-500 to-orange-600 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 mx-auto group-hover:scale-110 transition-transform duration-300">
-                <Zap className="h-10 w-10 text-white" />
+            <div className="group text-center p-10 rounded-3xl backdrop-blur-xl bg-white/5 border border-white/20 hover:bg-white/10 transition-all duration-300 hover:-translate-y-4 hover:shadow-2xl hover:shadow-yellow-500/20">
+              <div className="bg-gradient-to-br from-yellow-400/20 to-orange-500/20 w-24 h-24 rounded-3xl flex items-center justify-center mb-10 mx-auto group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm border border-yellow-400/30">
+                <Zap className="h-12 w-12 text-yellow-400" />
               </div>
-              <h3 className="text-2xl font-bold mb-6">Rapid Prototyping</h3>
-              <p className="text-slate-300 leading-relaxed text-lg">
+              <h3 className="text-3xl font-bold mb-6 text-white">Rapid Prototyping</h3>
+              <p className="text-white/70 leading-relaxed text-lg">
                 From concept to working prototype in record time. We validate ideas quickly and iterate based on real user feedback.
               </p>
             </div>
 
-            <div className="group text-center p-8 rounded-2xl bg-slate-800/50 hover:bg-slate-800/80 transition-all duration-300 hover:-translate-y-2">
-              <div className="bg-gradient-to-br from-green-500 to-emerald-600 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 mx-auto group-hover:scale-110 transition-transform duration-300">
-                <Shield className="h-10 w-10 text-white" />
+            <div className="group text-center p-10 rounded-3xl backdrop-blur-xl bg-white/5 border border-white/20 hover:bg-white/10 transition-all duration-300 hover:-translate-y-4 hover:shadow-2xl hover:shadow-green-500/20">
+              <div className="bg-gradient-to-br from-green-400/20 to-emerald-500/20 w-24 h-24 rounded-3xl flex items-center justify-center mb-10 mx-auto group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm border border-green-400/30">
+                <Shield className="h-12 w-12 text-green-400" />
               </div>
-              <h3 className="text-2xl font-bold mb-6">Enterprise-Grade Engineering</h3>
-              <p className="text-slate-300 leading-relaxed text-lg">
+              <h3 className="text-3xl font-bold mb-6 text-white">Enterprise-Grade Engineering</h3>
+              <p className="text-white/70 leading-relaxed text-lg">
                 Robust, scalable architecture built to handle growth. Security and performance are built into every line of code.
               </p>
             </div>
 
-            <div className="group text-center p-8 rounded-2xl bg-slate-800/50 hover:bg-slate-800/80 transition-all duration-300 hover:-translate-y-2">
-              <div className="bg-gradient-to-br from-purple-500 to-pink-600 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 mx-auto group-hover:scale-110 transition-transform duration-300">
-                <Users className="h-10 w-10 text-white" />
+            <div className="group text-center p-10 rounded-3xl backdrop-blur-xl bg-white/5 border border-white/20 hover:bg-white/10 transition-all duration-300 hover:-translate-y-4 hover:shadow-2xl hover:shadow-purple-500/20">
+              <div className="bg-gradient-to-br from-purple-400/20 to-pink-500/20 w-24 h-24 rounded-3xl flex items-center justify-center mb-10 mx-auto group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm border border-purple-400/30">
+                <Users className="h-12 w-12 text-purple-400" />
               </div>
-              <h3 className="text-2xl font-bold mb-6">Human-Centered UX</h3>
-              <p className="text-slate-300 leading-relaxed text-lg">
+              <h3 className="text-3xl font-bold mb-6 text-white">Human-Centered UX</h3>
+              <p className="text-white/70 leading-relaxed text-lg">
                 Beautiful, intuitive interfaces designed around real user needs. Technology should enhance human capabilities, not complicate them.
               </p>
             </div>
 
-            <div className="group text-center p-8 rounded-2xl bg-slate-800/50 hover:bg-slate-800/80 transition-all duration-300 hover:-translate-y-2">
-              <div className="bg-gradient-to-br from-red-500 to-rose-600 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 mx-auto group-hover:scale-110 transition-transform duration-300">
-                <CheckCircle className="h-10 w-10 text-white" />
+            <div className="group text-center p-10 rounded-3xl backdrop-blur-xl bg-white/5 border border-white/20 hover:bg-white/10 transition-all duration-300 hover:-translate-y-4 hover:shadow-2xl hover:shadow-red-500/20">
+              <div className="bg-gradient-to-br from-red-400/20 to-rose-500/20 w-24 h-24 rounded-3xl flex items-center justify-center mb-10 mx-auto group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm border border-red-400/30">
+                <CheckCircle className="h-12 w-12 text-red-400" />
               </div>
-              <h3 className="text-2xl font-bold mb-6">Secure & Scalable</h3>
-              <p className="text-slate-300 leading-relaxed text-lg">
+              <h3 className="text-3xl font-bold mb-6 text-white">Secure & Scalable</h3>
+              <p className="text-white/70 leading-relaxed text-lg">
                 Built for the future with security by design. Our systems grow with your business and protect your valuable data.
               </p>
             </div>
 
-            <div className="group text-center p-8 rounded-2xl bg-slate-800/50 hover:bg-slate-800/80 transition-all duration-300 hover:-translate-y-2">
-              <div className="bg-gradient-to-br from-indigo-500 to-blue-600 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 mx-auto group-hover:scale-110 transition-transform duration-300">
-                <Database className="h-10 w-10 text-white" />
+            <div className="group text-center p-10 rounded-3xl backdrop-blur-xl bg-white/5 border border-white/20 hover:bg-white/10 transition-all duration-300 hover:-translate-y-4 hover:shadow-2xl hover:shadow-indigo-500/20">
+              <div className="bg-gradient-to-br from-indigo-400/20 to-blue-500/20 w-24 h-24 rounded-3xl flex items-center justify-center mb-10 mx-auto group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm border border-indigo-400/30">
+                <Database className="h-12 w-12 text-indigo-400" />
               </div>
-              <h3 className="text-2xl font-bold mb-6">Data-Driven Insights</h3>
-              <p className="text-slate-300 leading-relaxed text-lg">
+              <h3 className="text-3xl font-bold mb-6 text-white">Data-Driven Insights</h3>
+              <p className="text-white/70 leading-relaxed text-lg">
                 Every decision backed by real data. We build analytics and intelligence into applications from the ground up.
               </p>
             </div>
@@ -365,76 +385,76 @@ const Index = () => {
       </section>
 
       {/* AI Solutions Section */}
-      <section className="py-24 bg-gradient-to-br from-blue-50 via-slate-50 to-purple-50 relative overflow-hidden">
-        <div className="container mx-auto px-4 relative">
-          <div className="max-w-5xl mx-auto text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-black text-unitar-gray-dark mb-8 tracking-tight">AI Solutions</h2>
-            <p className="text-xl text-unitar-gray leading-relaxed font-medium">
+      <section className="py-32 relative">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-6xl mx-auto text-center mb-24">
+            <h2 className="text-6xl md:text-7xl font-black text-white mb-12 tracking-tight">AI Solutions</h2>
+            <p className="text-2xl text-white/70 leading-relaxed font-light">
               We harness the power of artificial intelligence across natural language processing, computer vision, and predictive analytics 
               to create intelligent software that transforms how businesses operate and users interact with technology.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto">
-            <div className="bg-white p-10 rounded-3xl shadow-xl">
-              <h3 className="text-3xl font-black text-unitar-gray-dark mb-8">What We Build</h3>
-              <div className="space-y-8">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/20 p-12 rounded-3xl shadow-2xl">
+              <h3 className="text-4xl font-black text-white mb-12">What We Build</h3>
+              <div className="space-y-10">
                 <div className="flex items-start space-x-6">
-                  <div className="bg-gradient-to-br from-unitar-blue/10 to-unitar-blue/20 w-12 h-12 rounded-xl flex items-center justify-center mt-1">
-                    <ArrowRight className="h-6 w-6 text-unitar-blue" />
+                  <div className="bg-gradient-to-br from-cyan-400/20 to-blue-500/20 w-16 h-16 rounded-2xl flex items-center justify-center mt-1 backdrop-blur-sm border border-cyan-400/30">
+                    <ArrowRight className="h-8 w-8 text-cyan-400" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-unitar-gray-dark mb-3 text-lg">Intelligent Chatbots & Assistants</h4>
-                    <p className="text-unitar-gray text-lg">Conversational AI that understands context and provides meaningful responses.</p>
+                    <h4 className="font-bold text-white mb-4 text-xl">Intelligent Chatbots & Assistants</h4>
+                    <p className="text-white/70 text-lg">Conversational AI that understands context and provides meaningful responses.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-6">
-                  <div className="bg-gradient-to-br from-purple-100 to-purple-200 w-12 h-12 rounded-xl flex items-center justify-center mt-1">
-                    <ArrowRight className="h-6 w-6 text-purple-600" />
+                  <div className="bg-gradient-to-br from-purple-400/20 to-pink-500/20 w-16 h-16 rounded-2xl flex items-center justify-center mt-1 backdrop-blur-sm border border-purple-400/30">
+                    <ArrowRight className="h-8 w-8 text-purple-400" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-unitar-gray-dark mb-3 text-lg">Process Automation</h4>
-                    <p className="text-unitar-gray text-lg">Smart workflows that learn from patterns and optimize business operations.</p>
+                    <h4 className="font-bold text-white mb-4 text-xl">Process Automation</h4>
+                    <p className="text-white/70 text-lg">Smart workflows that learn from patterns and optimize business operations.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-6">
-                  <div className="bg-gradient-to-br from-emerald-100 to-emerald-200 w-12 h-12 rounded-xl flex items-center justify-center mt-1">
-                    <ArrowRight className="h-6 w-6 text-emerald-600" />
+                  <div className="bg-gradient-to-br from-emerald-400/20 to-green-500/20 w-16 h-16 rounded-2xl flex items-center justify-center mt-1 backdrop-blur-sm border border-emerald-400/30">
+                    <ArrowRight className="h-8 w-8 text-emerald-400" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-unitar-gray-dark mb-3 text-lg">Predictive Analytics</h4>
-                    <p className="text-unitar-gray text-lg">Data intelligence that forecasts trends and enables proactive decision-making.</p>
+                    <h4 className="font-bold text-white mb-4 text-xl">Predictive Analytics</h4>
+                    <p className="text-white/70 text-lg">Data intelligence that forecasts trends and enables proactive decision-making.</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white p-10 rounded-3xl shadow-xl">
-              <h3 className="text-3xl font-black text-unitar-gray-dark mb-8">Client Benefits</h3>
-              <div className="space-y-8">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/20 p-12 rounded-3xl shadow-2xl">
+              <h3 className="text-4xl font-black text-white mb-12">Client Benefits</h3>
+              <div className="space-y-10">
                 <div className="flex items-start space-x-6">
-                  <CheckCircle className="h-8 w-8 text-green-500 mt-1" />
+                  <CheckCircle className="h-10 w-10 text-green-400 mt-1" />
                   <div>
-                    <h4 className="font-bold text-unitar-gray-dark mb-3 text-lg">Increased Efficiency</h4>
-                    <p className="text-unitar-gray text-lg">Automate repetitive tasks and free your team to focus on high-value activities.</p>
+                    <h4 className="font-bold text-white mb-4 text-xl">Increased Efficiency</h4>
+                    <p className="text-white/70 text-lg">Automate repetitive tasks and free your team to focus on high-value activities.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-6">
-                  <CheckCircle className="h-8 w-8 text-green-500 mt-1" />
+                  <CheckCircle className="h-10 w-10 text-green-400 mt-1" />
                   <div>
-                    <h4 className="font-bold text-unitar-gray-dark mb-3 text-lg">Better Decision Making</h4>
-                    <p className="text-unitar-gray text-lg">AI-powered insights reveal hidden patterns and opportunities in your data.</p>
+                    <h4 className="font-bold text-white mb-4 text-xl">Better Decision Making</h4>
+                    <p className="text-white/70 text-lg">AI-powered insights reveal hidden patterns and opportunities in your data.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-6">
-                  <CheckCircle className="h-8 w-8 text-green-500 mt-1" />
+                  <CheckCircle className="h-10 w-10 text-green-400 mt-1" />
                   <div>
-                    <h4 className="font-bold text-unitar-gray-dark mb-3 text-lg">Enhanced User Experience</h4>
-                    <p className="text-unitar-gray text-lg">Personalized, responsive applications that adapt to user preferences and behavior.</p>
+                    <h4 className="font-bold text-white mb-4 text-xl">Enhanced User Experience</h4>
+                    <p className="text-white/70 text-lg">Personalized, responsive applications that adapt to user preferences and behavior.</p>
                   </div>
                 </div>
               </div>
@@ -444,54 +464,56 @@ const Index = () => {
       </section>
 
       {/* About UNITAR Section */}
-      <section id="about" className="py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto text-center">
-            <h2 className="text-5xl md:text-6xl font-black text-unitar-gray-dark mb-12 tracking-tight">About UNITAR</h2>
+      <section id="about" className="py-32 relative">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-6xl mx-auto text-center">
+            <h2 className="text-6xl md:text-7xl font-black text-white mb-16 tracking-tight">About UNITAR</h2>
             
-            <div className="text-left space-y-8 text-lg text-unitar-gray leading-relaxed font-medium">
-              <p>
-                UNITAR is a forward-thinking software development company founded on the belief that artificial intelligence 
-                should enhance human capabilities, not replace them. We specialize in creating intelligent applications that 
-                learn, adapt, and evolve with their users.
-              </p>
-              
-              <p>
-                We started UNITAR because we saw a gap between the promise of AI and its practical application in everyday 
-                software. Too many companies bolt AI onto existing systems as an afterthought. We take a different approach — 
-                AI is woven into the fabric of everything we build, from the initial architecture to the final user interface.
-              </p>
-              
-              <p>
-                Our mission is to democratize access to intelligent software solutions. Whether you're a startup with a 
-                groundbreaking idea or an enterprise looking to transform your operations, we provide the expertise and 
-                technology to turn your vision into reality. We believe the future belongs to organizations that can harness 
-                the power of AI while maintaining a human-centered approach to problem-solving.
-              </p>
+            <div className="backdrop-blur-xl bg-white/5 border border-white/20 p-16 rounded-3xl shadow-2xl">
+              <div className="text-left space-y-10 text-xl text-white/80 leading-relaxed font-light">
+                <p>
+                  UNITAR is a forward-thinking software development company founded on the belief that artificial intelligence 
+                  should enhance human capabilities, not replace them. We specialize in creating intelligent applications that 
+                  learn, adapt, and evolve with their users.
+                </p>
+                
+                <p>
+                  We started UNITAR because we saw a gap between the promise of AI and its practical application in everyday 
+                  software. Too many companies bolt AI onto existing systems as an afterthought. We take a different approach — 
+                  AI is woven into the fabric of everything we build, from the initial architecture to the final user interface.
+                </p>
+                
+                <p>
+                  Our mission is to democratize access to intelligent software solutions. Whether you're a startup with a 
+                  groundbreaking idea or an enterprise looking to transform your operations, we provide the expertise and 
+                  technology to turn your vision into reality. We believe the future belongs to organizations that can harness 
+                  the power of AI while maintaining a human-centered approach to problem-solving.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 text-white relative overflow-hidden">
-        <div className="container mx-auto px-4 relative">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-5xl md:text-6xl font-black mb-8 tracking-tight">Get In Touch</h2>
-            <p className="text-xl text-slate-300 mb-16 leading-relaxed font-medium">
+      <section id="contact" className="py-32 relative">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-5xl mx-auto text-center">
+            <h2 className="text-6xl md:text-7xl font-black text-white mb-12 tracking-tight">Get In Touch</h2>
+            <p className="text-2xl text-white/70 mb-20 leading-relaxed font-light">
               Ready to transform your ideas into intelligent software? We'd love to hear about your project and 
               explore how we can help you build something extraordinary.
             </p>
 
-            <div className="bg-slate-800/80 backdrop-blur-sm rounded-3xl p-12 shadow-2xl">
-              <div className="mb-12">
-                <div className="bg-gradient-to-br from-unitar-blue to-blue-600 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-8">
-                  <Mail className="h-10 w-10 text-white" />
+            <div className="backdrop-blur-xl bg-white/5 border border-white/20 rounded-3xl p-16 shadow-2xl">
+              <div className="mb-16">
+                <div className="bg-gradient-to-br from-cyan-400/20 to-purple-500/20 w-24 h-24 rounded-3xl flex items-center justify-center mx-auto mb-12 backdrop-blur-sm border border-cyan-400/30">
+                  <Mail className="h-12 w-12 text-cyan-400" />
                 </div>
-                <h3 className="text-3xl font-bold mb-8">Let's Start a Conversation</h3>
+                <h3 className="text-4xl font-bold mb-12 text-white">Let's Start a Conversation</h3>
                 
-                <form onSubmit={handleSubmit} className="max-w-2xl mx-auto mb-8">
-                  <div className="space-y-6">
+                <form onSubmit={handleSubmit} className="max-w-2xl mx-auto mb-12">
+                  <div className="space-y-8">
                     <div>
                       <Input
                         type="email"
@@ -499,7 +521,7 @@ const Index = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="bg-slate-700/50 border-slate-600 text-white placeholder-slate-400 h-14 text-lg rounded-xl"
+                        className="backdrop-blur-xl bg-white/10 border border-white/30 text-white placeholder-white/50 h-16 text-lg rounded-2xl focus:border-cyan-400/50"
                       />
                     </div>
                     <div>
@@ -509,7 +531,7 @@ const Index = () => {
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
                         required
-                        className="bg-slate-700/50 border-slate-600 text-white placeholder-slate-400 h-14 text-lg rounded-xl"
+                        className="backdrop-blur-xl bg-white/10 border border-white/30 text-white placeholder-white/50 h-16 text-lg rounded-2xl focus:border-cyan-400/50"
                       />
                     </div>
                     <div>
@@ -519,21 +541,22 @@ const Index = () => {
                         onChange={(e) => setMessage(e.target.value)}
                         required
                         rows={6}
-                        className="w-full bg-slate-700/50 border border-slate-600 rounded-xl px-4 py-3 text-white placeholder-slate-400 text-lg resize-none focus:outline-none focus:ring-2 focus:ring-unitar-blue"
+                        className="w-full backdrop-blur-xl bg-white/10 border border-white/30 rounded-2xl px-6 py-4 text-white placeholder-white/50 text-lg resize-none focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-transparent"
                       />
                     </div>
                     <Button 
                       type="submit"
-                      className="bg-gradient-to-r from-unitar-blue to-blue-600 hover:from-unitar-blue-dark hover:to-slate-800 h-14 px-12 text-lg font-semibold rounded-xl w-full"
+                      className="group relative bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 h-16 px-12 text-xl font-bold rounded-2xl w-full shadow-2xl hover:shadow-cyan-500/25 transform hover:-translate-y-1 transition-all duration-300 border border-white/20"
                     >
-                      Send Message
+                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
+                      <span className="relative z-10">Send Message</span>
                     </Button>
                   </div>
                 </form>
 
-                <div className="border-t border-slate-700 pt-8">
-                  <p className="text-slate-300 text-lg">
-                    Or email us directly at <a href="mailto:contact@unitar.app" className="text-unitar-blue-light hover:text-unitar-blue transition-colors font-semibold">contact@unitar.app</a>
+                <div className="border-t border-white/20 pt-12">
+                  <p className="text-white/70 text-xl">
+                    Or email us directly at <a href="mailto:contact@unitar.app" className="text-cyan-400 hover:text-cyan-300 transition-colors font-semibold">contact@unitar.app</a>
                   </p>
                 </div>
               </div>
@@ -543,18 +566,18 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-950 text-white py-16">
-        <div className="container mx-auto px-4">
+      <footer className="backdrop-blur-xl bg-white/5 border-t border-white/20 py-20 relative z-10">
+        <div className="container mx-auto px-6">
           <div className="text-center">
-            <div className="text-4xl font-black text-unitar-blue mb-8">UNITAR</div>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 mb-12">
-              <a href="#services" className="text-slate-400 hover:text-white transition-colors text-lg font-medium">Services</a>
-              <a href="#portfolio" className="text-slate-400 hover:text-white transition-colors text-lg font-medium">Portfolio</a>
-              <a href="#about" className="text-slate-400 hover:text-white transition-colors text-lg font-medium">About</a>
-              <a href="mailto:contact@unitar.app" className="text-slate-400 hover:text-white transition-colors text-lg font-medium">Contact</a>
+            <div className="text-5xl font-black bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-12">UNITAR</div>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-12 mb-16">
+              <a href="#services" className="text-white/70 hover:text-cyan-400 transition-colors text-xl font-medium backdrop-blur-sm px-6 py-3 rounded-full hover:bg-white/10 border border-transparent hover:border-white/20">Services</a>
+              <a href="#portfolio" className="text-white/70 hover:text-cyan-400 transition-colors text-xl font-medium backdrop-blur-sm px-6 py-3 rounded-full hover:bg-white/10 border border-transparent hover:border-white/20">Portfolio</a>
+              <a href="#about" className="text-white/70 hover:text-cyan-400 transition-colors text-xl font-medium backdrop-blur-sm px-6 py-3 rounded-full hover:bg-white/10 border border-transparent hover:border-white/20">About</a>
+              <a href="mailto:contact@unitar.app" className="text-white/70 hover:text-cyan-400 transition-colors text-xl font-medium backdrop-blur-sm px-6 py-3 rounded-full hover:bg-white/10 border border-transparent hover:border-white/20">Contact</a>
             </div>
-            <div className="border-t border-slate-800 pt-8">
-              <p className="text-slate-400 text-lg">
+            <div className="border-t border-white/20 pt-12">
+              <p className="text-white/60 text-xl">
                 © 2025 UNITAR. Building the future of software with AI-first development.
               </p>
             </div>
