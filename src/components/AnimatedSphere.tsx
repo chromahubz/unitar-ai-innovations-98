@@ -104,7 +104,8 @@ const AnimatedSphere = ({ className = "" }: { className?: string }) => {
             <animateTransform attributeName="transform" type="translate" values="0 0; 0 -5; 0 0" dur="5s" begin="-4.2s" repeatCount="indefinite" keyTimes="0;0.5;1" keySplines="0.9 0 0.9 0; 0 0.9 0 0.9" calcMode="spline"></animateTransform>
           </ellipse>
           <ellipse cx="50" cy="90" rx="30" ry="4.84">
-            <animate attributeName="stroke-width" values="0.1;1.2;0.1" dur="5s" begin="-4.4s" repeatCount="indefinite" keyTimes="0;0.5;1" keySplines="0.9 0 0.9 0; 0 0.9 0 0.9" calcMode="spline"></animateTransform>
+            <animate attributeName="stroke-width" values="0.1;1.2;0.1" dur="5s" begin="-4.4s" repeatCount="indefinite" keyTimes="0;0.5;1" keySplines="0.9 0 0.9 0; 0 0.9 0 0.9" calcMode="spline"></animate>
+            <animateTransform attributeName="transform" type="translate" values="0 0; 0 -5; 0 0" dur="5s" begin="-4.4s" repeatCount="indefinite" keyTimes="0;0.5;1" keySplines="0.9 0 0.9 0; 0 0.9 0 0.9" calcMode="spline"></animateTransform>
           </ellipse>
           <ellipse cx="50" cy="94" rx="23.74868417407584" ry="4.4">
             <animate attributeName="stroke-width" values="0.1;1.2;0.1" dur="5s" begin="-4.6s" repeatCount="indefinite" keyTimes="0;0.5;1" keySplines="0.9 0 0.9 0; 0 0.9 0 0.9" calcMode="spline"></animate>
