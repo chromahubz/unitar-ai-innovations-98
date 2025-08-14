@@ -40,12 +40,19 @@ All colors MUST be HSL.
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
+
     --sidebar-foreground: 240 5.3% 26.1%;
+
     --sidebar-primary: 240 5.9% 10%;
+
     --sidebar-primary-foreground: 0 0% 98%;
+
     --sidebar-accent: 240 4.8% 95.9%;
+
     --sidebar-accent-foreground: 240 5.9% 10%;
+
     --sidebar-border: 220 13% 91%;
+
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -102,181 +109,69 @@ All colors MUST be HSL.
   }
 }
 
-/* Glassmorphism and Futuristic Effects */
-@layer components {
-  .glass-morphism {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+/* Custom animations for retro-futuristic design */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
   }
-
-  .glass-card {
-    background: rgba(15, 23, 42, 0.3);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    border-radius: 20px;
-  }
-
-  .glass-button {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-  }
-
-  .glass-input {
-    background: rgba(15, 23, 42, 0.4);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-  }
-
-  .glass-input:focus {
-    background: rgba(15, 23, 42, 0.6);
-    border-color: rgba(6, 182, 212, 0.5);
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
-  }
-
-  .glow-button {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .glow-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-  }
-
-  .glow-button:hover::before {
-    left: 100%;
-  }
-
-  .glow-card {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .glow-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, rgba(6, 182, 212, 0.1), rgba(168, 85, 247, 0.1), rgba(59, 130, 246, 0.1));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    border-radius: inherit;
-  }
-
-  .glow-card:hover::before {
-    opacity: 1;
-  }
-
-  .neon-badge {
-    position: relative;
-    overflow: hidden;
-    animation: neon-pulse 2s infinite;
-  }
-
-  @keyframes neon-pulse {
-    0%, 100% {
-      box-shadow: 0 0 20px rgba(251, 191, 36, 0.8);
-    }
-    50% {
-      box-shadow: 0 0 30px rgba(251, 191, 36, 1), 0 0 40px rgba(251, 191, 36, 0.8);
-    }
-  }
-
-  .drop-shadow-glow {
-    filter: drop-shadow(0 0 8px currentColor);
-  }
-
-  /* Animation utilities */
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fade-in {
-    animation: fade-in 1s ease-out;
-  }
-
-  /* Cyberpunk grid background */
-  .cyber-grid {
-    background-image: 
-      linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
-  }
-
-  /* Holographic text effect */
-  .holographic-text {
-    background: linear-gradient(45deg, #00f5ff, #ff00f5, #f5ff00, #00f5ff);
-    background-size: 400% 400%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: holographic 3s ease-in-out infinite;
-  }
-
-  @keyframes holographic {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-  }
-
-  /* Particle system for backgrounds */
-  .particle-bg::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(2px 2px at 20px 30px, rgba(6, 182, 212, 0.3), transparent),
-                      radial-gradient(2px 2px at 40px 70px, rgba(168, 85, 247, 0.3), transparent),
-                      radial-gradient(1px 1px at 90px 40px, rgba(59, 130, 246, 0.3), transparent),
-                      radial-gradient(1px 1px at 130px 80px, rgba(6, 182, 212, 0.3), transparent),
-                      radial-gradient(2px 2px at 160px 30px, rgba(168, 85, 247, 0.3), transparent);
-    background-repeat: repeat;
-    background-size: 200px 100px;
-    animation: particle-move 20s linear infinite;
-  }
-
-  @keyframes particle-move {
-    0% {
-      transform: translateY(0);
-    }
-    100% {
-      transform: translateY(-200px);
-    }
+  50% {
+    transform: translateY(-10px);
   }
 }
 
-/* Font imports and definitions */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(6, 182, 212, 0.6);
+  }
+}
 
-.font-montserrat {
-  font-family: 'Montserrat', sans-serif;
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #06b6d4, #3b82f6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #0891b2, #2563eb);
 }
