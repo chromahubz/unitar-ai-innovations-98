@@ -46,7 +46,18 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white font-montserrat">
+    <div className="min-h-screen bg-white font-montserrat relative overflow-hidden">
+      {/* Epic Background Sphere */}
+      <div className="fixed top-0 right-0 w-full h-full pointer-events-none z-0 opacity-20">
+        <div className="absolute -top-1/2 -right-1/2 w-[150vw] h-[150vh]">
+          <AnimatedSphere 
+            size="massive" 
+            interactive={true}
+            className="w-full h-full"
+          />
+        </div>
+      </div>
+
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div className="container mx-auto px-4 py-4">
