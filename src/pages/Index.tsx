@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import AnimatedSphere from "@/components/AnimatedSphere";
 import { 
   Code2, 
   Smartphone, 
@@ -50,7 +51,10 @@ const Index = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-black text-unitar-blue tracking-tight">UNITAR</div>
+            <div className="flex items-center space-x-4">
+              <AnimatedSphere className="w-8 h-8" />
+              <div className="text-2xl font-black text-unitar-blue tracking-tight">UNITAR</div>
+            </div>
             <div className="hidden md:flex space-x-8">
               <a href="#services" className="text-unitar-gray hover:text-unitar-blue transition-all duration-300 font-medium">Services</a>
               <a href="#portfolio" className="text-unitar-gray hover:text-unitar-blue transition-all duration-300 font-medium">Portfolio</a>
@@ -63,6 +67,9 @@ const Index = () => {
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
+        <div className="absolute top-20 right-10 opacity-20 pointer-events-none">
+          <AnimatedSphere className="w-64 h-64" />
+        </div>
         <div className="container mx-auto px-4 relative">
           <div className="max-w-5xl mx-auto text-center animate-fade-in">
             <div className="flex items-center justify-center mb-6">
@@ -183,13 +190,16 @@ const Index = () => {
             </Card>
 
             <Card className="group p-10 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-gradient-to-br from-white to-slate-50 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-100 to-indigo-200 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
-                <Users className="h-10 w-10 text-indigo-600" />
+              <div className="absolute inset-0 bg-gradient-to-br from-unitar-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative">
+                <div className="bg-gradient-to-br from-indigo-100 to-indigo-200 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
+                  <Users className="h-10 w-10 text-indigo-600" />
+                </div>
+                <h3 className="text-2xl font-bold mb-6 text-unitar-gray-dark">Consulting & Strategy</h3>
+                <p className="text-unitar-gray leading-relaxed text-lg">
+                  Strategic guidance for your digital transformation. Product planning, architecture design, and technology consulting.
+                </p>
               </div>
-              <h3 className="text-2xl font-bold mb-6 text-unitar-gray-dark">Consulting & Strategy</h3>
-              <p className="text-unitar-gray leading-relaxed text-lg">
-                Strategic guidance for your digital transformation. Product planning, architecture design, and technology consulting.
-              </p>
             </Card>
           </div>
         </div>
