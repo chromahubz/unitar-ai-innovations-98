@@ -1,44 +1,19 @@
-import { useEffect, useRef } from "react";
 
 const AnimatedSphere = ({ className = "" }: { className?: string }) => {
-  const sphereRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (sphereRef.current) {
-        const { clientX, clientY } = e;
-        const { innerWidth, innerHeight } = window;
-        
-        // Calculate movement based on mouse position (inverted for parallax effect)
-        const moveX = (clientX / innerWidth - 0.5) * -50;
-        const moveY = (clientY / innerHeight - 0.5) * -50;
-        
-        sphereRef.current.style.transform = `translate(${moveX}px, ${moveY}px) scale(500)`;
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   return (
-    <div 
-      ref={sphereRef}
-      className={`fixed top-0 right-0 pointer-events-none z-0 transition-transform duration-700 ease-out ${className}`}
-      style={{ transform: 'translate(0px, 0px) scale(500)' }}
-    >
+    <div className={`relative ${className}`}>
       <svg 
         viewBox="-5 -5 110 110" 
         strokeWidth="0" 
-        className="w-full h-full max-w-[200px] max-h-[200px] opacity-20"
+        className="w-full h-full max-w-[200px] max-h-[200px]"
       >
         <g 
           fill="none" 
           id="sphere" 
           transform="rotate(135 50 50)" 
           strokeWidth="0" 
-          stroke="rgba(59,130,246,0.3)" 
-          filter="drop-shadow(0 0 20px rgba(59,130,246,0.4))"
+          stroke="rgba(59,130,246,0.6)" 
+          filter="drop-shadow(0 0 3px rgba(59,130,246,0.8))"
         >
           <ellipse cx="50" cy="3" rx="17" ry="4">
             <animate attributeName="stroke-width" values="0.1;1.2;0.1" dur="5s" begin="0s" repeatCount="indefinite" keyTimes="0;0.5;1" keySplines="0.9 0 0.9 0; 0 0.9 0 0.9" calcMode="spline"></animate>
