@@ -3,8 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import AnimatedSphere from "@/components/AnimatedSphere";
-import PrivacyPolicy from "@/components/PrivacyPolicy";
-import TermsConditions from "@/components/TermsConditions";
 import { 
   Code2, 
   Smartphone, 
@@ -34,8 +32,6 @@ const Index = () => {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
-  const [showTermsConditions, setShowTermsConditions] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -52,9 +48,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white font-montserrat">
-      {/* Legal Document Overlays */}
-      {showPrivacyPolicy && <PrivacyPolicy onClose={() => setShowPrivacyPolicy(false)} />}
-      {showTermsConditions && <TermsConditions onClose={() => setShowTermsConditions(false)} />}
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
@@ -564,18 +557,18 @@ const Index = () => {
             </div>
             <div className="border-t border-slate-800 pt-8">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-4">
-                <button 
-                  onClick={() => setShowPrivacyPolicy(true)}
+                <a 
+                  href="/privacy-policy"
                   className="text-slate-400 hover:text-white transition-colors text-sm font-medium underline"
                 >
                   Privacy Policy
-                </button>
-                <button 
-                  onClick={() => setShowTermsConditions(true)}
+                </a>
+                <a 
+                  href="/terms-conditions"
                   className="text-slate-400 hover:text-white transition-colors text-sm font-medium underline"
                 >
                   Terms & Conditions
-                </button>
+                </a>
               </div>
               <p className="text-slate-400 text-lg">
                 © 2025 UNITAR. Building the future of software with AI-first development.
