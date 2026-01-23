@@ -36,7 +36,11 @@ import {
   PenTool,
   ShoppingBag,
   Briefcase,
-  Radio
+  Radio,
+  TrendingUp,
+  Award,
+  Trophy,
+  BarChart3
 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -461,6 +465,112 @@ const Index = () => {
                 <ArrowRight className="ml-3 h-5 w-5" />
               </Button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* iOS App Store Success Section */}
+      <section className="py-24 bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djItaDJ2LTJoLTJ6bTAgNHYyaDJ2LTJoLTJ6bTAtOHYyaDJ2LTJoLTJ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-30"></div>
+        <div className="container mx-auto px-4 relative">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center justify-center px-6 py-2 mb-6 bg-yellow-500/20 border border-yellow-500/30 text-yellow-300 rounded-full font-bold text-sm">
+              <Trophy className="w-4 h-4 mr-2" />
+              App Store Success
+            </div>
+            <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tight">Top Charts in AI Category</h2>
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto font-medium leading-relaxed">
+              Our iOS applications have reached top positions in App Store charts, demonstrating our expertise in building market-leading AI-powered mobile experiences.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
+            {/* Stat Card 1 */}
+            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:-translate-y-2">
+              <div className="bg-gradient-to-br from-yellow-400 to-orange-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                <TrendingUp className="h-8 w-8 text-white" />
+              </div>
+              <div className="text-5xl font-black mb-2 text-center bg-gradient-to-r from-yellow-300 to-orange-400 bg-clip-text text-transparent">Top 10</div>
+              <p className="text-slate-300 text-center text-lg font-semibold">AI Tools Category</p>
+              <p className="text-slate-400 text-center text-sm mt-2">Multiple apps featured</p>
+            </div>
+
+            {/* Stat Card 2 */}
+            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:-translate-y-2">
+              <div className="bg-gradient-to-br from-purple-500 to-pink-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                <Award className="h-8 w-8 text-white" />
+              </div>
+              <div className="text-5xl font-black mb-2 text-center bg-gradient-to-r from-purple-300 to-pink-400 bg-clip-text text-transparent">#1</div>
+              <p className="text-slate-300 text-center text-lg font-semibold">AI Music Niche</p>
+              <p className="text-slate-400 text-center text-sm mt-2">Peak position achieved</p>
+            </div>
+
+            {/* Stat Card 3 */}
+            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:-translate-y-2">
+              <div className="bg-gradient-to-br from-blue-500 to-cyan-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                <BarChart3 className="h-8 w-8 text-white" />
+              </div>
+              <div className="text-5xl font-black mb-2 text-center bg-gradient-to-r from-blue-300 to-cyan-400 bg-clip-text text-transparent">500K+</div>
+              <p className="text-slate-300 text-center text-lg font-semibold">Total Downloads</p>
+              <p className="text-slate-400 text-center text-sm mt-2">Across iOS portfolio</p>
+            </div>
+          </div>
+
+          {/* Features List */}
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-10 border border-white/10">
+              <h3 className="text-2xl md:text-3xl font-black mb-8 text-center">What Makes Our iOS Apps Stand Out</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="flex items-start space-x-4">
+                  <div className="bg-gradient-to-br from-green-500 to-emerald-500 w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                    <CheckCircle className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-1">AI-First Innovation</h4>
+                    <p className="text-slate-300 text-sm">Cutting-edge AI features that users love and competitors can't match</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <div className="bg-gradient-to-br from-blue-500 to-indigo-500 w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                    <CheckCircle className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-1">Native Performance</h4>
+                    <p className="text-slate-300 text-sm">Optimized Swift code for buttery-smooth 60fps experiences</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <div className="bg-gradient-to-br from-purple-500 to-pink-500 w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                    <CheckCircle className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-1">Premium UX Design</h4>
+                    <p className="text-slate-300 text-sm">Following Apple's HIG with delightful animations and interactions</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <div className="bg-gradient-to-br from-orange-500 to-red-500 w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                    <CheckCircle className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-1">App Store Optimization</h4>
+                    <p className="text-slate-300 text-sm">Strategic metadata, screenshots, and marketing for maximum visibility</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="text-center mt-16">
+            <p className="text-slate-300 mb-6 text-lg">Want your app to reach the top charts?</p>
+            <Button
+              onClick={() => scrollToSection('contact')}
+              className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-slate-900 px-10 py-6 text-lg font-black shadow-2xl hover:shadow-orange-500/50 transform hover:scale-105 transition-all duration-300"
+            >
+              Build Your iOS App
+              <Rocket className="ml-3 h-5 w-5" />
+            </Button>
           </div>
         </div>
       </section>
