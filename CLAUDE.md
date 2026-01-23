@@ -747,7 +747,7 @@ The landing page tells a story:
 ### Contact Form
 
 **Current**: Uses `mailto:` links (no backend)
-**Email**: hello@unitarsoftware.com
+**Email**: contact@unitar.app
 
 **Future Enhancement**: Consider implementing:
 - Backend form submission
