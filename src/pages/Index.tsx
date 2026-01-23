@@ -74,12 +74,11 @@ const Index = () => {
           "Accept": "application/json",
         },
         body: JSON.stringify({
-          access_key: "YOUR_WEB3FORMS_ACCESS_KEY_HERE", // Replace with actual key
-          subject: subject || "New Contact Form Submission",
+          access_key: "96f02a55-edb1-46cc-9f61-f109effa0990",
+          subject: subject || "New Contact Form Submission - UNITAR Website",
           from_name: email,
           email: email,
           message: message,
-          to_email: "contact@unitar.app",
         }),
       });
 
