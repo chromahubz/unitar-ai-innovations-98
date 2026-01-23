@@ -3,14 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import AnimatedSphere from "@/components/AnimatedSphere";
-import { 
-  Code2, 
-  Smartphone, 
-  Brain, 
-  Building2, 
-  Zap, 
-  Shield, 
-  Users, 
+import {
+  Code2,
+  Smartphone,
+  Brain,
+  Building2,
+  Zap,
+  Shield,
+  Users,
   Target,
   Globe,
   Mail,
@@ -24,7 +24,19 @@ import {
   Music,
   Scissors,
   ChevronRight,
-  Star
+  Star,
+  Image,
+  Instagram,
+  Youtube,
+  FileText,
+  Camera,
+  Layers,
+  Film,
+  Disc,
+  PenTool,
+  ShoppingBag,
+  Briefcase,
+  Radio
 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -208,87 +220,247 @@ const Index = () => {
         </div>
       </section>
 
-      {/* App Catalogue Preview */}
-      <section className="py-24 bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 relative overflow-hidden">
-        <div className="container mx-auto px-4 text-center relative">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-5xl md:text-6xl font-black text-unitar-gray-dark mb-8 tracking-tight">App Catalogue Coming Soon</h2>
-            <p className="text-xl text-unitar-gray mb-12 leading-relaxed font-medium">
-              We're preparing to launch a comprehensive catalogue of cutting-edge applications that showcase the power of AI-driven development. 
-              Stay tuned for revolutionary tools that will transform how you work and create.
-            </p>
-            <Button className="bg-gradient-to-r from-purple-600 to-unitar-blue hover:from-purple-700 hover:to-unitar-blue-dark text-white px-10 py-6 text-lg font-semibold shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
-              <Sparkles className="mr-3 h-6 w-6" />
-              Get Early Access
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Portfolio Section */}
-      <section id="portfolio" className="py-24 bg-white">
+      {/* Production Apps Portfolio */}
+      <section id="portfolio" className="py-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-black text-unitar-gray-dark mb-6 tracking-tight">Featured Projects</h2>
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center justify-center px-6 py-2 mb-6 bg-green-100 text-green-700 rounded-full font-bold text-sm">
+              <CheckCircle className="w-4 h-4 mr-2" />
+              Production Ready Applications
+            </div>
+            <h2 className="text-5xl md:text-6xl font-black text-unitar-gray-dark mb-6 tracking-tight">Our App Portfolio</h2>
             <p className="text-xl text-unitar-gray max-w-3xl mx-auto font-medium leading-relaxed">
-              Get a sneak peek at our upcoming applications that will revolutionize their respective industries.
+              Explore our suite of production-ready AI-powered applications built for content creators, marketers, and businesses.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-10 max-w-7xl mx-auto">
-            <Card className="group p-10 text-center hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-4 bg-gradient-to-br from-white via-blue-50/30 to-blue-100/50 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative">
-                <div className="bg-gradient-to-br from-unitar-blue to-blue-600 w-24 h-24 rounded-3xl flex items-center justify-center mb-8 mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
-                  <Video className="h-12 w-12 text-white" />
+          {/* Content Creation Tools */}
+          <div className="mb-20">
+            <div className="flex items-center mb-10">
+              <div className="bg-gradient-to-r from-purple-500 to-pink-500 w-12 h-12 rounded-xl flex items-center justify-center mr-4">
+                <Video className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="text-3xl font-black text-unitar-gray-dark">Content Creation Tools</h3>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+              {/* VIDEYE */}
+              <Card className="group p-8 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-white relative overflow-hidden">
+                <div className="bg-gradient-to-br from-unitar-blue to-blue-600 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Video className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-3xl font-black mb-6 text-unitar-gray-dark">VIDEYE</h3>
-                <p className="text-unitar-gray mb-8 leading-relaxed text-lg font-medium">
+                <h4 className="text-xl font-black mb-3 text-unitar-gray-dark">VIDEYE</h4>
+                <p className="text-unitar-gray text-sm mb-4 leading-relaxed">
                   Transform simple ideas into viral videos with AI-powered content creation. The future of mobile video production.
                 </p>
-                <div className="flex items-center justify-center">
-                  <span className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-6 py-3 rounded-full text-sm font-bold shadow-lg">
-                    Coming Soon
-                  </span>
-                </div>
-              </div>
-            </Card>
+                <div className="text-xs text-unitar-blue font-semibold">AI Video • Mobile Creation</div>
+              </Card>
 
-            <Card className="group p-10 text-center hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-4 bg-gradient-to-br from-white via-purple-50/30 to-purple-100/50 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative">
-                <div className="bg-gradient-to-br from-purple-500 to-purple-700 w-24 h-24 rounded-3xl flex items-center justify-center mb-8 mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
-                  <Music className="h-12 w-12 text-white" />
+              {/* INFINITEMIX */}
+              <Card className="group p-8 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-white relative overflow-hidden">
+                <div className="bg-gradient-to-br from-purple-500 to-pink-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Disc className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-3xl font-black mb-6 text-unitar-gray-dark">INFIRADIO</h3>
-                <p className="text-unitar-gray mb-8 leading-relaxed text-lg font-medium">
+                <h4 className="text-xl font-black mb-3 text-unitar-gray-dark">INFINITEMIX</h4>
+                <p className="text-unitar-gray text-sm mb-4 leading-relaxed">
+                  AI-powered DJ mix creator. Upload songs, auto-mix with BPM/key analysis, add visualizers, and generate YouTube-ready content.
+                </p>
+                <div className="text-xs text-unitar-blue font-semibold">DJ Automation • YouTube Content</div>
+              </Card>
+
+              {/* INFIRADIO */}
+              <Card className="group p-8 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-white relative overflow-hidden">
+                <div className="bg-gradient-to-br from-purple-500 to-purple-700 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Radio className="h-8 w-8 text-white" />
+                </div>
+                <h4 className="text-xl font-black mb-3 text-unitar-gray-dark">INFIRADIO</h4>
+                <p className="text-unitar-gray text-sm mb-4 leading-relaxed">
                   Create professional music mixes with one click. AI-driven audio processing that understands rhythm and mood.
                 </p>
-                <div className="flex items-center justify-center">
-                  <span className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-6 py-3 rounded-full text-sm font-bold shadow-lg">
-                    Coming Soon
-                  </span>
-                </div>
-              </div>
-            </Card>
+                <div className="text-xs text-unitar-blue font-semibold">Music Mixing • Radio Streaming</div>
+              </Card>
 
-            <Card className="group p-10 text-center hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-4 bg-gradient-to-br from-white via-green-50/30 to-green-100/50 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative">
-                <div className="bg-gradient-to-br from-green-500 to-green-700 w-24 h-24 rounded-3xl flex items-center justify-center mb-8 mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
-                  <Scissors className="h-12 w-12 text-white" />
+              {/* LYRICVIDEOMAKER */}
+              <Card className="group p-8 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-white relative overflow-hidden">
+                <div className="bg-gradient-to-br from-pink-500 to-rose-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Music className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-3xl font-black mb-6 text-unitar-gray-dark">VIDEOBLADE</h3>
-                <p className="text-unitar-gray mb-8 leading-relaxed text-lg font-medium">
+                <h4 className="text-xl font-black mb-3 text-unitar-gray-dark">LYRICVIDEOMAKER</h4>
+                <p className="text-unitar-gray text-sm mb-4 leading-relaxed">
+                  Create studio-quality lyric videos in 5 minutes. 100% browser-based with professional audio visualizers.
+                </p>
+                <div className="text-xs text-unitar-blue font-semibold">Musicians • Record Labels</div>
+              </Card>
+
+              {/* VIDEOBLADE */}
+              <Card className="group p-8 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-white relative overflow-hidden">
+                <div className="bg-gradient-to-br from-green-500 to-emerald-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Scissors className="h-8 w-8 text-white" />
+                </div>
+                <h4 className="text-xl font-black mb-3 text-unitar-gray-dark">VIDEOBLADE</h4>
+                <p className="text-unitar-gray text-sm mb-4 leading-relaxed">
                   Lightning-fast web-based video editor that rivals desktop applications. Professional editing made simple and accessible.
                 </p>
-                <div className="flex items-center justify-center">
-                  <span className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-6 py-3 rounded-full text-sm font-bold shadow-lg">
-                    Coming Soon
-                  </span>
+                <div className="text-xs text-unitar-blue font-semibold">Video Editing • Social Media</div>
+              </Card>
+
+              {/* DEPTH-FLOW-PRO */}
+              <Card className="group p-8 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-white relative overflow-hidden">
+                <div className="bg-gradient-to-br from-blue-500 to-cyan-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Layers className="h-8 w-8 text-white" />
                 </div>
+                <h4 className="text-xl font-black mb-3 text-unitar-gray-dark">DEPTH-FLOW-PRO</h4>
+                <p className="text-unitar-gray text-sm mb-4 leading-relaxed">
+                  Transform 2D photos into mesmerizing 3D depth videos with cinematic camera movements. Viral social media content.
+                </p>
+                <div className="text-xs text-unitar-blue font-semibold">3D Effects • Viral Content</div>
+              </Card>
+
+            </div>
+          </div>
+
+          {/* E-commerce & Marketing Tools */}
+          <div className="mb-20">
+            <div className="flex items-center mb-10">
+              <div className="bg-gradient-to-r from-orange-500 to-red-500 w-12 h-12 rounded-xl flex items-center justify-center mr-4">
+                <ShoppingBag className="h-6 w-6 text-white" />
               </div>
-            </Card>
+              <h3 className="text-3xl font-black text-unitar-gray-dark">E-commerce & Marketing</h3>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+              {/* PRODUCTPHOTO */}
+              <Card className="group p-8 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-white relative overflow-hidden">
+                <div className="bg-gradient-to-br from-orange-500 to-amber-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Camera className="h-8 w-8 text-white" />
+                </div>
+                <h4 className="text-xl font-black mb-3 text-unitar-gray-dark">PRODUCTPHOTO</h4>
+                <p className="text-unitar-gray text-sm mb-4 leading-relaxed">
+                  AI-generated professional product photography. Studio-quality lifestyle shots for Amazon, Shopify, Etsy in 60 seconds.
+                </p>
+                <div className="text-xs text-unitar-blue font-semibold">E-commerce • Photography</div>
+              </Card>
+
+              {/* BG-REMOVE-PRO */}
+              <Card className="group p-8 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-white relative overflow-hidden">
+                <div className="bg-gradient-to-br from-red-500 to-pink-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Image className="h-8 w-8 text-white" />
+                </div>
+                <h4 className="text-xl font-black mb-3 text-unitar-gray-dark">BG-REMOVE-PRO</h4>
+                <p className="text-unitar-gray text-sm mb-4 leading-relaxed">
+                  Advanced background removal with 4 AI models. Process 100 images in 2 minutes. No subscriptions needed.
+                </p>
+                <div className="text-xs text-unitar-blue font-semibold">Image Editing • Bulk Processing</div>
+              </Card>
+
+              {/* SITECLONE PRO */}
+              <Card className="group p-8 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-white relative overflow-hidden">
+                <div className="bg-gradient-to-br from-indigo-500 to-purple-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Globe className="h-8 w-8 text-white" />
+                </div>
+                <h4 className="text-xl font-black mb-3 text-unitar-gray-dark">SITECLONE PRO</h4>
+                <p className="text-unitar-gray text-sm mb-4 leading-relaxed">
+                  Scrape, recreate, and generate outreach for outdated websites. Perfect for agencies finding new clients.
+                </p>
+                <div className="text-xs text-unitar-blue font-semibold">Lead Generation • Web Design</div>
+              </Card>
+
+              {/* IGPOSTTEMPLATE */}
+              <Card className="group p-8 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-white relative overflow-hidden">
+                <div className="bg-gradient-to-br from-pink-500 to-purple-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Instagram className="h-8 w-8 text-white" />
+                </div>
+                <h4 className="text-xl font-black mb-3 text-unitar-gray-dark">IGPOSTTEMPLATE</h4>
+                <p className="text-unitar-gray text-sm mb-4 leading-relaxed">
+                  Create viral Instagram posts in seconds. Pre-built templates, hashtag generation, and brand kit management.
+                </p>
+                <div className="text-xs text-unitar-blue font-semibold">Social Media • Content Creation</div>
+              </Card>
+
+            </div>
+          </div>
+
+          {/* Professional Tools */}
+          <div>
+            <div className="flex items-center mb-10">
+              <div className="bg-gradient-to-r from-blue-500 to-indigo-500 w-12 h-12 rounded-xl flex items-center justify-center mr-4">
+                <Briefcase className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="text-3xl font-black text-unitar-gray-dark">Professional Tools</h3>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+              {/* FRAMECRAFT PRO */}
+              <Card className="group p-8 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-white relative overflow-hidden">
+                <div className="bg-gradient-to-br from-blue-500 to-indigo-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Film className="h-8 w-8 text-white" />
+                </div>
+                <h4 className="text-xl font-black mb-3 text-unitar-gray-dark">FRAMECRAFT PRO</h4>
+                <p className="text-unitar-gray text-sm mb-4 leading-relaxed">
+                  AI-powered film pre-visualization. Replace traditional storyboarding with infinite canvas planning and scene generation.
+                </p>
+                <div className="text-xs text-unitar-blue font-semibold">Filmmaking • Pre-Production</div>
+              </Card>
+
+              {/* AUTOBLOG */}
+              <Card className="group p-8 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-white relative overflow-hidden">
+                <div className="bg-gradient-to-br from-teal-500 to-cyan-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <FileText className="h-8 w-8 text-white" />
+                </div>
+                <h4 className="text-xl font-black mb-3 text-unitar-gray-dark">AUTOBLOG</h4>
+                <p className="text-unitar-gray text-sm mb-4 leading-relaxed">
+                  Launch professional blogs in 5 minutes. GitHub + Hugo + Vercel with AI-powered content generation and bulk features.
+                </p>
+                <div className="text-xs text-unitar-blue font-semibold">Content Marketing • SEO</div>
+              </Card>
+
+              {/* YOUTUBE DETECTIVE */}
+              <Card className="group p-8 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-white relative overflow-hidden">
+                <div className="bg-gradient-to-br from-red-500 to-rose-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Youtube className="h-8 w-8 text-white" />
+                </div>
+                <h4 className="text-xl font-black mb-3 text-unitar-gray-dark">YOUTUBE DETECTIVE</h4>
+                <p className="text-unitar-gray text-sm mb-4 leading-relaxed">
+                  Channel analysis tool with video summaries delivered daily. Study competition without watching hours of content.
+                </p>
+                <div className="text-xs text-unitar-blue font-semibold">Analytics • Research</div>
+              </Card>
+
+              {/* KEY OF SONG */}
+              <Card className="group p-8 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-white relative overflow-hidden">
+                <div className="bg-gradient-to-br from-violet-500 to-purple-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Music className="h-8 w-8 text-white" />
+                </div>
+                <h4 className="text-xl font-black mb-3 text-unitar-gray-dark">KEY OF SONG</h4>
+                <p className="text-unitar-gray text-sm mb-4 leading-relaxed">
+                  Music analysis platform for artists and producers. Discover song keys, BPM, and harmonic mixing insights.
+                </p>
+                <div className="flex items-center justify-between mt-4">
+                  <div className="text-xs text-unitar-blue font-semibold">Music Tech • Analysis</div>
+                  <a href="https://www.keyofsong.com/" target="_blank" rel="noopener noreferrer" className="text-xs text-unitar-blue hover:text-unitar-blue-dark font-bold flex items-center">
+                    Visit <ChevronRight className="h-3 w-3 ml-1" />
+                  </a>
+                </div>
+              </Card>
+
+            </div>
+          </div>
+
+          {/* CTA Section */}
+          <div className="mt-20 text-center">
+            <div className="bg-gradient-to-r from-unitar-blue to-purple-600 rounded-3xl p-12 text-white">
+              <h3 className="text-3xl md:text-4xl font-black mb-6">Ready to Launch Your App Idea?</h3>
+              <p className="text-lg mb-8 opacity-90 max-w-2xl mx-auto">
+                We've built 14+ production-ready applications. Let us build yours next with our proven AI-first development process.
+              </p>
+              <Button
+                onClick={() => scrollToSection('contact')}
+                className="bg-white text-unitar-blue hover:bg-gray-100 px-10 py-6 text-lg font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+              >
+                Start Your Project
+                <ArrowRight className="ml-3 h-5 w-5" />
+              </Button>
+            </div>
           </div>
         </div>
       </section>

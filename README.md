@@ -1,73 +1,107 @@
-# Welcome to your Lovable project
+# UNITAR AI Innovations - Website
 
-## Project info
+This is the official marketing website for UNITAR AI Innovations, showcasing our portfolio of AI-powered applications and development services.
 
-**URL**: https://lovable.dev/projects/861c6b04-5db2-4ccd-bf1e-5b6b7ed76c43
+## Project Overview
 
-## How can I edit this code?
+**Website**: UNITAR AI Innovations Marketing Site
+**Stack**: React + TypeScript + Vite
+**Deployment**: Vercel
+**Contact**: contact@unitar.app
 
-There are several ways of editing your application.
+## Technologies Used
 
-**Use Lovable**
+- **Vite** - Lightning-fast build tool
+- **React 18** - Modern UI framework
+- **TypeScript** - Type-safe development
+- **ShadcN UI** - Beautiful, accessible component library
+- **Tailwind CSS** - Utility-first CSS framework
+- **React Router** - Client-side routing
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/861c6b04-5db2-4ccd-bf1e-5b6b7ed76c43) and start prompting.
+## Development
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js 16+ (install with [nvm](https://github.com/nvm-sh/nvm#installing-and-updating))
+- npm or bun package manager
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+### Local Setup
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Clone the repository
+git clone https://github.com/chromahubz/unitar-ai-innovations-98.git
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Navigate to the project directory
+cd unitar-ai-innovations-98
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The development server will start at `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Available Scripts
 
-**Use GitHub Codespaces**
+```sh
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run build:dev    # Build in development mode
+npm run lint         # Run ESLint
+npm run preview      # Preview production build locally
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Project Structure
 
-## What technologies are used for this project?
+```
+/src
+├── components/     # React components
+│   └── ui/        # ShadcN UI components (48 components)
+├── pages/         # Page components (Index, NotFound, PrivacyPolicy, Terms)
+├── hooks/         # Custom React hooks
+├── lib/           # Utility functions
+├── App.tsx        # Root app component with routing
+└── main.tsx       # Application entry point
+```
 
-This project is built with:
+## Deployment
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+This project is automatically deployed to Vercel. Any push to the main branch triggers a new deployment.
 
-## How can I deploy this project?
+### Manual Deployment
 
-Simply open [Lovable](https://lovable.dev/projects/861c6b04-5db2-4ccd-bf1e-5b6b7ed76c43) and click on Share -> Publish.
+```sh
+# Build the project
+npm run build
 
-## Can I connect a custom domain to my Lovable project?
+# The dist/ folder contains the production build
+```
 
-Yes, you can!
+## Portfolio Applications
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+The website showcases 14+ production-ready applications including:
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- **VIDEYE** - AI-powered video creation
+- **INFINITEMIX** - AI DJ mix creator
+- **INFIRADIO** - Professional music mixing
+- **VIDEOBLADE** - Browser-based video editor
+- **PRODUCTPHOTO** - AI product photography
+- **BG-REMOVE-PRO** - Background removal tool
+- **SITECLONE PRO** - Website recreation tool
+- **KEY OF SONG** - Music analysis platform (Live at https://www.keyofsong.com/)
+- And more...
+
+## Contributing
+
+For development guidelines and contribution instructions, see [CLAUDE.md](./CLAUDE.md).
+
+## License
+
+Proprietary - UNITAR AI Innovations © 2024-2026
+
+## Contact
+
+- **Email**: contact@unitar.app
+- **Website**: Coming soon
