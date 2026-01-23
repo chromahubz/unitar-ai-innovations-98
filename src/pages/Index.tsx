@@ -728,6 +728,74 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Entertainment AI Specialization Spotlight */}
+      <section className="py-20 bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wOCI+PHBhdGggZD0iTTM2IDM0djItaDJ2LTJoLTJ6bTAgNHYyaDJ2LTJoLTJ6bTAtOHYyaDJ2LTJoLTJ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-40"></div>
+        <div className="container mx-auto px-4 relative">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-bold mb-6">
+                  <Star className="w-4 h-4 mr-2" />
+                  Our Specialty
+                </div>
+                <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight">Entertainment & Creative AI Experts</h2>
+                <p className="text-xl text-white/90 mb-8 leading-relaxed">
+                  While we build AI solutions across all industries, our passion and proven expertise lies in entertainment.
+                  We've created 14+ AI-powered apps for music, video, and creative professionals—reaching Top 10 in App Store charts.
+                </p>
+                <div className="grid grid-cols-3 gap-6 mb-8">
+                  <div>
+                    <div className="text-3xl font-black mb-1">14+</div>
+                    <div className="text-sm text-white/80">Entertainment Apps</div>
+                  </div>
+                  <div>
+                    <div className="text-3xl font-black mb-1">500K+</div>
+                    <div className="text-sm text-white/80">Active Users</div>
+                  </div>
+                  <div>
+                    <div className="text-3xl font-black mb-1">#1</div>
+                    <div className="text-sm text-white/80">AI Music Category</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4">
+                <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
+                  <div className="flex items-center space-x-4 mb-3">
+                    <div className="bg-gradient-to-br from-pink-400 to-rose-400 w-12 h-12 rounded-lg flex items-center justify-center">
+                      <Music className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="text-xl font-black">Music & Audio AI</h3>
+                  </div>
+                  <p className="text-white/80 text-sm">DJ mixing, key detection, lyric videos, music analysis—we've built it all</p>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
+                  <div className="flex items-center space-x-4 mb-3">
+                    <div className="bg-gradient-to-br from-purple-400 to-indigo-400 w-12 h-12 rounded-lg flex items-center justify-center">
+                      <Video className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="text-xl font-black">Video & Visual AI</h3>
+                  </div>
+                  <p className="text-white/80 text-sm">Editing, 3D effects, pre-viz, viral content—professional tools in the browser</p>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
+                  <div className="flex items-center space-x-4 mb-3">
+                    <div className="bg-gradient-to-br from-orange-400 to-yellow-400 w-12 h-12 rounded-lg flex items-center justify-center">
+                      <Sparkles className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="text-xl font-black">Creative Content AI</h3>
+                  </div>
+                  <p className="text-white/80 text-sm">Product photos, social posts, blogs—AI tools that make creators unstoppable</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About UNITAR Section */}
       <section id="about" className="py-24 bg-white">
         <div className="container mx-auto px-4">
