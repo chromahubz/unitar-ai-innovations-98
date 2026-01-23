@@ -49,6 +49,8 @@ const Index = () => {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -57,10 +59,46 @@ const Index = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const mailtoUrl = `mailto:contact@unitar.app?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}%0A%0AFrom: ${encodeURIComponent(email)}`;
-    window.location.href = mailtoUrl;
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      // Using Web3Forms for email delivery
+      // Get your free access key from https://web3forms.com
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "YOUR_WEB3FORMS_ACCESS_KEY_HERE", // Replace with actual key
+          subject: subject || "New Contact Form Submission",
+          from_name: email,
+          email: email,
+          message: message,
+          to_email: "contact@unitar.app",
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitStatus('success');
+        setEmail("");
+        setSubject("");
+        setMessage("");
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -272,16 +310,28 @@ const Index = () => {
                 <div className="text-xs text-unitar-blue font-semibold">DJ Automation • YouTube Content</div>
               </Card>
 
-              {/* INFIRADIO */}
+              {/* DEMO-VIDEO-MAKER */}
               <Card className="group p-8 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-white relative overflow-hidden">
-                <div className="bg-gradient-to-br from-purple-500 to-purple-700 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Radio className="h-8 w-8 text-white" />
+                <div className="bg-gradient-to-br from-indigo-500 to-purple-600 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <MonitorSpeaker className="h-8 w-8 text-white" />
                 </div>
-                <h4 className="text-xl font-black mb-3 text-unitar-gray-dark">INFIRADIO</h4>
+                <h4 className="text-xl font-black mb-3 text-unitar-gray-dark">DEMO-VIDEO-MAKER</h4>
                 <p className="text-unitar-gray text-sm mb-4 leading-relaxed">
-                  Create professional music mixes with one click. AI-driven audio processing that understands rhythm and mood.
+                  Turn product screenshots into professional demo videos in 60 seconds. Perfect for Product Hunt launches and landing pages.
                 </p>
-                <div className="text-xs text-unitar-blue font-semibold">Music Mixing • Radio Streaming</div>
+                <div className="text-xs text-unitar-blue font-semibold">Product Demos • Marketing Videos</div>
+              </Card>
+
+              {/* VIDEO SCRIPT GENERATOR */}
+              <Card className="group p-8 hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-3 bg-white relative overflow-hidden">
+                <div className="bg-gradient-to-br from-amber-500 to-orange-600 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <FileText className="h-8 w-8 text-white" />
+                </div>
+                <h4 className="text-xl font-black mb-3 text-unitar-gray-dark">VIDEO SCRIPT GENERATOR</h4>
+                <p className="text-unitar-gray text-sm mb-4 leading-relaxed">
+                  Generate professional video scripts using Claude, GPT-4, and Gemini. From VSLs to explainer videos, optimized for conversions.
+                </p>
+                <div className="text-xs text-unitar-blue font-semibold">AI Scripts • Multi-Model</div>
               </Card>
 
               {/* LYRICVIDEOMAKER */}
@@ -455,7 +505,7 @@ const Index = () => {
             <div className="bg-gradient-to-r from-unitar-blue to-purple-600 rounded-3xl p-12 text-white">
               <h3 className="text-3xl md:text-4xl font-black mb-6">Ready to Launch Your App Idea?</h3>
               <p className="text-lg mb-8 opacity-90 max-w-2xl mx-auto">
-                We've built 14+ production-ready applications. Let us build yours next with our proven AI-first development process.
+                We've built 15+ production-ready applications. Let us build yours next with our proven AI-first development process.
               </p>
               <Button
                 onClick={() => scrollToSection('contact')}
@@ -478,9 +528,9 @@ const Index = () => {
               <Trophy className="w-4 h-4 mr-2" />
               App Store Success
             </div>
-            <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tight">Top Charts in AI Category</h2>
+            <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tight">Chart-Topping App Development</h2>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto font-medium leading-relaxed">
-              Our iOS applications have reached top positions in App Store charts, demonstrating our expertise in building market-leading AI-powered mobile experiences.
+              We've developed iOS applications that have reached top positions in App Store charts, demonstrating our expertise in building market-leading AI-powered mobile experiences that users love.
             </p>
           </div>
 
@@ -519,7 +569,7 @@ const Index = () => {
           {/* Features List */}
           <div className="max-w-4xl mx-auto">
             <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-10 border border-white/10">
-              <h3 className="text-2xl md:text-3xl font-black mb-8 text-center">What Makes Our iOS Apps Stand Out</h3>
+              <h3 className="text-2xl md:text-3xl font-black mb-8 text-center">How We Build Chart-Topping iOS Apps</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="flex items-start space-x-4">
                   <div className="bg-gradient-to-br from-green-500 to-emerald-500 w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
@@ -742,11 +792,11 @@ const Index = () => {
                 <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight">Entertainment & Creative AI Experts</h2>
                 <p className="text-xl text-white/90 mb-8 leading-relaxed">
                   While we build AI solutions across all industries, our passion and proven expertise lies in entertainment.
-                  We've created 14+ AI-powered apps for music, video, and creative professionals—reaching Top 10 in App Store charts.
+                  We've created 15+ AI-powered apps for music, video, and creative professionals—reaching Top 10 in App Store charts.
                 </p>
                 <div className="grid grid-cols-3 gap-6 mb-8">
                   <div>
-                    <div className="text-3xl font-black mb-1">14+</div>
+                    <div className="text-3xl font-black mb-1">15+</div>
                     <div className="text-sm text-white/80">Entertainment Apps</div>
                   </div>
                   <div>
@@ -875,12 +925,29 @@ const Index = () => {
                         className="w-full bg-slate-700/50 border border-slate-600 rounded-xl px-4 py-3 text-white placeholder-slate-400 text-lg resize-none focus:outline-none focus:ring-2 focus:ring-unitar-blue"
                       />
                     </div>
-                    <Button 
+                    <Button
                       type="submit"
-                      className="bg-gradient-to-r from-unitar-blue to-blue-600 hover:from-unitar-blue-dark hover:to-slate-800 h-14 px-12 text-lg font-semibold rounded-xl w-full"
+                      disabled={isSubmitting}
+                      className="bg-gradient-to-r from-unitar-blue to-blue-600 hover:from-unitar-blue-dark hover:to-slate-800 h-14 px-12 text-lg font-semibold rounded-xl w-full disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Send Message
+                      {isSubmitting ? "Sending..." : "Send Message"}
                     </Button>
+
+                    {/* Success Message */}
+                    {submitStatus === 'success' && (
+                      <div className="bg-green-500/20 border border-green-500/50 rounded-xl p-4 text-green-300">
+                        <p className="font-semibold">Message sent successfully!</p>
+                        <p className="text-sm">We'll get back to you within 24 hours.</p>
+                      </div>
+                    )}
+
+                    {/* Error Message */}
+                    {submitStatus === 'error' && (
+                      <div className="bg-red-500/20 border border-red-500/50 rounded-xl p-4 text-red-300">
+                        <p className="font-semibold">Oops! Something went wrong.</p>
+                        <p className="text-sm">Please email us directly at contact@unitar.app</p>
+                      </div>
+                    )}
                   </div>
                 </form>
 
