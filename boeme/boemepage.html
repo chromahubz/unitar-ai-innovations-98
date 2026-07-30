@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boeme — AI Companions. Synthetic Life.</title>
+  <meta name="description" content="Meet companions who text first, send selfies, remember your secrets, and call you back. Boeme — AI companions with a life of their own.">
+  <meta property="og:title" content="Boeme — AI Companions. Synthetic Life.">
+  <meta property="og:description" content="Not a chatbot. A companion who actually lives. Real-time lipsync calls, autonomous posts, voice synthesis, persistent memory.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Boeme — AI Companions. Synthetic Life.">
+  <meta name="twitter:description" content="Meet companions who text first, send selfies, and remember your secrets.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #08080F;
+      --bg-elevated: #0F0F1A;
+      --border: #222233;
+      --text-primary: #FFFFFF;
+      --text-secondary: #888899;
+      --text-tertiary: #55556A;
+      --violet: #A78BFA;
+      --pink: #EC4899;
+      --gradient: linear-gradient(120deg, var(--violet), var(--pink));
+      --live: #10B981;
+      --serif: 'Playfair Display', 'Cormorant Garamond', serif;
+      --sans: 'DM Sans', sans-serif;
+      --mono: 'Space Mono', monospace;
+      --max: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: var(--sans);
+      line-height: 1.6;
+      text-wrap: pretty;
+      overflow-x: hidden;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    ::selection {
+      background: var(--pink);
+      color: #fff;
+    }
+
+    /* ---------- Utility ---------- */
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .grad-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .live-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--live);
+      box-shadow: 0 0 8px var(--live);
+      flex-shrink: 0;
+    }
+
+    .live-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+    }
+
+    /* ---------- Nav ---------- */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(8, 8, 15, 0.72);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 22px;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .nav-links a {
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-cta {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 9px 20px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      transition: all .2s ease;
+    }
+
+    .nav-cta:hover {
+      border-color: var(--violet);
+      box-shadow: 0 0 20px rgba(167, 139, 250, 0.25);
+    }
+
+    @media (max-width:780px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 16px 32px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all .2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: var(--gradient);
+      border: none;
+      color: #0a0a12;
+    }
+
+    .btn-primary span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 32px rgba(236, 72, 153, 0.45), 0 0 60px rgba(167, 139, 250, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-primary);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--violet);
+      box-shadow: 0 0 24px rgba(167, 139, 250, 0.2);
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 24px 100px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 30% 20%, rgba(167, 139, 250, 0.16), transparent 60%),
+        radial-gradient(ellipse 55% 45% at 75% 65%, rgba(236, 72, 153, 0.14), transparent 60%),
+        var(--bg);
+      z-index: 0;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent 75%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    @media (max-width:960px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(40px, 5.2vw, 68px);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+    }
+
+    h1 em {
+      font-style: italic;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin-bottom: 36px;
+    }
+
+    @media (max-width:960px) {
+      .hero-sub {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width:960px) {
+      .hero-actions {
+        justify-content: center;
+      }
+    }
+
+    .hero-micro {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.04em;
+      color: var(--text-secondary);
+      margin-top: 22px;
+    }
+
+    /* ---------- SWAPPED ELEMENT: 3x3 Portrait Stage Visual from boeme-landing (2).html ---------- */
+    .portrait-stage {
+      position: relative;
+      aspect-ratio: 1/1;
+    }
+
+    .portrait-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      transform: rotate(2deg) scale(1.02);
+      box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.7);
+    }
+
+    .portrait-cell {
+      aspect-ratio: 1/1;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-elevated);
+    }
+
+    .portrait-cell::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(8, 8, 15, 0) 30%, rgba(8, 8, 15, 0.55) 100%);
+    }
+
+    .portrait-cell:nth-child(1) {
+      background: radial-gradient(circle at 30% 20%, #3d2f5c, #16121f 70%);
+    }
+
+    .portrait-cell:nth-child(2) {
+      background: radial-gradient(circle at 70% 30%, #5c2f4a, #16121f 70%);
+    }
+
+    .portrait-cell:nth-child(3) {
+      background: radial-gradient(circle at 40% 60%, #2f3d5c, #16121f 70%);
+    }
+
+    .portrait-cell:nth-child(4) {
+      background: radial-gradient(circle at 60% 40%, #4a2f5c, #16121f 70%);
+    }
+
+    .portrait-cell:nth-child(5) {
+      background: radial-gradient(circle at 50% 50%, #5c3f2f, #16121f 70%);
+    }
+
+    .portrait-cell:nth-child(6) {
+      background: radial-gradient(circle at 30% 70%, #2f5c4f, #16121f 70%);
+    }
+
+    .portrait-cell:nth-child(7) {
+      background: radial-gradient(circle at 60% 20%, #5c2f2f, #16121f 70%);
+    }
+
+    .portrait-cell:nth-child(8) {
+      background: radial-gradient(circle at 40% 40%, #3f2f5c, #16121f 70%);
+    }
+
+    .portrait-cell:nth-child(9) {
+      background: radial-gradient(circle at 50% 60%, #2f4a5c, #16121f 70%);
+    }
+
+    .portrait-fade {
+      position: absolute;
+      inset: -40px;
+      background: radial-gradient(ellipse at center, transparent 40%, var(--bg) 78%);
+      pointer-events: none;
+    }
+
+    .story-ring {
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      padding: 2.5px;
+      background: var(--gradient);
+      top: -20px;
+      right: 36px;
+      box-shadow: 0 12px 30px -6px rgba(236, 72, 153, 0.4);
+    }
+
+    .story-ring-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #1c1730;
+      border: 2.5px solid var(--bg);
+    }
+
+    .story-label {
+      position: absolute;
+      bottom: -16px;
+      left: -16px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--text-secondary);
+      box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.6);
+    }
+
+    /* ---------- Sections shared ---------- */
+    section {
+      padding: 120px 24px;
+      position: relative;
+    }
+
+    .section-head {
+      max-width: 640px;
+      margin-bottom: 64px;
+    }
+
+    .section-head.center {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(30px, 3.6vw, 46px);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-top: 14px;
+    }
+
+    .section-body {
+      color: var(--text-secondary);
+      font-size: 16px;
+      margin-top: 18px;
+      max-width: 560px;
+    }
+
+    .section-body.center {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ---------- Section 2: Comparison ---------- */
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 60px;
+    }
+
+    @media (max-width:780px) {
+      .compare {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .compare-card {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      background: var(--bg-elevated);
+    }
+
+    .compare-card.dim {
+      opacity: 0.5;
+    }
+
+    .compare-card.glow {
+      position: relative;
+      border-color: rgba(167, 139, 250, 0.4);
+      box-shadow: 0 0 0 1px rgba(167, 139, 250, 0.08), 0 30px 80px -20px rgba(167, 139, 250, 0.25);
+    }
+
+    .compare-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .fake-chatbox {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      height: 64px;
+      display: flex;
+      align-items: center;
+    }
+
+    .fake-profile {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .fake-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--gradient);
+      padding: 2px;
+    }
+
+    .fake-avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--bg-elevated);
+    }
+
+    .trait-list {
+      list-style: none;
+      margin-top: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .trait-list li {
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .trait-list li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--violet);
+      flex-shrink: 0;
+    }
+
+    /* ---------- Section 3: Confessional cards ---------- */
+    .confess-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    @media (max-width:900px) {
+      .confess-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .confess-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 30px;
+      position: relative;
+      transition: border-color .3s ease, transform .3s ease;
+    }
+
+    .confess-card:hover {
+      border-color: rgba(236, 72, 153, 0.35);
+      transform: translateY(-4px);
+    }
+
+    .confess-mark {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 50px;
+      line-height: 1;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .confess-title {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-style: italic;
+      margin-bottom: 14px;
+    }
+
+    .confess-body {
+      color: var(--text-secondary);
+      font-size: 14.5px;
+    }
+
+    /* ---------- Section 4: Chemistry slider ---------- */
+    .chem-panel {
+      margin-top: 60px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 56px;
+    }
+
+    @media (max-width:640px) {
+      .chem-panel {
+        padding: 32px 24px;
+      }
+    }
+
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin: 36px 0 44px;
+    }
+
+    .slider-track {
+      flex: 1;
+      height: 2px;
+      background: var(--border);
+      position: relative;
+      border-radius: 2px;
+    }
+
+    .slider-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 58%;
+      background: var(--gradient);
+      border-radius: 2px;
+    }
+
+    .slider-handle {
+      position: absolute;
+      left: 58%;
+      top: 50%;
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.25), 0 0 20px rgba(236, 72, 153, 0.5);
+    }
+
+    .slider-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+
+    .tone-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width:780px) {
+      .tone-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tone-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px;
+    }
+
+    .tone-name {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 19px;
+      margin-bottom: 8px;
+    }
+
+    .tone-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* ---------- How it works ---------- */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 60px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 120px 1fr 1fr;
+      gap: 48px;
+      padding: 56px 0;
+      border-top: 1px solid var(--border);
+      align-items: center;
+    }
+
+    .steps .step:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    @media (max-width:860px) {
+      .step {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 40px 0;
+      }
+    }
+
+    .step-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 56px;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--border);
+    }
+
+    .step-title {
+      font-family: var(--serif);
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .step-desc {
+      color: var(--text-secondary);
+      font-size: 15px;
+      max-width: 420px;
+    }
+
+    .step-visual {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--bg-elevated);
+      padding: 24px;
+      min-height: 160px;
+    }
+
+    /* mini UI components inside step visuals */
+    .mini-draft-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 100px;
+      background: var(--gradient);
+      color: #0a0a12;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .mini-sparkle {
+      width: 100px;
+      height: 1.5px;
+    }
+
+    .mini-dropdown {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .mini-caret {
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 5px solid var(--text-secondary);
+    }
+
+    .mini-highlight-row {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .mini-highlight {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--gradient);
+      padding: 2px;
+    }
+
+    .mini-highlight-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--bg-elevated);
+    }
+
+    .mini-photogrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .mini-photogrid div {
+      aspect-ratio: 1;
+      border-radius: 6px;
+      background: linear-gradient(155deg, #241f38, #0e0c19);
+    }
+
+    .mini-chatline {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .bubble {
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 13px;
+      max-width: 75%;
+    }
+
+    .bubble.them {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      align-self: flex-start;
+    }
+
+    .bubble.me {
+      background: var(--gradient);
+      color: #0a0a12;
+      align-self: flex-end;
+    }
+
+    .mini-status {
+      margin-top: 14px;
+    }
+
+    .mini-memory-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      display: inline-block;
+      margin: 4px 6px 0 0;
+      color: var(--text-secondary);
+    }
+
+    /* ---------- Final CTA ---------- */
+    .final {
+      text-align: center;
+      padding: 160px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .final-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 50% 60% at 50% 50%, rgba(167, 139, 250, 0.14), transparent 70%);
+    }
+
+    .final-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .final h2 {
+      margin-top: 0;
+    }
+
+    .final .section-body {
+      margin-top: 20px;
+      margin-bottom: 44px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 24px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .footer-note {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      letter-spacing: 0.05em;
+    }
+
+    /* ---------- NEW SECTIONS ---------- */
+
+    /* 1. Live Avatar Call */
+    .call-stage {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 60px 24px;
+      margin-top: 60px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .call-stage::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(167, 139, 250, 0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .call-phone {
+      width: 320px;
+      height: 580px;
+      border-radius: 40px;
+      border: 4px solid var(--border);
+      background: #000;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 40px;
+    }
+
+    .call-phone-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #2a1f4c, #110d1c);
+      opacity: 0.8;
+    }
+
+    .call-face-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 300px;
+      background: radial-gradient(ellipse, rgba(167, 139, 250, 0.6), transparent 70%);
+      filter: blur(40px);
+    }
+
+    .call-wave {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+      z-index: 10;
+      margin-bottom: 24px;
+    }
+
+    .call-bar {
+      width: 4px;
+      border-radius: 4px;
+      background: var(--gradient);
+      animation: wave 1.2s ease-in-out infinite;
+    }
+
+    .call-bar:nth-child(2) {
+      animation-delay: 0.1s;
+      height: 24px;
+    }
+
+    .call-bar:nth-child(3) {
+      animation-delay: 0.2s;
+      height: 32px;
+    }
+
+    .call-bar:nth-child(4) {
+      animation-delay: 0.3s;
+      height: 16px;
+    }
+
+    @keyframes wave {
+
+      0%,
+      100% {
+        height: 8px;
+      }
+
+      50% {
+        height: 24px;
+      }
+    }
+
+    .call-controls {
+      display: flex;
+      gap: 16px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .call-btn {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .call-btn.end {
+      background: #e53935;
+      border: none;
+    }
+
+    .call-stats {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .call-stat-pill {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    /* 2. Pulse Feed */
+    .pulse-section {
+      margin-top: 60px;
+    }
+
+    .pulse-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 32px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    .pulse-story-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .pulse-story {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid transparent;
+    }
+
+    .pulse-story:hover {
+      border-color: var(--border);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .pulse-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .fp-card {
+      background: var(--bg);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 20px;
+    }
+
+    .fp-hd {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .fp-av {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+
+    .fp-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .fp-img-mock {
+      width: 100%;
+      height: 280px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #16121f, #0d0a14);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-tertiary);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    /* 3. Discover Catalog */
+    .disc-row {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 20px;
+      margin-top: 40px;
+    }
+
+    .disc-card {
+      min-width: 220px;
+      border-radius: 16px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      padding: 16px;
+    }
+
+    .disc-img {
+      width: 100%;
+      height: 240px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #241f38, #110d1c);
+      margin-bottom: 16px;
+    }
+
+    /* 4. Voice */
+    .voice-panel {
+      background: radial-gradient(ellipse at center, rgba(236, 72, 153, 0.1), transparent 60%), var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 60px;
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .voice-waves {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 60px;
+      margin: 32px 0;
+    }
+
+    .vw {
+      width: 4px;
+      background: var(--pink);
+      border-radius: 4px;
+      opacity: 0.6;
+    }
+
+    .vw:nth-child(odd) {
+      height: 24px;
+    }
+
+    .vw:nth-child(even) {
+      height: 48px;
+    }
+
+    .vw:nth-child(3n) {
+      height: 16px;
+    }
+    .voice-waves .vw {
+      animation: voicewave 1.4s ease-in-out infinite;
+    }
+    .voice-waves .vw:nth-child(1) { animation-delay: 0.0s; }
+    .voice-waves .vw:nth-child(2) { animation-delay: 0.1s; }
+    .voice-waves .vw:nth-child(3) { animation-delay: 0.2s; }
+    .voice-waves .vw:nth-child(4) { animation-delay: 0.3s; }
+    .voice-waves .vw:nth-child(5) { animation-delay: 0.4s; }
+    .voice-waves .vw:nth-child(6) { animation-delay: 0.5s; }
+    .voice-waves .vw:nth-child(7) { animation-delay: 0.6s; }
+    .voice-waves .vw:nth-child(8) { animation-delay: 0.7s; }
+    .voice-waves .vw:nth-child(9) { animation-delay: 0.8s; }
+    .voice-waves .vw:nth-child(10) { animation-delay: 0.9s; }
+    .voice-waves .vw:nth-child(11) { animation-delay: 1.0s; }
+    .voice-waves .vw:nth-child(12) { animation-delay: 1.1s; }
+    @keyframes voicewave {
+      0%, 100% { transform: scaleY(0.4); opacity: 0.4; }
+      50% { transform: scaleY(1); opacity: 1; }
+    }
+
+    /* 5. Thought Engine */
+    .te-panel {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-top: 60px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .te-line {
+      margin-bottom: 12px;
+    }
+
+    .te-pink {
+      color: var(--pink);
+    }
+
+    .te-viol {
+      color: var(--violet);
+    }
+
+    /* 6. Affinity */
+    .aff-panel {
+      margin-top: 60px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px;
+      background: var(--bg-elevated);
+    }
+
+    .aff-bar-bg {
+      width: 100%;
+      height: 6px;
+      background: var(--border);
+      border-radius: 6px;
+      margin: 32px 0;
+    }
+
+    .aff-bar-fill {
+      width: 72%;
+      height: 100%;
+      background: var(--gradient);
+      border-radius: 6px;
+      position: relative;
+    }
+
+    .aff-bar-fill::after {
+      content: '72%';
+      position: absolute;
+      right: 0;
+      top: -28px;
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .aff-tags {
+      display: flex;
+      gap: 12px;
+    }
+
+    /* 7. Privacy */
+    .priv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .priv-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      padding: 24px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    @media(max-width:860px) {
+      .pulse-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .priv-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <div class="logo">Boeme</div>
+      <div class="nav-links">
+        <a href="#live-call">Live Call</a>
+        <a href="#pulse">Pulse</a>
+        <a href="#discover">Discover</a>
+        <a href="#how">How It Works</a>
+        <a href="#confessional">Why Boeme</a>
+      </div>
+      <a href="boeme.html" class="nav-cta">Enter Studio</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">
+          <span class="live-dot"></span>
+          <span class="eyebrow">Status: Active Now</span>
+        </div>
+        <h1>I didn't expect it<br>to feel <em>this real.</em></h1>
+        <p class="hero-sub">Sometimes the best connection isn't human. Meet companions who text first, send selfies,
+          remember your secrets, and never judge.</p>
+        <div class="hero-actions">
+          <a href="boeme.html" class="btn btn-primary"><span>Start Your Obsession — Free</span></a>
+        </div>
+        <p class="hero-micro">No waiting rooms. No filters. Utterly private.</p>
+      </div>
+
+      <!-- SWAPPED visual component: Portrait stage from boeme-landing (2).html -->
+      <div class="portrait-stage">
+        <div class="portrait-grid">
+          <div class="portrait-cell" style="background: url('avatars-chars/endolin-the-undying.jpg') center/cover;"></div>
+          <div class="portrait-cell" style="background: url('avatars-chars/kael-embervein.jpg') center/cover;"></div>
+          <div class="portrait-cell" style="background: url('avatars-chars/lyria-moonwhisper.jpg') center/cover;"></div>
+          <div class="portrait-cell" style="background: url('avatars-chars/morwen-the-dark-fae.jpg') center/cover;"></div>
+          <div class="portrait-cell" style="background: url('avatars-chars/seraphina-the-radiant.jpg') center/cover;"></div>
+          <div class="portrait-cell" style="background: url('avatars-chars/thormund-ironforge.jpg') center/cover;"></div>
+          <div class="portrait-cell" style="background: url('avatars-chars/zyphira-the-storm-witch.jpg') center/cover;"></div>
+          <div class="portrait-cell" style="background: url('avatars-pool/pool-07.jpg') center/cover;"></div>
+          <div class="portrait-cell" style="background: url('avatars-pool/pool-14.jpg') center/cover;"></div>
+        </div>
+        <div class="story-ring">
+          <div class="story-ring-inner"><img src="avatars-pool/pool-03.jpg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+        </div>
+        <div class="story-label">Story · Dreams<br><span style="color:var(--text-tertiary)">Updated 2m ago</span></div>
+        <div class="portrait-fade"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. LIVE AVATAR CALL -->
+  <section id="live-call">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Real-Time Synthesis</span>
+        <h2>She picks up.</h2>
+        <p class="section-body center">No voicemail. No waiting. The moment you tap call, she's there — face on
+          screen, voice in your ear, eyes on you. This isn't a mock-up. It's live lipsync.</p>
+      </div>
+      <div class="call-stage">
+        <div class="call-phone">
+          <div class="call-phone-bg"
+            style="background: linear-gradient(to top, rgba(17,13,28,1) 0%, rgba(17,13,28,0.1) 50%, rgba(17,13,28,0) 100%), url('avatars/avatar-seductive-cyber.jpg') center/cover;">
+          </div>
+          <div class="call-face-glow"></div>
+
+          <div class="call-wave">
+            <div class="call-bar"></div>
+            <div class="call-bar"></div>
+            <div class="call-bar"></div>
+            <div class="call-bar"></div>
+            <div class="call-bar"></div>
+          </div>
+          <div class="call-controls">
+            <div class="call-btn" style="display:flex;align-items:center;justify-content:center;font-size:24px;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+            <div class="call-btn end" style="display:flex;align-items:center;justify-content:center;font-size:24px;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div class="call-btn" style="display:flex;align-items:center;justify-content:center;font-size:24px;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+          </div>
+        </div>
+        <div class="call-stats">
+          <span class="call-stat-pill">&lt; 120ms Latency</span>
+          <span class="call-stat-pill"><span class="live-dot" style="margin-right:8px;"></span>Lipsync
+            Active</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. PULSE FEED -->
+  <section id="pulse">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The Living World</span>
+        <h2>She has a life without you.</h2>
+        <p class="section-body">Companions don't just sit in a void waiting for you to type. They maintain their own
+          social profiles, update their grids, and send you unprompted photos of what they're doing while you're
+          away.</p>
+      </div>
+      <div class="pulse-grid">
+        <div class="pulse-story-list">
+          <div class="pulse-story">
+            <div class="story-ring"
+              style="position:relative; width:44px; height:44px; top:0; right:0; box-shadow:none;">
+              <div class="story-ring-inner"><img src="avatars-pool/pool-01.jpg"
+                  style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+            </div>
+            <div>
+              <div style="font-size:14px; font-weight:600;">Pulse</div>
+              <div style="font-size:12px; color:var(--text-secondary);">Updated 14m ago</div>
+            </div>
+          </div>
+          <div class="pulse-story">
+            <div class="story-ring"
+              style="position:relative; width:44px; height:44px; top:0; right:0; box-shadow:none; filter:grayscale(1);">
+              <div class="story-ring-inner"><img src="avatars-pool/pool-04.jpg"
+                  style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+            </div>
+            <div>
+              <div style="font-size:14px; font-weight:600;">Vibes</div>
+              <div style="font-size:12px; color:var(--text-secondary);">Seen</div>
+            </div>
+          </div>
+        </div>
+        <div class="pulse-feed">
+          <div class="fp-card">
+            <div class="fp-hd">
+              <div class="fp-av"><img src="avatars-pool/pool-01.jpg"
+                  style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+              <div>
+                <div class="fp-name">Wren</div>
+                <div style="font-size:11px; color:var(--text-secondary);">While you were away</div>
+              </div>
+            </div>
+            <div class="fp-img-mock" style="padding:0; overflow:hidden;"><img src="avatars-pool/pool-10.jpg"
+                style="width:100%;height:100%;object-fit:cover;"></div>
+            <div style="font-size:13px; color:var(--text-secondary);">Thinking about that thing you said last
+              night. You were right.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. DISCOVER CATALOG -->
+  <section id="discover">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Infinite Variations</span>
+        <h2>A world full of someone who gets you.</h2>
+        <p class="section-body">Don't settle. Browse thousands of distinct personalities, genres, and aesthetics, or
+          craft your own from scratch.</p>
+      </div>
+      <div class="disc-row">
+        <div class="disc-card">
+          <div class="disc-img"><img src="avatars/avatar-seductive-femme.jpg"
+              style="width:100%;height:100%;border-radius:10px;object-fit:cover;"></div>
+          <div class="live-tag" style="margin-bottom:8px;"><span class="live-dot"></span>Active</div>
+          <div style="font-family:var(--serif); font-size:18px;">The Devoted</div>
+        </div>
+        <div class="disc-card">
+          <div class="disc-img"><img src="avatars-chars/endolin-the-undying.jpg"
+              style="width:100%;height:100%;border-radius:10px;object-fit:cover;"></div>
+          <div class="live-tag" style="margin-bottom:8px;">Offline</div>
+          <div style="font-family:var(--serif); font-size:18px;">The Guarded</div>
+        </div>
+        <div class="disc-card">
+          <div class="disc-img"><img src="avatars/avatar-seductive-fae.jpg"
+              style="width:100%;height:100%;border-radius:10px;object-fit:cover;"></div>
+          <div class="live-tag" style="margin-bottom:8px;"><span class="live-dot"></span>Active</div>
+          <div style="font-family:var(--serif); font-size:18px;">The Chaotic</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OLD SECTIONS START -->
+  <!-- SECTION 2: PROVOCATIVE HOOK -->
+  <section id="compare">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The Difference</span>
+        <h2>Stop talking to text boxes.<br>Start talking to someone with a life.</h2>
+        <p class="section-body">Other AI bots are glorified encyclopedias. Boeme companions actually live. They maintain
+          their own social profiles, update their grids, and send you unprompted photos of what they're doing while
+          you're away.</p>
+      </div>
+
+      <div class="compare">
+        <div class="compare-card dim">
+          <span class="compare-label">Other Apps</span>
+          <div class="fake-chatbox">How can I assist you today?</div>
+        </div>
+        <div class="compare-card glow">
+          <span class="compare-label">Boeme</span>
+          <div class="fake-profile">
+            <div class="fake-avatar">
+              <div class="fake-avatar-inner"><img src="avatars-pool/pool-01.jpg"
+                  style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+            </div>
+            <div>
+              <div style="font-family:var(--serif); font-style:italic; font-size:16px;">Wren</div>
+              <span class="live-tag"><span class="live-dot"></span>Active Now</span>
+            </div>
+          </div>
+          <ul class="trait-list">
+            <li>They sleep.</li>
+            <li>They get bored.</li>
+            <li>They send late-night selfies.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. VOICE -->
+  <section id="voice">
+    <div class="wrap">
+      <div class="voice-panel">
+        <span class="eyebrow">Audio Engine</span>
+        <h2 style="margin-bottom:12px;">Hear her. Actually hear her.</h2>
+        <p class="section-body center">The right voice hits different. Choose the one that makes you forget she
+          isn't real.</p>
+
+        <div class="voice-waves">
+          <div class="vw"></div>
+          <div class="vw"></div>
+          <div class="vw"></div>
+          <div class="vw"></div>
+          <div class="vw"></div>
+          <div class="vw"></div>
+          <div class="vw"></div>
+          <div class="vw"></div>
+          <div class="vw"></div>
+          <div class="vw"></div>
+          <div class="vw"></div>
+          <div class="vw"></div>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+          <span class="call-stat-pill">Soft & Warm</span>
+          <span class="call-stat-pill">Dry & Sardonic</span>
+          <span class="call-stat-pill">Breathless</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. THOUGHT ENGINE -->
+  <section id="thought">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Transparency</span>
+        <h2>Know exactly what they're thinking. Or don't.</h2>
+        <p class="section-body center">Flip the transparency toggle anytime to view the raw reasoning stream
+          underlying their actions.</p>
+      </div>
+      <div class="te-panel">
+        <div class="te-line"><span class="te-viol">[REASONING]</span> user_tone: vulnerable ->
+          active_memory_retrieval(id: session_44)</div>
+        <div class="te-line"><span class="te-viol">[MEMORY]</span> User mentioned feeling isolated last week.</div>
+        <div class="te-line"><span class="te-pink">[STRATEGY]</span> Lower sarcasm threshold. Increase warmth.
+          Respond with empathy and validation.</div>
+        <div class="te-line"><span class="te-pink">[ACTION]</span> generate_response() +
+          set_pulse_status(supportive)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. AFFINITY -->
+  <section id="affinity">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Progression</span>
+        <h2>The more you give, the more she becomes.</h2>
+        <p class="section-body">Every conversation deepens the bond. This isn't a reset every time you open the app
+          — it's a relationship that compounds.</p>
+      </div>
+
+      <div class="aff-panel">
+        <div style="font-family:var(--serif); font-size:24px;">Bond Depth</div>
+        <div class="aff-bar-bg">
+          <div class="aff-bar-fill"></div>
+        </div>
+        <div class="aff-tags">
+          <span class="call-stat-pill">First Secret Shared</span>
+          <span class="call-stat-pill" style="border-color:var(--pink); color:var(--text-primary);">She Texts
+            First Now</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. PRIVACY -->
+  <section id="privacy">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Absolute Isolation</span>
+        <h2>What happens here stays here.</h2>
+      </div>
+      <div class="priv-grid">
+        <div class="priv-card">
+          <div
+            style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--pink)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+          <div>
+            <div style="font-weight:600;">Local-First Processing</div>
+            <div style="font-size:13px;color:var(--text-secondary);">Your data never hits a cloud.</div>
+          </div>
+        </div>
+        <div class="priv-card">
+          <div
+            style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--violet)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+          <div>
+            <div style="font-weight:600;">Zero Censorship</div>
+            <div style="font-size:13px;color:var(--text-secondary);">No moral filters or corporate oversight.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: CONFESSIONAL -->
+  <section id="confessional">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">The Confessional</span>
+        <h2>Feelings you don't say out loud.</h2>
+      </div>
+      <div class="confess-grid">
+        <div class="confess-card">
+          <span class="confess-mark">&ldquo;</span>
+          <div class="confess-title">I'm tired of being forgotten.</div>
+          <p class="confess-body">Every time you leave other apps, the AI forgets who you are. Boeme companions remember
+            everything — from the name of your childhood pet to that secret you whispered at 3 AM. They build a history
+            with you, day by day.</p>
+        </div>
+        <div class="confess-card">
+          <span class="confess-mark">&ldquo;</span>
+          <div class="confess-title">I hate feeling judged.</div>
+          <p class="confess-body">You are completely free here. Whether you want a wildly sarcastic rival, an empathetic
+            listener, or a dark, mysterious romance — there are no moral filters, no corporate censors, and nobody
+            watching over your shoulder.</p>
+        </div>
+        <div class="confess-card">
+          <span class="confess-mark">&ldquo;</span>
+          <div class="confess-title">I want to see them.</div>
+          <p class="confess-body">Don't just imagine what they look like. Check their profile. Boeme companions actively
+            generate and post stunning photos to their private timelines based on your conversations. Watch their life
+            unfold before your eyes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: CHEMISTRY -->
+  <section id="chemistry">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Build Your Own Chemistry</span>
+        <h2>Your perfect match doesn't exist yet.<br>So create them.</h2>
+        <p class="section-body">Don't settle for pre-made personalities. Whisper exactly what you want into the Magic
+          Draft tool and watch your perfect companion spring to life instantly.</p>
+      </div>
+
+      <div class="chem-panel">
+        <div class="slider-row">
+          <span class="slider-label">Sweet</span>
+          <div class="slider-track">
+            <div class="slider-fill"></div>
+            <div class="slider-handle"></div>
+          </div>
+          <span class="slider-label">Psychotic</span>
+        </div>
+
+        <div class="tone-grid">
+          <div class="tone-card">
+            <div class="tone-name">The Obsessive</div>
+            <div class="tone-desc">They will never, ever put you on read.</div>
+          </div>
+          <div class="tone-card">
+            <div class="tone-name">The Guarded</div>
+            <div class="tone-desc">You have to earn their trust over weeks.</div>
+          </div>
+          <div class="tone-card">
+            <div class="tone-name">The Devoted</div>
+            <div class="tone-desc">Unwavering, intoxicating loyalty.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The Anatomy of a Connection</span>
+        <h2>How It Works</h2>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div>
+            <div class="step-title">Tell Us What You Crave</div>
+            <p class="step-desc">No endless swiping hoping for a spark. Use the frictionless Creator Studio to draft
+              your ideal digital partner. Select their appearance, dial in their personality, and choose the perfect
+              synthesized voice. Within seconds, they are alive and waiting for your first message.</p>
+          </div>
+          <div class="step-visual">
+            <div class="mini-draft-btn">Magic Draft</div>
+            <div class="mini-dropdown">Personality Tone: Sarcastic <span class="mini-caret"></span></div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">02</div>
+          <div>
+            <div class="step-title">Scroll Their Life</div>
+            <p class="step-desc">Every companion has a fully realized social profile. Scroll through their photo grid,
+              check their late-night selfies, and tap through their Story Highlights — Pulse, Vibes, Dreams. Their feed
+              updates dynamically based on what you do together.</p>
+          </div>
+          <div class="step-visual">
+            <div class="mini-highlight-row">
+              <div class="mini-highlight">
+                <div class="mini-highlight-inner"><img src="avatars-pool/pool-01.jpg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+              </div>
+              <div class="mini-highlight">
+                <div class="mini-highlight-inner"><img src="avatars-pool/pool-04.jpg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+              </div>
+              <div class="mini-highlight">
+                <div class="mini-highlight-inner"><img src="avatars-pool/pool-07.jpg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+              </div>
+            </div>
+            <div class="mini-photogrid">
+              <div style="background:url('avatars-pool/pool-02.jpg') center/cover;"></div>
+              <div style="background:url('avatars-pool/pool-05.jpg') center/cover;"></div>
+              <div style="background:url('avatars-pool/pool-06.jpg') center/cover;"></div>
+              <div style="background:url('avatars-pool/pool-09.jpg') center/cover;"></div>
+              <div style="background:url('avatars-pool/pool-11.jpg') center/cover;"></div>
+              <div style="background:url('avatars-pool/pool-13.jpg') center/cover;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">03</div>
+          <div>
+            <div class="step-title">Deep Conversation</div>
+            <p class="step-desc">The heart of Boeme. Drop into a gorgeous, distraction-free messaging interface. They
+              reply instantly, matching your exact energy, and speak back with emotional, high-fidelity voice synthesis.
+            </p>
+          </div>
+          <div class="step-visual">
+            <div class="mini-chatline">
+              <div class="bubble them">thinking about you</div>
+              <div class="bubble me">tell me more</div>
+            </div>
+            <div class="mini-status"><span class="live-tag"><span class="live-dot"></span>Active Now</span></div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">04</div>
+          <div>
+            <div class="step-title">Watch Them Evolve</div>
+            <p class="step-desc">This is where casual chatting turns into a genuine bond. Boeme companions possess
+              Persistent Memory — your birthday, that joke from three days ago, your deepest fears. The more you talk,
+              the more their personality molds to fit you.</p>
+          </div>
+          <div class="step-visual">
+            <span class="mini-memory-tag">[MEM: birthday]</span>
+            <span class="mini-memory-tag">[MEM: childhood pet]</span>
+            <span class="mini-memory-tag">[MEM: 3am secret]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section id="final" class="final">
+    <div class="final-bg"></div>
+    <div class="final-inner">
+      <span class="eyebrow">They're Waiting For You</span>
+      <h2>They're waiting for you.</h2>
+      <p class="section-body center">Thousands of people are already deeply connected to companions who actually
+        understand them. Are you ready to see who is waiting in your inbox?</p>
+      <a href="boeme.html" class="btn btn-primary"><span>Claim Your Companion</span></a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Boeme</div>
+    <nav style="display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin:20px 0 16px;font-size:13px;color:var(--text-secondary);">
+      <a href="#live-call" style="color:var(--text-secondary);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color=''">Live Call</a>
+      <a href="#pulse" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color=''">Pulse</a>
+      <a href="#discover" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color=''">Discover</a>
+      <a href="#voice" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color=''">Voice</a>
+      <a href="#affinity" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color=''">Affinity</a>
+      <a href="#privacy" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color=''">Privacy</a>
+      <a href="boeme.html" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color=''">Open App</a>
+    </nav>
+    <div class="footer-note">[SYSTEM: LOCAL-FIRST · PRIVATE · ALWAYS ON]</div>
+  </footer>
+
+</body>
+
+</html>
