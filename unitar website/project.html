@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Project — UNITAR</title>
+<meta name="description" content="UNITAR project detail"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#050a0d;--void-2:#081018;--abyss:#0c1922;--panel:#0e1c26;
+  --glass-border:rgba(170,224,224,.14);--glass-border-strong:rgba(170,224,224,.28);
+  --bio-green:#6dffc1;--bio-cyan:#52e0ff;--dusk-purple:#9084e6;
+  --ink-100:#f2f9f7;--ink-300:#b9cdcb;--ink-500:#7f948f;--ink-700:#445350;
+  --font-display:'Unbounded',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace;
+  --accent:#6dffc1;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--void);color:var(--ink-100);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+::selection{background:var(--accent);color:#04120c;}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.05;mix-blend-mode:overlay;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.6) 0px,rgba(255,255,255,.6) 1px,transparent 1px,transparent 3px);}
+.wrap{max-width:1100px;margin-inline:auto;padding-inline:clamp(1.25rem,5vw,2.5rem);}
+h1,h2,h3{font-family:var(--font-display);font-weight:700;letter-spacing:-.01em;}
+.eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:.6em;}
+.eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px 2px color-mix(in srgb,var(--accent) 70%,transparent);flex-shrink:0;}
+.section{padding-block:clamp(3.5rem,7vw,6rem);}
+
+/* NAV */
+.nav{position:fixed;top:1.1rem;left:50%;transform:translateX(-50%);width:min(calc(100% - 2rem),1080px);z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.55rem .6rem .55rem 1.3rem;border-radius:999px;background:rgba(8,16,20,.55);border:1px solid var(--glass-border);backdrop-filter:blur(18px) saturate(140%);}
+.logo{display:flex;align-items:center;gap:.6em;font-family:var(--font-display);font-weight:700;font-size:1rem;}
+.logo-mark{width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#eafff4,var(--bio-green) 45%,transparent 75%);box-shadow:0 0 14px 3px rgba(109,255,193,.65);}
+.nav-actions{display:flex;align-items:center;gap:.7rem;}
+.nav-back{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.06em;color:var(--ink-500);display:flex;align-items:center;gap:.4em;transition:color .2s;}
+.nav-back:hover{color:var(--ink-100);}
+.btn{font-family:var(--font-mono);font-size:.8rem;letter-spacing:.04em;font-weight:500;display:inline-flex;align-items:center;gap:.5em;padding:.75em 1.4em;border-radius:999px;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s;white-space:nowrap;border:none;}
+.btn-primary{background:radial-gradient(circle at 32% 22%,#d4ffec,var(--bio-green) 45%,#35d99b 100%);color:#04140d;box-shadow:0 0 0 1px rgba(109,255,193,.4),0 8px 24px -6px rgba(109,255,193,.5),inset 0 1px 0 rgba(255,255,255,.6);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(109,255,193,.6),0 12px 30px -6px rgba(109,255,193,.7);}
+.btn-ghost{background:rgba(170,224,224,.05);border:1px solid var(--glass-border);color:var(--ink-100);}
+.btn-ghost:hover{background:rgba(170,224,224,.1);transform:translateY(-2px);}
+.btn-accent{color:#04140d;box-shadow:0 0 0 1px rgba(109,255,193,.4),0 8px 24px -6px color-mix(in srgb,var(--accent) 40%,transparent);}
+
+/* HERO */
+.hero{padding-top:8rem;padding-bottom:4rem;position:relative;overflow:hidden;min-height:56vh;display:flex;align-items:center;}
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.18;filter:saturate(60%);}
+.hero-bg-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,10,13,.4) 0%,var(--void) 90%);}
+.hero-bg-glow{position:absolute;inset:0;background:radial-gradient(ellipse 800px 500px at 50% 50%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 65%);}
+.hero-content{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;}
+@media(max-width:760px){.hero-content{grid-template-columns:1fr;}}
+.hero-badges{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.2rem;}
+.badge{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;padding:.3em .8em;border-radius:999px;display:inline-flex;align-items:center;gap:.4em;}
+.badge::before{content:'';width:5px;height:5px;border-radius:50%;}
+.badge-cat{background:color-mix(in srgb,var(--accent) 10%,transparent);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);color:var(--accent);}
+.badge-cat::before{background:var(--accent);box-shadow:0 0 6px var(--accent);}
+.badge-live{background:rgba(109,255,193,.06);border:1px solid rgba(109,255,193,.3);color:rgba(109,255,193,.9);}
+.badge-live::before{background:#6dffc1;box-shadow:0 0 5px #6dffc1;}
+.badge-wip{background:rgba(129,140,248,.06);border:1px solid rgba(129,140,248,.3);color:rgba(129,140,248,.9);}
+.badge-wip::before{background:#818CF8;}
+.badge-github{background:rgba(100,116,139,.06);border:1px solid rgba(100,116,139,.3);color:rgba(100,116,139,.9);}
+.badge-github::before{background:#64748B;}
+.badge-deploy{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.3);color:rgba(245,158,11,.9);}
+.badge-deploy::before{background:#F59E0B;}
+.badge-client{background:rgba(215,255,94,.08);border:1px solid rgba(215,255,94,.25);color:rgba(215,255,94,.9);}
+.badge-client::before{background:#d7ff5e;box-shadow:0 0 5px #d7ff5e;}
+.hero-title{font-size:clamp(2.2rem,5vw,4rem);line-height:1.04;margin-bottom:.7rem;}
+.hero-title span{color:var(--accent);}
+.hero-tagline{color:var(--ink-300);font-size:1.05rem;max-width:48ch;margin-bottom:2rem;}
+.hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;}
+.hero-aside{text-align:right;}
+@media(max-width:760px){.hero-aside{display:none;}}
+
+/* HOW IT WORKS */
+.how-section{border-top:1px solid var(--glass-border);background:linear-gradient(180deg,var(--void-2),var(--void));}
+.flow-wrap{margin-top:2.4rem;overflow-x:auto;padding-bottom:.5rem;}
+.flow-svg{min-width:600px;width:100%;}
+.steps-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.1rem;margin-top:2.2rem;}
+.step-card{padding:1.2rem 1.4rem;border-radius:14px;background:rgba(14,28,38,.7);border:1px solid var(--glass-border);border-left:2px solid var(--accent);}
+.step-card .step-num{font-family:var(--font-mono);font-size:.65rem;color:var(--accent);letter-spacing:.14em;margin-bottom:.4rem;}
+.step-card h4{font-family:var(--font-display);font-size:.88rem;margin-bottom:.35rem;}
+.step-card p{color:var(--ink-500);font-size:.82rem;line-height:1.5;}
+
+/* FEATURES */
+.features-section{border-top:1px solid var(--glass-border);}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-top:2.2rem;}
+.feat-card{padding:1.5rem 1.6rem;border-radius:16px;background:linear-gradient(145deg,rgba(14,28,38,.8),rgba(8,16,24,.9));border:1px solid var(--glass-border);transition:border-color .25s,transform .25s;}
+.feat-card:hover{border-color:var(--glass-border-strong);transform:translateY(-3px);}
+.feat-card::before{content:'';display:block;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px 2px color-mix(in srgb,var(--accent) 50%,transparent);margin-bottom:1rem;}
+.feat-card h4{font-family:var(--font-display);font-size:.9rem;margin-bottom:.45rem;}
+.feat-card p{color:var(--ink-300);font-size:.82rem;line-height:1.5;}
+
+/* SCREENSHOTS */
+.screens-section{border-top:1px solid var(--glass-border);}
+.screens-track{display:flex;gap:1rem;overflow-x:auto;padding-bottom:1rem;scroll-snap-type:x mandatory;margin-top:2rem;}
+.screens-track::-webkit-scrollbar{height:4px;}
+.screens-track::-webkit-scrollbar-track{background:rgba(170,224,224,.05);}
+.screens-track::-webkit-scrollbar-thumb{background:rgba(109,255,193,.3);border-radius:999px;}
+.screen-item{flex-shrink:0;scroll-snap-align:start;border-radius:12px;overflow:hidden;border:1px solid var(--glass-border);position:relative;}
+.screen-item img{height:300px;width:auto;display:block;}
+.screen-label{position:absolute;bottom:.6rem;left:.7rem;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(242,249,247,.7);background:rgba(0,0,0,.55);padding:.25em .6em;border-radius:4px;}
+
+/* PLACEHOLDER HERO */
+.hero-ph{width:280px;height:200px;border-radius:16px;overflow:hidden;border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.6rem;opacity:.22;color:var(--ink-100);}
+
+/* TECH STACK */
+.tech-section{border-top:1px solid var(--glass-border);}
+.tech-pills{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.8rem;}
+.tech-pill{font-family:var(--font-mono);font-size:.78rem;padding:.55em 1.1em;border-radius:8px;background:rgba(170,224,224,.04);border:1px solid var(--glass-border);color:var(--ink-300);display:inline-flex;align-items:center;gap:.5em;}
+.tech-pill::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:.7;}
+
+/* NAV STRIP */
+.proj-nav{border-top:1px solid var(--glass-border);padding-block:2rem;}
+.proj-nav .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;}
+.pnav-link{display:flex;flex-direction:column;gap:.3rem;font-family:var(--font-mono);}
+.pnav-link .dir{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-500);}
+.pnav-link .pname{font-family:var(--font-display);font-size:1rem;color:var(--ink-100);transition:color .2s;}
+.pnav-link:hover .pname{color:var(--accent);}
+
+/* SECTION HEADS */
+.sec-head{margin-bottom:.4rem;}
+.sec-head h2{font-size:clamp(1.5rem,3vw,2.2rem);margin-top:.8rem;}
+.sec-head p{color:var(--ink-300);margin-top:.8rem;max-width:58ch;}
+
+/* CTA */
+.cta-strip{padding-block:3.5rem;border-top:1px solid var(--glass-border);background:radial-gradient(ellipse 600px 300px at 50% 100%,color-mix(in srgb,var(--accent) 10%,transparent),transparent 65%);}
+.cta-strip .wrap{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;}
+.cta-strip h3{font-size:clamp(1.3rem,2.4vw,1.8rem);}
+.cta-strip p{color:var(--ink-300);font-size:.95rem;max-width:46ch;}
+
+/* 404 */
+.four04{min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1.2rem;padding-top:6rem;}
+.four04 h1{font-size:2.4rem;}
+.four04 p{color:var(--ink-300);}
+
+footer{border-top:1px solid var(--glass-border);padding-block:2rem;}
+footer .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.footer-fine{font-family:var(--font-mono);font-size:.72rem;color:var(--ink-700);}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.vis{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<nav class="nav">
+  <a href="index.html" class="logo">
+    <span class="logo-mark" aria-hidden="true" style="width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#eafff4,#6dffc1 45%,transparent 75%);box-shadow:0 0 14px 3px rgba(109,255,193,.65);display:inline-block;"></span>
+    &nbsp;UNITAR
+  </a>
+  <div class="nav-actions">
+    <a href="index.html#projects" class="nav-back">← All projects</a>
+    <a id="navLiveBtn" href="#" target="_blank" rel="noopener" class="btn btn-primary" style="display:none">Open live ↗</a>
+  </div>
+</nav>
+
+<div id="root">
+  <div class="four04">
+    <h1>Loading…</h1>
+    <p>If this persists, <a href="index.html" style="color:var(--bio-green)">go back to the portfolio.</a></p>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <a href="index.html" class="logo" style="display:flex;align-items:center;gap:.6em;font-family:var(--font-display);font-weight:700;font-size:.95rem;">
+      <span style="width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#eafff4,#6dffc1 45%,transparent 75%);box-shadow:0 0 12px 3px rgba(109,255,193,.6);display:inline-block;"></span>
+      UNITAR
+    </a>
+    <div class="footer-fine">© 2026 UNITAR Studio. All projects live.</div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   PROJECT DATA — all 42 projects
+   flow: [{label, detail}] — describes how the software works
+   features: [{name, detail}]
+   screenshots: filenames from screenshots/ folder
+   ============================================================ */
+const PROJECTS = {
+
+boeme:{name:'Boeme',cat:'Flagship',status:'live',clientWork:false,
+tagline:'An AI companion that remembers who you are — across sessions, across time.',
+desc:'Boeme is built on the idea that AI conversation should feel genuinely continuous. Most chatbots reset every session. Boeme keeps a persistent memory layer — emotional state, relationship context, and personality — that survives across every conversation. The result is an AI that feels like it knows you.',
+flow:[
+  {label:'User Message',detail:'Text input + session context'},
+  {label:'Memory Fetch',detail:'Long-term + emotional history'},
+  {label:'Context Build',detail:'Assembled prompt with persona'},
+  {label:'LLM Inference',detail:'Personality-weighted generation'},
+  {label:'Affect Update',detail:'Emotional state recalculated'},
+  {label:'Response',detail:'In-character, coherent reply'},
+],
+features:[
+  {name:'Persistent memory',detail:'Remembers conversations, preferences, and context across every session.'},
+  {name:'Emotional intelligence',detail:'Tracks affective state over time — not just what you said, but how things felt.'},
+  {name:'Custom personalities',detail:'Each companion has a defined character that shapes every response.'},
+  {name:'Cross-session continuity',detail:'Pick up exactly where you left off, every time.'},
+],
+tech:['React','Node.js','OpenAI API','Supabase','Vercel'],
+screenshots:['boeme.png'],
+liveUrl:'https://boeme-ai-companion.vercel.app',
+accent:'#6dffc1'},
+
+celestos:{name:'Celestos',cat:'Flagship',status:'live',clientWork:false,
+tagline:'JARVIS-style AI agent — voice-driven, task-capable, runs on any LLM.',
+desc:"Celestos is the AI assistant Iron Man would build. Voice input, real-time reasoning, local or cloud model support, and a task execution loop that can actually do things — not just talk about doing them. It's built to feel fast, smart, and always-available.",
+flow:[
+  {label:'Voice / Text',detail:'Input via mic or keyboard'},
+  {label:'Intent Parse',detail:'Command or conversation?'},
+  {label:'Agent Loop',detail:'Plan → execute → observe'},
+  {label:'Tool Calls',detail:'Web, files, APIs, system'},
+  {label:'LLM Reasoning',detail:'Local or cloud model'},
+  {label:'Output',detail:'Voice + on-screen response'},
+],
+features:[
+  {name:'Voice-first interface',detail:'Talk to it naturally. Responds in kind.'},
+  {name:'Local model support',detail:'Works with Ollama, LM Studio, or any OpenAI-compatible endpoint.'},
+  {name:'Agent task loop',detail:'Plans and executes multi-step tasks, not just single-turn responses.'},
+  {name:'Real-time response',detail:'Designed for low-latency, continuous interaction.'},
+],
+tech:['Python','Whisper','Ollama','OpenAI API','Text-to-Speech'],
+screenshots:['celestos.png'],
+liveUrl:'https://celestos.online',
+accent:'#6dffc1'},
+
+cosmofic:{name:'Cosmofic',cat:'Flagship',status:'wip',clientWork:false,
+tagline:'Full AI video creation — from script to final cut, in one flow.',
+desc:'Cosmofic is a production-grade AI video creation system. Write a script, break it into shots, generate images and video clips for each scene, then assemble and edit in the built-in interface. No external tools. No switching apps. The whole pipeline lives in one place.',
+flow:[
+  {label:'Script / Prompt',detail:'Story or scene description'},
+  {label:'Shot Breakdown',detail:'AI segments into scenes'},
+  {label:'Media Gen',detail:'Image + video per shot'},
+  {label:'Timeline',detail:'Auto-assembled edit'},
+  {label:'Chat-to-Edit',detail:'Adjust with plain language'},
+  {label:'Export',detail:'Rendered final video'},
+],
+features:[
+  {name:'Chat-to-edit interface',detail:'Describe changes in plain language — the timeline updates automatically.'},
+  {name:'AI image generation',detail:'Each shot gets a generated image or video clip, matched to the scene.'},
+  {name:'Storyboard view',detail:'See your whole video as a visual grid before rendering.'},
+  {name:'Zero external tools',detail:'Script, edit, export — all in one tab.'},
+],
+tech:['React','Node.js','AI Image Gen','AI Video Gen','FFmpeg'],
+screenshots:[],
+liveUrl:'',
+accent:'#6dffc1'},
+
+vidblade:{name:'VidBlade',cat:'Flagship',status:'live',clientWork:false,
+tagline:'The simplest video editor ever built — drag, cut, export.',
+desc:'VidBlade strips video editing down to its essentials. No 40-panel interface, no 200-option menus. You get a timeline, your clips, and the tools you actually need. The landing page makes the pitch; the editor delivers on it. Built with Next.js, deployed clean.',
+flow:[
+  {label:'Media Import',detail:'Drag-drop video files'},
+  {label:'Timeline Layout',detail:'Arrange clips in order'},
+  {label:'Layer Stack',detail:'Video, audio, text tracks'},
+  {label:'Effect Pipeline',detail:'Trim, cut, transition'},
+  {label:'Render Engine',detail:'Client-side processing'},
+  {label:'Export',detail:'Download final video'},
+],
+features:[
+  {name:'Zero-learning-curve timeline',detail:'If you can drag and drop, you can edit video.'},
+  {name:'Layered track system',detail:'Video, audio, and text on separate tracks, cleanly managed.'},
+  {name:'Landing page included',detail:'The product ships with a polished landing page at the root URL.'},
+  {name:'No install required',detail:'Runs entirely in the browser. Nothing to download.'},
+],
+tech:['Next.js','TypeScript','FFmpeg.wasm','Vercel'],
+screenshots:['vidblade.png'],
+liveUrl:'https://vidblade-editor.vercel.app',
+accent:'#ff5fa2'},
+
+infinitemix:{name:'InfiniteMix',cat:'Flagship',status:'live',clientWork:false,
+tagline:'Auto DJ mixing — BPM analysis, smart transitions, professional output.',
+desc:"InfiniteMix does the DJ's job: it analyses your tracks, finds the tempo, builds a beat grid, and executes clean crossfades between songs. The output sounds professional and looks great as lofi-angle social content. No music production knowledge required.",
+flow:[
+  {label:'Track Upload',detail:'Multiple audio files'},
+  {label:'BPM Analysis',detail:'Tempo detected per track'},
+  {label:'Beat Grid',detail:'Downbeats mapped precisely'},
+  {label:'Crossfade Logic',detail:'Smart in/out point calc'},
+  {label:'Mix Render',detail:'Seamless transition audio'},
+  {label:'Export',detail:'Mixed file + video output'},
+],
+features:[
+  {name:'BPM detection',detail:'Analyses tempo automatically — no manual input needed.'},
+  {name:'Smart crossfades',detail:'Transitions calculated at beat boundaries, not arbitrary timestamps.'},
+  {name:'Video output',detail:'Renders a visual mix video ready for social media.'},
+  {name:'No music knowledge needed',detail:'Point it at your tracks — it handles the rest.'},
+],
+tech:['React','Web Audio API','FFmpeg.wasm','Vite','Vercel'],
+screenshots:['infinitemix.png'],
+youtubeExamples:[
+  {id:'BmnqYrLwbOM',label:'Lofi Hip-Hop Mix'},
+  {id:'yz0K_RYGpW8',label:'Chill Study Mix'},
+  {id:'JQAK3iJO05I',label:'Late Night Lofi'},
+],
+liveUrl:'https://infinitemixappsumo.vercel.app',
+accent:'#52e0ff'},
+
+lyricvideomaker:{name:'LyricVideoMaker',cat:'Flagship',status:'live',clientWork:false,
+tagline:'Studio-quality lyric videos in the browser — zero server costs.',
+desc:'LyricVideoMaker runs entirely client-side using FFmpeg.wasm. Upload your track, type your lyrics, pick a visual style, and the browser renders a studio-quality lyric video file. No backend, no render queue, no upload size limit imposed by a server. It happens on your machine.',
+flow:[
+  {label:'Audio Upload',detail:'MP3 or WAV track'},
+  {label:'Lyric Input',detail:'Text + timestamps'},
+  {label:'Style Select',detail:'Visual template pick'},
+  {label:'Sync Engine',detail:'Words mapped to audio'},
+  {label:'FFmpeg Render',detail:'Client-side, zero server'},
+  {label:'Video Export',detail:'Download MP4 file'},
+],
+features:[
+  {name:'100% client-side',detail:'FFmpeg.wasm runs the render in your browser — no servers, no queues.'},
+  {name:'Multiple visual styles',detail:'Choose from different animator templates for different aesthetics.'},
+  {name:'Lyric sync engine',detail:'Map each line to its exact timestamp in the track.'},
+  {name:'Zero infrastructure cost',detail:'Free to run at any scale — no render costs, ever.'},
+],
+tech:['React','FFmpeg.wasm','Web Workers','Vite','Vercel'],
+screenshots:['lyricvideomaker.png'],
+liveUrl:'https://lyricvideomaker-unitar.vercel.app',
+accent:'#6dffc1'},
+
+autoblogai:{name:'AutoBlog AI',cat:'Flagship',status:'live',clientWork:false,
+tagline:'Connect your repo — get a live AI-powered blog in minutes.',
+desc:'AutoBlog AI wires together GitHub, Vercel, and Hugo into a pipeline where the AI writes the content, the repo manages it, and Vercel deploys it. Sign in, point it at your repository, and watch a live blog appear at a Vercel URL. The whole setup takes under five minutes.',
+flow:[
+  {label:'GitHub Auth',detail:'Connect your repo'},
+  {label:'Hugo Theme',detail:'Template applied'},
+  {label:'AI Writes',detail:'Content generated per config'},
+  {label:'Git Commit',detail:'Post pushed to repo'},
+  {label:'Vercel Build',detail:'Auto-triggered deploy'},
+  {label:'Live URL',detail:'Blog is live instantly'},
+],
+features:[
+  {name:'One-click setup',detail:'GitHub + Vercel integration in under five minutes.'},
+  {name:'AI content generation',detail:'Posts written automatically based on your topics and tone.'},
+  {name:'Hugo-powered',detail:'Fast, static, SEO-ready pages with no database required.'},
+  {name:'Auto-deploy pipeline',detail:'Every AI-written post triggers a Vercel build and goes live.'},
+],
+tech:['Node.js','Hugo','GitHub API','Vercel API','OpenAI'],
+screenshots:['autoblog-ai.png'],
+liveUrl:'https://auto-blog-ai-nu.vercel.app',
+accent:'#d7ff5e'},
+
+siteclonepro:{name:'SiteClone Pro',cat:'Flagship',status:'live',clientWork:false,
+tagline:'Scrape any site, rebuild it clean, generate outreach — all in one tool.',
+desc:'SiteClone Pro is a sales and development tool in one. It scrapes a target website, reconstructs it with clean code, and then generates a personalised outreach email pitching a redesign. Agencies use it to show prospects what their site could look like — before the conversation even starts.',
+flow:[
+  {label:'Target URL',detail:'Paste any website'},
+  {label:'DOM Scrape',detail:'HTML, CSS, assets fetched'},
+  {label:'Code Rebuild',detail:'Clean reconstruction'},
+  {label:'Style Match',detail:'Visual parity check'},
+  {label:'Export',detail:'Clean codebase download'},
+  {label:'Outreach Gen',detail:'Personalised pitch email'},
+],
+features:[
+  {name:'Full site reconstruction',detail:'Scrapes and rebuilds any public website with clean, editable code.'},
+  {name:'AI outreach generation',detail:'Writes a personalised cold email pitching a redesign to the site owner.'},
+  {name:'Agency-ready workflow',detail:'From prospect URL to pitch email in one flow — no manual work.'},
+  {name:'Export-ready code',detail:'The rebuilt site is clean, commented, and ready to hand off.'},
+],
+tech:['Python','Playwright','OpenAI','BeautifulSoup','Node.js'],
+screenshots:[],
+liveUrl:'',
+accent:'#6dffc1'},
+
+preictio:{name:'Preictio',cat:'Flagship',status:'wip',clientWork:false,
+tagline:'Price prediction trained on historical chart data — probability-weighted output.',
+desc:"Preictio takes historical time-series data and runs it through Google's TimesFM foundation model to produce probability-weighted forecasts. It's not a confidence bar — it's a full probability distribution over future values, visualised as a chart. Built for anyone who needs to understand what a trend is likely to do.",
+flow:[
+  {label:'Data Upload',detail:'CSV with historical values'},
+  {label:'Feature Extract',detail:'Trend, seasonality, lag'},
+  {label:'TimesFM',detail:"Google's forecast model"},
+  {label:'Prob. Dist.',detail:'Distribution over outcomes'},
+  {label:'Quantiles',detail:'p10, p50, p90 computed'},
+  {label:'Chart Output',detail:'Visual forecast display'},
+],
+features:[
+  {name:'TimesFM foundation model',detail:"Uses Google's pre-trained time-series model — no training required."},
+  {name:'Probability distributions',detail:'Outputs full probability distributions, not single-point predictions.'},
+  {name:'CSV input',detail:'Paste or upload any time-series CSV — stock prices, revenue, traffic.'},
+  {name:'Quantile output',detail:'See optimistic, median, and pessimistic forecasts side by side.'},
+],
+tech:['Python','TimesFM','Pandas','Matplotlib','FastAPI'],
+screenshots:[],
+liveUrl:'',
+accent:'#9084e6'},
+
+openworld:{name:'Open World — Three.js',cat:'Games',status:'live',clientWork:false,
+tagline:'Third-person open-world sim across multiple biomes — runs in the browser.',
+desc:'A full open-world third-person game built entirely in Three.js. Multiple biomes, terrain generation, full character movement with collision detection, atmospheric lighting, and real-time rendering — all running at 60fps in a browser tab. No game engine. No install.',
+flow:[
+  {label:'World Seed',detail:'Deterministic generation'},
+  {label:'Terrain Mesh',detail:'Heightmap → 3D geometry'},
+  {label:'Biome Rules',detail:'Climate-zone assignment'},
+  {label:'Lighting Rig',detail:'Sun angle + ambient'},
+  {label:'Character Init',detail:'Controller + collision'},
+  {label:'Real-time Loop',detail:'60fps render tick'},
+],
+features:[
+  {name:'Multiple biomes',detail:'Forest, desert, snow, and ocean zones with distinct terrain and colour.'},
+  {name:'Third-person character',detail:'Full WASD movement with camera follow, jump, and collision.'},
+  {name:'Atmospheric lighting',detail:'Day/night cycle with dynamic sun position and ambient occlusion.'},
+  {name:'Browser-native',detail:'Zero install. Loads in seconds. Runs on any device with WebGL.'},
+],
+tech:['Three.js','JavaScript','WebGL','GLSL Shaders','Vercel'],
+screenshots:['open-world-threejs.png'],
+liveUrl:'https://fable5-world-demo-phi.vercel.app',
+accent:'#9084e6'},
+
+proceduralworld:{name:'Procedural World',cat:'Games',status:'live',clientWork:false,
+tagline:'Every seed is a different world — infinite terrain variation, zero repetition.',
+desc:'Procedural World uses layered noise algorithms to generate unique terrain on every load. Mountains, valleys, rivers, and plains are computed from a single seed value — change the seed, get a completely different world. All rendered in real time with Three.js.',
+flow:[
+  {label:'Noise Seed',detail:'Random or user-set'},
+  {label:'Heightmap',detail:'Octave Perlin noise layers'},
+  {label:'Biome Blend',detail:'Moisture + temp map'},
+  {label:'Geometry',detail:'Mesh from heightmap'},
+  {label:'Texture Map',detail:'Biome-based colouring'},
+  {label:'Three.js Render',detail:'Real-time 3D world'},
+],
+features:[
+  {name:'Seeded generation',detail:'Any seed produces a unique, deterministic world — shareable and reproducible.'},
+  {name:'Octave noise layers',detail:'Multiple noise frequencies combined for realistic, natural-looking terrain.'},
+  {name:'Biome blending',detail:'Smooth transitions between terrain types based on elevation and moisture.'},
+  {name:'Real-time generation',detail:'World computed and rendered in seconds, directly in the browser.'},
+],
+tech:['Three.js','JavaScript','Perlin Noise','WebGL','Vercel'],
+screenshots:['procedural-world.png'],
+liveUrl:'https://procedural-world-unitar.vercel.app',
+accent:'#9084e6'},
+
+citysimvisualizer:{name:'City Sim Visualizer',cat:'Games',status:'live',clientWork:false,
+tagline:'Procedurally generated city terrain — disc geometry, custom atmosphere, real-time 3D.',
+desc:'City Sim Visualizer generates a full urban terrain environment from a seed — buildings, street grids, district zones, atmospheric dome, and horizon geometry, all rendered in Three.js. Every seed produces a different city layout. Interactive camera, real-time generation, no install.',
+flow:[
+  {label:'Seed Input',detail:'Random or set value'},
+  {label:'Terrain Gen',detail:'City disc heightmap'},
+  {label:'District Map',detail:'Zone boundary geometry'},
+  {label:'Horizon Math',detail:'Curvature simulation'},
+  {label:'Atmosphere',detail:'Dome + sky rendering'},
+  {label:'Three.js Scene',detail:'Full 3D view'},
+],
+features:[
+  {name:'Procedural city layout',detail:'Every seed generates a different arrangement of districts, terrain, and structures.'},
+  {name:'Disc geometry',detail:'City built on a disc plane with boundary walls and correct horizon behaviour.'},
+  {name:'Custom atmosphere',detail:'Dome sky rendering with realistic ambient lighting and haze.'},
+  {name:'Interactive camera',detail:'Orbit, zoom, and explore the full generated city in real time.'},
+],
+tech:['Three.js','JavaScript','WebGL','GLSL','Vercel'],
+screenshots:['city-sim-visualizer.png'],
+liveUrl:'https://flatearth-visualizer.vercel.app',
+accent:'#9084e6'},
+
+terrainmaker:{name:'Terrain Maker',cat:'Games',status:'live',clientWork:false,
+tagline:'Game terrain randomiser — generate unique heightmaps with one click.',
+desc:'Terrain Maker v2 gives game developers and artists a fast way to get unique terrain. Press the button, get a heightmap — varied elevation, natural-looking topology, different biome palettes. Every output is export-ready for use in game engines or 3D tools.',
+flow:[
+  {label:'Random Seed',detail:'Generated or manual'},
+  {label:'Perlin Noise',detail:'Multi-octave pass'},
+  {label:'Heightmap',detail:'Elevation grid computed'},
+  {label:'Biome Tint',detail:'Colour assigned by height'},
+  {label:'Preview Render',detail:'2D + 3D preview'},
+  {label:'Export',detail:'PNG heightmap download'},
+],
+features:[
+  {name:'One-click generation',detail:'New unique terrain every press — no parameters to fiddle with.'},
+  {name:'Exportable heightmaps',detail:'PNG output compatible with Unreal Engine, Unity, Blender, and more.'},
+  {name:'Biome colouring',detail:'Automatic colour-coding by elevation — water, plains, forest, snow.'},
+  {name:'Instant preview',detail:'See the terrain in 2D and 3D before exporting.'},
+],
+tech:['HTML Canvas','JavaScript','Perlin Noise','CSS','Vercel'],
+screenshots:['terrain-maker.png'],
+liveUrl:'https://terrain-maker-unitar.vercel.app',
+accent:'#9084e6'},
+
+interactiveadventure:{name:'Interactive Adventure',cat:'Games',status:'live',clientWork:false,
+tagline:'DnD-style AI game — AI-generated images, ambient sound, story that adapts.',
+desc:'Interactive Adventure is a living text RPG. Every choice you make feeds into an AI story engine that generates the next scene, an AI image that illustrates it, and ambient audio that sets the mood. No two playthroughs are identical. The world exists because you moved through it.',
+flow:[
+  {label:'Player Choice',detail:'Narrative decision input'},
+  {label:'Story Engine',detail:'AI generates next scene'},
+  {label:'Scene Text',detail:'Narrative written live'},
+  {label:'Image Gen',detail:'Scene illustrated by AI'},
+  {label:'Audio Select',detail:'Ambient matched to mood'},
+  {label:'Display',detail:'Immersive scene presented'},
+],
+features:[
+  {name:'AI-generated story',detail:'Every scene written live based on your choices — no pre-scripted paths.'},
+  {name:'AI-generated images',detail:'Each scene gets an illustration generated to match the narrative.'},
+  {name:'Ambient soundscape',detail:'Background audio matched to scene mood — forest, dungeon, town.'},
+  {name:'Infinite branching',detail:'No two playthroughs follow the same path.'},
+],
+tech:['Node.js','OpenAI','Stable Diffusion','Web Audio API','Vercel'],
+screenshots:['interactive-adventure.png'],
+liveUrl:'https://interactive-adventure-unitar.vercel.app',
+accent:'#9084e6'},
+
+mesmeraudiovisual:{name:'Mesmer Audio Visual',cat:'Creative',status:'live',clientWork:false,
+tagline:'Frequencies become geometry — a live audio-visual performance tool.',
+desc:'Mesmer is built for the intersection of music and image. It takes audio — live or uploaded — breaks it into frequency bands using FFT analysis, and maps those bands to procedurally generated 3D geometry in real time. The result is a visual system that moves with the music.',
+flow:[
+  {label:'Audio Input',detail:'Live mic or upload'},
+  {label:'FFT Analysis',detail:'Frequency decomposition'},
+  {label:'Band Split',detail:'Bass, mid, treble isolated'},
+  {label:'Geometry Map',detail:'Bands drive 3D shapes'},
+  {label:'WebGL Render',detail:'60fps visual output'},
+  {label:'Visual Out',detail:'Reactive geometry display'},
+],
+features:[
+  {name:'Real-time FFT',detail:'Frequency analysis runs at audio frame rate — zero perceptible latency.'},
+  {name:'Procedural geometry',detail:'3D shapes generated and driven by live frequency data.'},
+  {name:'WebGL rendering',detail:'Hardware-accelerated at 60fps, runs smoothly in any modern browser.'},
+  {name:'Live or uploaded audio',detail:'Plug in a microphone or upload a track — either works.'},
+],
+tech:['Web Audio API','WebGL','Three.js','JavaScript','Vercel'],
+screenshots:['mesmer-audio-visual.png'],
+livePerformance:'https://youtu.be/_fNxoDRPnxM',
+liveUrl:'https://mesmeraudiovisual.vercel.app',
+accent:'#ff5fa2'},
+
+binauralmixer:{name:'Binaural Mixer',cat:'Creative',status:'live',clientWork:false,
+tagline:'Place instruments in true 3D space — the difference is felt in headphones.',
+desc:'Binaural Mixer lets you position individual instruments or stems from a track anywhere in 3D space — left, right, above, behind, near, far. It uses Head-Related Transfer Function (HRTF) processing to create genuine spatial audio, not stereo panning. Put on headphones and feel the difference.',
+flow:[
+  {label:'Track Upload',detail:'Audio or stem files'},
+  {label:'Stem Split',detail:'Instruments isolated'},
+  {label:'3D Position',detail:'Place each in space'},
+  {label:'HRTF Processing',detail:'Spatial audio encoding'},
+  {label:'Binaural Mix',detail:'L+R channels encoded'},
+  {label:'Output',detail:'Spatial audio download'},
+],
+features:[
+  {name:'HRTF spatial audio',detail:'Head-Related Transfer Function — how sound actually reaches your ears in 3D space.'},
+  {name:'Per-stem positioning',detail:'Place each instrument independently anywhere in the 360° sphere.'},
+  {name:'Headphone-optimised',detail:'Designed for headphones. Sounds nothing like regular stereo panning.'},
+  {name:'Browser-native processing',detail:'All spatial audio computed in Web Audio API — no server needed.'},
+],
+tech:['Web Audio API','HRTF','JavaScript','CSS','Vercel'],
+screenshots:['binaural-mixer.png'],
+youtubeDemo:'https://www.youtube.com/watch?v=HZGPGfLeLHA',
+liveUrl:'https://binauralmixer.vercel.app',
+accent:'#ff5fa2'},
+
+artisticqr:{name:'Artistic QR Code Gallery',cat:'Creative',status:'live',clientWork:false,
+tagline:'30 AI-generated QR codes that are visually stunning and fully scannable.',
+desc:'A gallery of 30 QR codes each generated with a different AI art style — watercolour, glitch art, mosaic, ink wash, neon circuit, and more. The technical challenge: every single one scans correctly. The aesthetic challenge: every single one looks like actual art. Both achieved.',
+flow:[
+  {label:'URL Input',detail:'Content to encode'},
+  {label:'QR Matrix',detail:'Error-corrected grid'},
+  {label:'Style Prompt',detail:'Art direction written'},
+  {label:'AI Overlay',detail:'Style applied to matrix'},
+  {label:'Scan Test',detail:'All codes verified live'},
+  {label:'Gallery',detail:'30 styles published'},
+],
+features:[
+  {name:'30 distinct art styles',detail:'Watercolour, glitch, mosaic, ink, neon, oil painting — and more.'},
+  {name:'100% scan rate',detail:'Every code in the gallery scans correctly on any QR scanner.'},
+  {name:'AI-generated artwork',detail:'Each style was generated with AI direction, not stock filters.'},
+  {name:'Gallery format',detail:'Browse, preview, and use any code directly from the gallery.'},
+],
+tech:['Python','QR Libraries','AI Image Gen','HTML','Vercel'],
+screenshots:[],
+liveUrl:'https://qr-art-gallery-unitar.vercel.app',
+accent:'#ff5fa2'},
+
+keyofsong:{name:'Key of Song',cat:'Tools',status:'live',clientWork:false,
+tagline:'Find the musical key and BPM of any track — instantly.',
+desc:"Key of Song answers the two questions every producer, DJ, and musician asks: what key is this in, and how fast is it? Upload any audio file and get both answers in seconds. The analysis uses FFT-based chroma vectors for key detection and onset detection for BPM — the same techniques used in professional DAWs.",
+flow:[
+  {label:'Audio Upload',detail:'MP3, WAV, or FLAC'},
+  {label:'FFT Analysis',detail:'Frequency spectrum mapped'},
+  {label:'Chroma Vector',detail:'Pitch class profile built'},
+  {label:'Key Match',detail:'Compared to all 24 keys'},
+  {label:'Onset Detect',detail:'Beat positions found'},
+  {label:'BPM + Key',detail:'Both results displayed'},
+],
+features:[
+  {name:'Chroma-based key detection',detail:'Analyses the pitch class profile of the whole track for accurate key identification.'},
+  {name:'BPM analysis',detail:'Onset detection finds beats and computes tempo.'},
+  {name:'All major and minor keys',detail:'Detects all 24 keys including relative majors and minors.'},
+  {name:'No account required',detail:'Upload and get results — nothing else needed.'},
+],
+tech:['Web Audio API','FFT','JavaScript','CSS','Vercel'],
+screenshots:['key-of-song.png'],
+liveUrl:'https://www.keyofsong.com',
+accent:'#52e0ff'},
+
+planetaryhours:{name:'Planetary Hours',cat:'Tools',status:'live',clientWork:false,
+tagline:'Accurate astrological planetary hour clock — real-time, location-aware.',
+desc:'Planetary Hours calculates the astrological hours of the day based on your location, the sunrise and sunset for today, and traditional Chaldean order. Each hour is ruled by a different planet — the clock shows you which one is current, how long until the next, and the full day ahead.',
+flow:[
+  {label:'Location',detail:'GPS or manual entry'},
+  {label:'Sunrise Calc',detail:'Exact for date + coords'},
+  {label:'Day Division',detail:'12 day + 12 night hours'},
+  {label:'Planet Assign',detail:'Chaldean order applied'},
+  {label:'Current Hour',detail:'Real-time sync'},
+  {label:'Live Clock',detail:'Countdown + full table'},
+],
+features:[
+  {name:'Location-accurate',detail:'Uses your real GPS coordinates for sunrise/sunset calculations.'},
+  {name:'Full day table',detail:'See all 24 planetary hours — day and night — at a glance.'},
+  {name:'Real-time countdown',detail:'Live timer counting down to the next planetary hour.'},
+  {name:'Traditional Chaldean order',detail:'Correct esoteric planetary sequence, not a simplified version.'},
+],
+tech:['JavaScript','Geolocation API','Astronomy Calc','CSS','Vercel'],
+screenshots:['planetary-hours.png'],
+liveUrl:'https://planetaryhours.vercel.app',
+accent:'#52e0ff'},
+
+midify:{name:'Midify',cat:'Tools',status:'live',clientWork:false,
+tagline:'Convert any audio to MIDI — melody extraction, note for note.',
+desc:'Midify takes an audio file and produces a MIDI file. Upload a vocal melody, a guitar riff, a piano line — anything with a clear pitch — and Midify transcribes it into MIDI notes. Producers use it to sample and replay in their DAW; musicians use it to transcribe by ear without the ear.',
+flow:[
+  {label:'Audio Upload',detail:'MP3, WAV file input'},
+  {label:'Onset Detect',detail:'Note start times found'},
+  {label:'Pitch Track',detail:'Fundamental freq per note'},
+  {label:'Note Map',detail:'Freq → MIDI number'},
+  {label:'MIDI Events',detail:'Timing + velocity written'},
+  {label:'.mid Export',detail:'Download MIDI file'},
+],
+features:[
+  {name:'Pitch tracking',detail:'Fundamental frequency tracked frame-by-frame for accurate transcription.'},
+  {name:'Onset detection',detail:'Note start and end points identified for clean MIDI timing.'},
+  {name:'MIDI velocity',detail:'Amplitude mapped to MIDI velocity — dynamics preserved.'},
+  {name:'DAW-ready output',detail:'Standard .mid file compatible with every DAW.'},
+],
+tech:['Web Audio API','FFT','JavaScript','MIDI.js','Vercel'],
+screenshots:['midify.png'],
+liveUrl:'https://midify-brown.vercel.app',
+accent:'#52e0ff'},
+
+cartoonify:{name:'Cartoonify',cat:'Tools',status:'live',clientWork:false,
+tagline:'Transform any photo into a cartoon illustration — multiple styles.',
+desc:'Cartoonify takes a photo and runs it through an AI pipeline to produce a cartoon-style illustration. Multiple style options — Pixar-style 3D render, flat vector, anime, and more. Works on portraits, landscapes, pets, products — anything.',
+flow:[
+  {label:'Photo Upload',detail:'Any image file'},
+  {label:'Style Parse',detail:'Subject analysis'},
+  {label:'AI Transform',detail:'Style model applied'},
+  {label:'Detail Pass',detail:'Lines + colour refine'},
+  {label:'Post-Process',detail:'Output cleaned up'},
+  {label:'Download',detail:'High-res cartoon image'},
+],
+features:[
+  {name:'Multiple cartoon styles',detail:'Pixar, flat vector, anime, line-art — distinct outputs, not filters.'},
+  {name:'Works on anything',detail:'People, pets, landscapes, products — the model handles any subject.'},
+  {name:'High-res output',detail:'Downloads at full resolution, suitable for printing and sharing.'},
+  {name:'Instant results',detail:'No render queue — processed and delivered in seconds.'},
+],
+tech:['Python','AI Image Models','React','FastAPI','Vercel'],
+screenshots:['cartoonify.png'],
+liveUrl:'https://cartoonify-qrlm.vercel.app',
+accent:'#52e0ff'},
+
+plushymaker:{name:'Plushy Maker',cat:'Tools',status:'live',clientWork:false,
+tagline:'Turn any photo into a photorealistic plush toy render.',
+desc:'Upload a photo — of a person, a pet, a character, an object — and Plushy Maker renders it as a plush toy. Soft felt texture, visible stitching, accurate proportions from the source image. The result is so convincing it looks like product photography for a real toy that was manufactured.',
+flow:[
+  {label:'Photo Upload',detail:'Any image subject'},
+  {label:'Subject Extract',detail:'Main subject isolated'},
+  {label:'Plush Geometry',detail:'Soft body shape adapted'},
+  {label:'Material Render',detail:'Felt + stitch texture'},
+  {label:'Composite',detail:'Background + lighting'},
+  {label:'Output',detail:'Plush toy photo result'},
+],
+features:[
+  {name:'Photorealistic plush render',detail:'Looks like product photography, not a cartoon filter.'},
+  {name:'Any subject',detail:'People, pets, characters, objects — anything can become a plushie.'},
+  {name:'Felt and stitch detail',detail:'Surface texture includes realistic felt weave and visible thread stitching.'},
+  {name:'Product-photo quality',detail:'Output is clean enough to use as e-commerce imagery.'},
+],
+tech:['Python','AI Image Gen','React','FastAPI','Vercel'],
+screenshots:['plushy-maker.png'],
+liveUrl:'https://plushymaker.vercel.app',
+accent:'#52e0ff'},
+
+worldwondermaker:{name:'World Wonder Maker',cat:'Tools',status:'live',clientWork:false,
+tagline:'Reimagine any image as an ancient world wonder.',
+desc:'Upload any image and World Wonder Maker renders it as an ancient monument — a pyramid, a colossus, a hanging garden. The AI identifies the subject and structures, then composites a version of it built as if it were one of the great wonders of the ancient world.',
+flow:[
+  {label:'Image Upload',detail:'Any photo or image'},
+  {label:'Structure Detect',detail:'Shapes and subject found'},
+  {label:'Wonder Style',detail:'Monument type selected'},
+  {label:'AI Composite',detail:'Scene constructed in style'},
+  {label:'Blend Pass',detail:'Lighting + integration'},
+  {label:'Output',detail:'Wonder version downloaded'},
+],
+features:[
+  {name:'Ancient monument styles',detail:'Pyramid, Colossus, Hanging Gardens, Lighthouse — each a distinct render.'},
+  {name:'Structure-aware',detail:'AI uses your image geometry to anchor the wonder in the scene.'},
+  {name:'Cinematic output',detail:'Results look like genuine architectural photography, not obvious AI.'},
+  {name:'Any input',detail:'Buildings, people, landscapes — all work as source material.'},
+],
+tech:['Python','AI Image Gen','React','FastAPI','Vercel'],
+screenshots:['world-wonder-maker.png'],
+liveUrl:'https://worldwonderstatuesmaker-cuxy.vercel.app',
+accent:'#52e0ff'},
+
+dogpetportrait:{name:'Dog Pet Portrait',cat:'Tools',status:'live',clientWork:false,
+tagline:'Stylized dog portraits across every artistic filter — oil to neon.',
+desc:'Upload your dog photo and get back a gallery of artistic portraits in different styles — oil painting, watercolour, pencil sketch, neon pop art, Renaissance, and more. The breed is identified and the portrait is styled accurately to the dog, not just applied as a filter over a photo.',
+flow:[
+  {label:'Photo Upload',detail:'Dog photo input'},
+  {label:'Breed Analysis',detail:'Breed detected + noted'},
+  {label:'Style Select',detail:'Multiple styles queued'},
+  {label:'AI Portrait',detail:'Each style rendered'},
+  {label:'Post-Process',detail:'Output refined per style'},
+  {label:'Gallery',detail:'All styles displayed'},
+],
+features:[
+  {name:'Breed-aware rendering',detail:'The model identifies the breed and renders it accurately — not just a texture overlay.'},
+  {name:'Multiple artistic styles',detail:'Oil, watercolour, sketch, neon, Renaissance, and more — all from one upload.'},
+  {name:'Gallery output',detail:'All style variants shown together for easy comparison and download.'},
+  {name:'High-res downloads',detail:'Each portrait downloads at full resolution.'},
+],
+tech:['Python','AI Image Gen','React','FastAPI','Vercel'],
+screenshots:['dog-pet-portrait.png'],
+liveUrl:'https://dogpetportrait-jthy.vercel.app',
+accent:'#52e0ff'},
+
+catpetportrait:{name:'Cat Pet Portrait',cat:'Tools',status:'live',clientWork:false,
+tagline:'Stylized cat portraits — same power as the dog tool, tuned for felines.',
+desc:'The same multi-style portrait pipeline as Dog Pet Portrait, calibrated for cats. Upload your cat photo, get back oil paintings, watercolours, sketches, neon art, and more. The model recognises cat features accurately and renders each style with them intact.',
+flow:[
+  {label:'Photo Upload',detail:'Cat photo input'},
+  {label:'Feature Analysis',detail:'Feline features mapped'},
+  {label:'Style Select',detail:'All styles queued'},
+  {label:'AI Portrait',detail:'Each style rendered'},
+  {label:'Post-Process',detail:'Output refined per style'},
+  {label:'Gallery',detail:'All variants displayed'},
+],
+features:[
+  {name:'Feline-tuned model',detail:'Calibrated for cat facial structure, fur, and markings — accurate to the subject.'},
+  {name:'Multiple artistic styles',detail:'Oil, watercolour, sketch, neon, Renaissance — all from one upload.'},
+  {name:'Gallery output',detail:'All style variants shown together for easy comparison.'},
+  {name:'High-res downloads',detail:'Every portrait downloads at full resolution.'},
+],
+tech:['Python','AI Image Gen','React','FastAPI','Vercel'],
+screenshots:['cat-pet-portrait.png'],
+liveUrl:'https://catpetportrait.vercel.app',
+accent:'#52e0ff'},
+
+imgto3d:{name:'Img to 3D',cat:'Tools',status:'live',clientWork:false,
+tagline:'Transform flat images into 3D-style renders — depth from nothing.',
+desc:'Img to 3D estimates depth from a 2D image, generates a surface normal map, and renders the result as a 3D-style image with volumetric shading. The process extracts dimensionality that was never there — flat photos become objects with perceived depth and lighting.',
+flow:[
+  {label:'Image Upload',detail:'2D photo or image'},
+  {label:'Depth Estimate',detail:'Monocular depth model'},
+  {label:'Normal Map',detail:'Surface normals computed'},
+  {label:'Mesh Extrude',detail:'Geometry built from depth'},
+  {label:'Light Rig',detail:'Directional + ambient'},
+  {label:'3D Render',detail:'Output with depth illusion'},
+],
+features:[
+  {name:'Monocular depth estimation',detail:'Infers 3D depth from a single 2D image — no stereo pair needed.'},
+  {name:'Normal map generation',detail:'Computes surface orientation for realistic directional lighting.'},
+  {name:'Adjustable light direction',detail:'Drag the light position and see the 3D effect respond in real time.'},
+  {name:'Any image input',detail:'Works on photos, illustrations, product shots, and more.'},
+],
+tech:['Python','Depth Models','WebGL','Three.js','Vercel'],
+screenshots:['img-to-3d.png'],
+liveUrl:'https://imgtothreed.vercel.app',
+accent:'#52e0ff'},
+
+bulkimagecreator:{name:'Bulk Image Creator',cat:'Tools',status:'live',clientWork:false,
+tagline:'Batch resize and compress images in the browser — no upload, no limit.',
+desc:'Bulk Image Creator handles image batch processing entirely client-side. Drag in a folder of images, set your target dimensions and compression quality, and get a ZIP of all processed files. No server, no upload size limit, no privacy concerns — everything runs on your machine.',
+flow:[
+  {label:'Image Batch',detail:'Drag-drop any folder'},
+  {label:'Dimension Rules',detail:'Width, height, or both set'},
+  {label:'Compression',detail:'Quality level selected'},
+  {label:'Process Queue',detail:'Each image transformed'},
+  {label:'Validate',detail:'Dimensions confirmed'},
+  {label:'ZIP Export',detail:'All images downloaded'},
+],
+features:[
+  {name:'100% client-side',detail:'No upload. Files stay on your machine. No size limits imposed by a server.'},
+  {name:'Batch processing',detail:'Handle hundreds of images at once — single or batch dimension rules.'},
+  {name:'Output format control',detail:'Set target width, height, quality, and file format per batch.'},
+  {name:'ZIP download',detail:'All processed images bundled into a single ZIP for easy export.'},
+],
+tech:['JavaScript','Canvas API','JSZip','Vite','Vercel'],
+screenshots:['bulk-image-creator.png'],
+liveUrl:'https://bulkimgcreatorr.vercel.app',
+accent:'#52e0ff'},
+
+bulkaudioquality:{name:'Bulk Audio Quality Changer',cat:'Tools',status:'live',clientWork:false,
+tagline:'Batch audio bitrate conversion in the browser — drag, set, ZIP, done.',
+desc:'Bulk Audio Quality Changer processes MP3 files in the browser using FFmpeg.wasm. Drag in your files, pick a target bitrate, and download a ZIP of all converted files. No audio ever leaves your machine — the conversion runs locally, instantly, with no file size restrictions.',
+flow:[
+  {label:'MP3 Batch',detail:'Drag-drop audio files'},
+  {label:'Bitrate Select',detail:'128, 192, 320kbps etc.'},
+  {label:'FFmpeg Decode',detail:'Source audio decoded'},
+  {label:'Re-Encode',detail:'Target bitrate applied'},
+  {label:'Quality Check',detail:'Output validated'},
+  {label:'ZIP Export',detail:'All files downloaded'},
+],
+features:[
+  {name:'FFmpeg.wasm processing',detail:'Professional-grade audio codec running entirely in the browser.'},
+  {name:'Any bitrate target',detail:'Set any standard bitrate — 64, 128, 192, 256, or 320kbps.'},
+  {name:'No upload required',detail:'Files processed locally. Nothing sent to a server.'},
+  {name:'Batch ZIP output',detail:'All converted files in a single ZIP download.'},
+],
+tech:['FFmpeg.wasm','JavaScript','JSZip','Vite','Vercel'],
+screenshots:['bulk-audio-quality.png'],
+liveUrl:'https://bulkaudioqualitychanger.vercel.app',
+accent:'#52e0ff'},
+
+texttranslator:{name:'Text Translator',cat:'Tools',status:'live',clientWork:false,
+tagline:'Translate entire books — no character limits, no truncation.',
+desc:'Text Translator handles document-length translation without the character caps that break every other translation tool. Paste a whole chapter, a full document, or an entire book and get it translated into any language. The model handles context continuity across the full length.',
+flow:[
+  {label:'Document Paste',detail:'Any length of text'},
+  {label:'Language Detect',detail:'Source identified'},
+  {label:'Chunk Split',detail:'Optimal context windows'},
+  {label:'AI Translate',detail:'Each chunk translated'},
+  {label:'Reassemble',detail:'Chunks merged coherently'},
+  {label:'Output',detail:'Full translated document'},
+],
+features:[
+  {name:'No character limit',detail:'Translate a whole book in one paste. No truncation, no chunking visible to the user.'},
+  {name:'Context preservation',detail:'Translation maintains coherence across chunks — not isolated sentence-by-sentence.'},
+  {name:'100+ languages',detail:'Any language pair the underlying model supports.'},
+  {name:'Format preserved',detail:'Paragraphs, line breaks, and structure kept intact in the output.'},
+],
+tech:['React','OpenAI API','Node.js','Vite','Vercel'],
+screenshots:['text-translator.png'],
+liveUrl:'https://texttranslator-ten.vercel.app',
+accent:'#52e0ff'},
+
+gifcityscraper:{name:'GifCity Scraper',cat:'Tools',status:'github',clientWork:false,
+tagline:'Internet archaeology — archive old GIFs from GifCity.com.',
+desc:'GifCity Scraper crawls GifCity.com and downloads every GIF it finds, preserving metadata, categories, and original filenames. Built for digital archivists and aesthetic hunters who want to preserve old internet culture before it disappears. Run it locally, collect forever.',
+flow:[
+  {label:'Target URL',detail:'GifCity.com category'},
+  {label:'HTTP Crawl',detail:'Pages fetched in sequence'},
+  {label:'HTML Parse',detail:'GIF links extracted'},
+  {label:'Download Queue',detail:'GIFs fetched in parallel'},
+  {label:'Metadata Save',detail:'Category + name stored'},
+  {label:'Archive',detail:'Local GIF collection'},
+],
+features:[
+  {name:'Full site crawl',detail:'Follows pagination and category links to find every available GIF.'},
+  {name:'Parallel downloads',detail:'Multiple GIFs fetched simultaneously for speed.'},
+  {name:'Metadata preservation',detail:'Original filenames, categories, and page URLs saved with each GIF.'},
+  {name:'Resume support',detail:'Skips already-downloaded files — safe to stop and restart.'},
+],
+tech:['Python','BeautifulSoup','Requests','AsyncIO','CLI'],
+screenshots:['gifcity-scraper.png'],
+liveUrl:'https://github.com/UnitarLab/GifCityScraper',
+accent:'#52e0ff'},
+
+dimensio:{name:'Dimensio',cat:'Tools',status:'wip',clientWork:false,
+tagline:'Cinematic parallax — depth layering for images that feel alive.',
+desc:'Dimensio takes a flat image and creates a cinematic parallax effect by separating it into depth layers. Subject, midground, and background are peeled apart, given independent motion, and composited back into an animated output that makes still images feel three-dimensional.',
+flow:[
+  {label:'Image Upload',detail:'Any photo or illustration'},
+  {label:'Depth Map',detail:'Depth estimated per pixel'},
+  {label:'Layer Segment',detail:'3+ depth layers split'},
+  {label:'Inpaint',detail:'Gaps filled behind subject'},
+  {label:'Parallax Rig',detail:'Motion applied per layer'},
+  {label:'Video Export',detail:'Animated output rendered'},
+],
+features:[
+  {name:'Automatic depth segmentation',detail:'AI separates foreground, midground, and background without manual masking.'},
+  {name:'Inpainting behind layers',detail:'Fills the revealed background behind the subject so layers can separate cleanly.'},
+  {name:'Cinematic motion',detail:'Parallax amount and easing tuned for a professional, natural-feeling result.'},
+  {name:'Video output',detail:'Exports as a looping video file — ready for social media or embedding.'},
+],
+tech:['Python','Depth Models','AI Inpaint','FFmpeg','GLSL'],
+screenshots:[],
+liveUrl:'https://drive.google.com/file/d/1xlq76LfC_37lsGpmzlh-EoBgVygVpg98/view',
+accent:'#52e0ff'},
+
+seatravel:{name:'SEA Travel',cat:'Websites',status:'live',clientWork:false,
+tagline:'South East Asia travel guide — real tips, hidden spots, zero fluff.',
+desc:'SEA Travel is a complete South East Asia guide: destinations, visa information, cost breakdowns, practical tips, hidden gems, and embedded travel videos — all in one site. Built for travellers who want substance over sponsored content.',
+flow:[
+  {label:'Destination',detail:'Country or city select'},
+  {label:'Content DB',detail:'Curated travel data'},
+  {label:'Filter',detail:'Category or topic'},
+  {label:'Guide Page',detail:'Full destination content'},
+  {label:'Media',detail:'Maps, videos, images'},
+  {label:'Share',detail:'Save or share guide'},
+],
+features:[
+  {name:'7 content sections',detail:'Destinations, visas, costs, tips, hidden gems, videos, and a full homepage.'},
+  {name:'Real cost breakdowns',detail:'Budget ranges per country — accommodation, food, transport, activities.'},
+  {name:'Visa information',detail:'Entry requirements for major nationalities, up to date and plainly written.'},
+  {name:'Hidden gems',detail:'Off-the-beaten-path places that actual travellers found, not guidebook clichés.'},
+],
+tech:['HTML','CSS','JavaScript','Vercel'],
+screenshots:['sea-travel.png','sea-destinations.png','sea-visas.png','sea-costs.png','sea-tips.png','sea-hidden-gems.png','sea-videos.png'],
+liveUrl:'https://sea-travel-unitar.vercel.app',
+accent:'#d7ff5e'},
+
+youtubedigest:{name:'YouTube Digest',cat:'Websites',status:'live',clientWork:false,
+tagline:'Daily AI summaries of your YouTube channels — stay current without watching.',
+desc:'YouTube Digest monitors the channels you care about, summarises new videos with AI, and delivers a daily digest. Full video knowledge in a two-minute read. Sign up, add your channels, and get a feed of what was posted and what it covered.',
+flow:[
+  {label:'Channel Sub',detail:'Add YouTube channels'},
+  {label:'Video Monitor',detail:'New uploads detected'},
+  {label:'Transcript Fetch',detail:'Video text extracted'},
+  {label:'AI Summarise',detail:'Key points extracted'},
+  {label:'Digest Format',detail:'Summary card created'},
+  {label:'Feed / Notify',detail:'Daily digest delivered'},
+],
+features:[
+  {name:'Multi-channel monitoring',detail:'Track as many YouTube channels as you want in one place.'},
+  {name:'AI video summaries',detail:'Full video knowledge condensed to key points — no watching required.'},
+  {name:'Daily digest feed',detail:'New summaries collected into a daily reading list.'},
+  {name:'Supabase backend',detail:'Account system, channel subscriptions, and history stored persistently.'},
+],
+tech:['React','Vite','Supabase','YouTube API','OpenAI'],
+screenshots:['youtube-digest.png'],
+liveUrl:'https://youtube-digest-unitar.vercel.app',
+accent:'#d7ff5e'},
+
+lostalgia:{name:'Lostalgia',cat:'Websites',status:'live',clientWork:false,
+tagline:'90s internet nostalgia hub — Frutiger Aero aesthetic, vintage web culture.',
+desc:"Lostalgia is a digital time capsule for the early internet aesthetic — Frutiger Aero design, Windows XP vibes, the kind of web that felt optimistic and glossy. It's a content hub for people who weren't there and a nostalgia hit for people who were.",
+flow:[
+  {label:'Browse',detail:'Aesthetic categories'},
+  {label:'Filter',detail:'Era or style select'},
+  {label:'Content Pull',detail:'Archive items loaded'},
+  {label:'Vibe Match',detail:'Related content surfaced'},
+  {label:'Display',detail:'Immersive aesthetic view'},
+  {label:'Save / Share',detail:'Bookmark or post'},
+],
+features:[
+  {name:'Frutiger Aero aesthetic',detail:'The visual language of the early 2000s web — glossy, optimistic, and instantly recognisable.'},
+  {name:'Vintage web archive',detail:'Content curated from early internet culture — software, UIs, media, and design.'},
+  {name:'Era navigation',detail:'Browse by decade or aesthetic sub-style.'},
+  {name:'Shareable',detail:'Content designed to be shared and spread across social platforms.'},
+],
+tech:['HTML','CSS','JavaScript','Vercel'],
+screenshots:['lostalgia.png'],
+liveUrl:'https://lostalgia.vercel.app',
+accent:'#d7ff5e'},
+
+faero:{name:'Faero',cat:'Websites',status:'wip',clientWork:false,
+tagline:'Browser-based XP-style OS and social network for the Frutiger Aero community.',
+desc:'Faero is a virtual desktop operating system running in the browser, styled after Windows XP-era aesthetics, built as the home of the Frutiger Aero aesthetic community. It has a desktop interface, app launcher, and social features — a community platform disguised as a nostalgia trip.',
+flow:[
+  {label:'Sign Up',detail:'Community account'},
+  {label:'Virtual Desktop',detail:'XP-style OS loads'},
+  {label:'App Launch',detail:'Tools + social apps'},
+  {label:'Interact',detail:'Posts, profiles, chat'},
+  {label:'Community',detail:'Shared aesthetic space'},
+  {label:'Discover',detail:'Content + creators'},
+],
+features:[
+  {name:'Browser-based desktop OS',detail:'Full windowed desktop interface running in a browser tab — no install.'},
+  {name:'XP-era aesthetic',detail:'Faithful Windows XP visual language, recreated with modern web tech.'},
+  {name:'Social network layer',detail:'Profiles, posts, and community features built into the OS interface.'},
+  {name:'Frutiger Aero community',detail:'Built specifically as the home for this aesthetic movement.'},
+],
+tech:['React','CSS','Node.js','Supabase','Vercel'],
+screenshots:['faero.png'],
+liveUrl:'https://www.faero.net',
+accent:'#d7ff5e'},
+
+whereshouldilive:{name:'Where Should I Live',cat:'Websites',status:'wip',clientWork:false,
+tagline:'Interactive city comparison — find where you actually want to move.',
+desc:"Where Should I Live is a decision tool for people thinking about relocating. Set your priorities — climate, cost, culture, safety, lifestyle — and the tool ranks cities against your criteria. It's not a listicle. It's a weighted comparison engine that produces a personalised answer.",
+flow:[
+  {label:'Criteria Set',detail:'Priority weights defined'},
+  {label:'City Database',detail:'Global city data loaded'},
+  {label:'Score Calc',detail:'Weighted match per city'},
+  {label:'Rank List',detail:'Cities ordered by match'},
+  {label:'Detail View',detail:'Per-city breakdown'},
+  {label:'Compare',detail:'Side-by-side decision view'},
+],
+features:[
+  {name:'Weighted criteria engine',detail:'Set what matters most — the ranking adjusts to your priorities, not a fixed formula.'},
+  {name:'Comprehensive city data',detail:'Climate, cost of living, safety, culture, and lifestyle data per city.'},
+  {name:'Side-by-side comparison',detail:'Compare your top candidates head-to-head across all criteria.'},
+  {name:'No filler content',detail:'Data and decision tools — no sponsored suggestions or affiliate links.'},
+],
+tech:['React','Node.js','City Data APIs','Vite','Vercel'],
+screenshots:[],
+liveUrl:'',
+accent:'#d7ff5e'},
+
+porucisajt:{name:'Poruci Sajt',cat:'Clients',status:'live',clientWork:true,
+tagline:'Website creation agency landing page — conversion-focused, Serbian market.',
+desc:'Built for a foreign client operating in the Serbian market. Poruci Sajt is a website creation agency landing page designed to generate inbound leads from Serbian businesses that need a web presence. Clean, credible, and built to convert visitors into enquiries.',
+flow:[
+  {label:'Client Brief',detail:'Service scope defined'},
+  {label:'Market Research',detail:'Serbian web landscape'},
+  {label:'Design',detail:'Conversion-led layout'},
+  {label:'Development',detail:'Fast, static build'},
+  {label:'Copy',detail:'Serbian market tone'},
+  {label:'Launch',detail:'Live + indexed'},
+],
+features:[
+  {name:'Conversion-focused layout',detail:'Every section designed to move visitors toward making an enquiry.'},
+  {name:'Serbian market copy',detail:'Tone and language calibrated for the local business audience.'},
+  {name:'Fast static build',detail:'No CMS overhead — loads instantly and ranks well organically.'},
+  {name:'Lead generation ready',detail:'Contact form and CTA placements optimised for enquiry rate.'},
+],
+tech:['HTML','CSS','JavaScript','Vercel'],
+screenshots:['poruci-sajt.png'],
+liveUrl:'https://www.porucisajt.com',
+accent:'#d7ff5e'},
+
+prevodilacsrpski:{name:'Prevodilac Srpski',cat:'Clients',status:'live',clientWork:true,
+tagline:'Eastern European language specialist — professional translation service site.',
+desc:'Built for a foreign client offering translation services across Serbian, Croatian, Bosnian, and related Eastern European languages. Professional service landing page with clear offerings, turnaround times, and contact flow. Designed to establish credibility in a trust-sensitive market.',
+flow:[
+  {label:'Service Brief',detail:'Languages + specialisms'},
+  {label:'Credibility Design',detail:'Trust signals defined'},
+  {label:'Service Pages',detail:'Each language pair covered'},
+  {label:'Pricing Structure',detail:'Clear rate display'},
+  {label:'Contact Flow',detail:'Enquiry → response'},
+  {label:'Launch',detail:'Live + SEO ready'},
+],
+features:[
+  {name:'Language pair pages',detail:'Dedicated content for each language pair — optimised for search.'},
+  {name:'Trust signal design',detail:'Credentials, turnaround guarantees, and social proof prominently placed.'},
+  {name:'Clear pricing',detail:'Service rates visible without needing to make an enquiry.'},
+  {name:'Enquiry flow',detail:'Direct contact form routed to the translator without friction.'},
+],
+tech:['HTML','CSS','JavaScript','Vercel'],
+screenshots:['prevodilac-srpski.png'],
+liveUrl:'https://www.prevodilacsrpski.com',
+accent:'#d7ff5e'},
+
+stadajedem:{name:'Šta Da Jedem',cat:'Clients',status:'live',clientWork:true,
+tagline:"\"What should I eat?\" — random meal generator for the Serbian market.",
+desc:'Built for a foreign client targeting the Serbian market. Šta Da Jedem ("What should I eat?") solves the daily decision paralysis around meals with a dead-simple interface: pick a cuisine category, press the button, get a random suggestion. The kind of tool people bookmark and come back to daily.',
+flow:[
+  {label:'Filter Set',detail:'Cuisine or diet type'},
+  {label:'Random Seed',detail:'Pseudo-random selection'},
+  {label:'Recipe DB',detail:'Meal pool queried'},
+  {label:'Result',detail:'Meal + basic info shown'},
+  {label:'Save',detail:'Bookmark favourite meals'},
+  {label:'Share',detail:'Send suggestion to others'},
+],
+features:[
+  {name:'One-button simplicity',detail:'Pick a category, press the button. That is the entire UI.'},
+  {name:'Serbian cuisine included',detail:'Local dishes alongside international options — relevant to the target market.'},
+  {name:'Bookmark meals',detail:'Save meals you like so they come up again in future sessions.'},
+  {name:'Shareable suggestions',detail:'Send a meal suggestion to someone else directly from the result.'},
+],
+tech:['HTML','CSS','JavaScript','Vercel'],
+screenshots:['sta-da-jedem.png'],
+liveUrl:'https://stadajedem.com',
+accent:'#d7ff5e'},
+
+everythingaboutjapan:{name:'Everything About Japan',cat:'Clients',status:'live',clientWork:true,
+tagline:'Japan travel and culture guide — built for a foreign client, global audience.',
+desc:'A comprehensive Japan guide built for a foreign client targeting international travellers. Covers food, etiquette, city guides, hidden spots, transport, and cultural context. Built to rank for Japan travel searches and convert readers into believers in the destination.',
+flow:[
+  {label:'Topic Browse',detail:'Food, culture, travel'},
+  {label:'Search',detail:'Query the full guide'},
+  {label:'Content DB',detail:'Curated Japan content'},
+  {label:'Cultural Context',detail:'Why, not just what'},
+  {label:'Guide Display',detail:'Article or section'},
+  {label:'Map / Link',detail:'Location or resource'},
+],
+features:[
+  {name:'Full cultural coverage',detail:'Not just tourist spots — etiquette, language, food culture, social norms.'},
+  {name:'City-by-city guides',detail:'Dedicated pages for Tokyo, Kyoto, Osaka, and more.'},
+  {name:'Practical travel info',detail:'Transport, costs, timing, and logistics for every type of trip.'},
+  {name:'Hidden gems section',detail:'Places locals go that most travel guides miss entirely.'},
+],
+tech:['HTML','CSS','JavaScript','Vercel'],
+screenshots:['everything-about-japan.png'],
+liveUrl:'https://everythingaboutjapan.vercel.app',
+accent:'#d7ff5e'},
+
+srpskajela:{name:'Srpska Jela',cat:'Clients',status:'live',clientWork:true,
+tagline:'Eastern European dishes catalogue — recipes, origins, and cultural notes.',
+desc:'Srpska Jela is a browsable catalogue of Serbian and Eastern European traditional dishes. Each entry has a recipe, the story behind the dish, preparation steps, and cultural context. Built for a foreign client serving the diaspora and food-curious international audience.',
+flow:[
+  {label:'Category Browse',detail:'Cuisine type filter'},
+  {label:'Recipe Search',detail:'Name or ingredient'},
+  {label:'Dish Page',detail:'Full recipe loaded'},
+  {label:'Ingredient List',detail:'Quantities + notes'},
+  {label:'Steps',detail:'Preparation walkthrough'},
+  {label:'Cultural Note',detail:'History + context'},
+],
+features:[
+  {name:'Full recipe catalogue',detail:'Ingredients, quantities, and step-by-step preparation for every dish.'},
+  {name:'Cultural context',detail:'The story behind each dish — where it comes from and what it means.'},
+  {name:'Category filtering',detail:'Browse by meal type, occasion, or region.'},
+  {name:'Diaspora-friendly',detail:'Written for people who grew up with the food but need the measurements in modern units.'},
+],
+tech:['HTML','CSS','JavaScript','Vercel'],
+screenshots:['srpska-jela.png'],
+liveUrl:'https://srpskajela.vercel.app',
+accent:'#d7ff5e'},
+
+decordomadobro:{name:'Decor Doma Dobro',cat:'Clients',status:'live',clientWork:true,
+tagline:'3D-printed home gadgets e-shop — built for a foreign client, Balkan market.',
+desc:'An e-commerce site for a foreign client selling 3D-printed home gadgets and décor items in the Balkan market. Product listings with description, imagery, and a checkout flow. The brand identity — name, visual style, copy — was created alongside the site.',
+flow:[
+  {label:'Product Browse',detail:'Category or search'},
+  {label:'Product Page',detail:'Description + images'},
+  {label:'Customise',detail:'Colour or size option'},
+  {label:'Add to Cart',detail:'Item added'},
+  {label:'Checkout',detail:'Order placed'},
+  {label:'Fulfil',detail:'3D print + ship'},
+],
+features:[
+  {name:'Product catalogue',detail:'Full listing page with filtering, search, and category navigation.'},
+  {name:'Product detail pages',detail:'Images, description, variants, and add-to-cart on each product.'},
+  {name:'Checkout flow',detail:'Clean order flow from cart through to confirmation.'},
+  {name:'Brand identity included',detail:'Name, visual language, and copy created as part of the project.'},
+],
+tech:['HTML','CSS','JavaScript','Vercel'],
+screenshots:['decor-doma-dobro.png'],
+liveUrl:'https://decor-doma-dobro-43.vercel.app',
+accent:'#d7ff5e'},
+
+};
+
+/* ============================================================
+   ORDERED LIST for prev/next navigation
+   ============================================================ */
+const ORDER = ['boeme','celestos','cosmofic','vidblade','infinitemix','lyricvideomaker','autoblogai','siteclonepro','preictio','openworld','proceduralworld','citysimvisualizer','terrainmaker','interactiveadventure','mesmeraudiovisual','binauralmixer','artisticqr','keyofsong','planetaryhours','midify','cartoonify','plushymaker','worldwondermaker','dogpetportrait','catpetportrait','imgto3d','bulkimagecreator','bulkaudioquality','texttranslator','gifcityscraper','dimensio','seatravel','youtubedigest','lostalgia','faero','whereshouldilive','porucisajt','prevodilacsrpski','stadajedem','everythingaboutjapan','srpskajela','decordomadobro'];
+
+/* ============================================================
+   CATEGORY ACCENT MAP
+   ============================================================ */
+const CAT_ACCENT = {Flagship:'#6dffc1',Games:'#9084e6',Creative:'#ff5fa2',Tools:'#52e0ff',Websites:'#d7ff5e',Clients:'#d7ff5e'};
+
+/* ============================================================
+   FLOW DIAGRAM RENDERER
+   ============================================================ */
+function drawFlow(steps, accent='#6dffc1') {
+  const nodeW = 140, nodeH = 58, gap = 18, arrLen = 28;
+  const totalW = steps.length * nodeW + (steps.length - 1) * (gap + arrLen);
+  const W = Math.max(1000, totalW + 60);
+  const sx = (W - totalW) / 2;
+  const cy = 58;
+  let svg = '';
+  // Glow def
+  svg += `<defs><filter id="glo"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
+  steps.forEach((s,i)=>{
+    const x = sx + i*(nodeW+gap+arrLen);
+    // Box
+    svg+=`<rect x="${x}" y="${cy-nodeH/2}" width="${nodeW}" height="${nodeH}" rx="10" fill="rgba(12,25,34,0.92)" stroke="${accent}" stroke-opacity="0.45" stroke-width="1"/>`;
+    // Label
+    svg+=`<text x="${x+nodeW/2}" y="${cy-6}" text-anchor="middle" fill="${accent}" font-family="'JetBrains Mono',monospace" font-size="11" font-weight="600" letter-spacing="0.05em">${s.label}</text>`;
+    // Detail
+    if(s.detail)svg+=`<text x="${x+nodeW/2}" y="${cy+12}" text-anchor="middle" fill="rgba(185,205,203,0.65)" font-family="'Inter',sans-serif" font-size="9.5">${s.detail}</text>`;
+    // Arrow
+    if(i<steps.length-1){
+      const ax=x+nodeW+2, ay=cy;
+      svg+=`<line x1="${ax}" y1="${ay}" x2="${ax+gap+arrLen-6}" y2="${ay}" stroke="${accent}" stroke-opacity="0.55" stroke-width="1.4"/>`;
+      svg+=`<polygon points="${ax+gap+arrLen-6},${ay-4} ${ax+gap+arrLen+4},${ay} ${ax+gap+arrLen-6},${ay+4}" fill="${accent}" opacity="0.55"/>`;
+    }
+  });
+  return `<svg class="flow-svg" viewBox="0 0 ${W} ${cy*2}" xmlns="http://www.w3.org/2000/svg">${svg}</svg>`;
+}
+
+/* ============================================================
+   STATUS BADGE HTML
+   ============================================================ */
+function statusBadge(status){
+  const map={live:'badge-live',wip:'badge-wip',github:'badge-github',deploy:'badge-deploy'};
+  const label={live:'Live',wip:'In Progress',github:'Open Source',deploy:'Backend Needed'};
+  return `<span class="badge ${map[status]||'badge-wip'}">${label[status]||status}</span>`;
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+function render(slug){
+  const p = PROJECTS[slug];
+  const root = document.getElementById('root');
+  if(!p){
+    root.innerHTML=`<div class="four04"><h1>Project not found.</h1><p><a href="index.html" style="color:var(--bio-green)">← Back to the portfolio</a></p></div>`;
+    return;
+  }
+  const accent = p.accent || CAT_ACCENT[p.cat] || '#6dffc1';
+  // Update CSS accent var
+  document.documentElement.style.setProperty('--accent', accent);
+  document.title = `${p.name} — UNITAR`;
+
+  // Nav live button
+  const navBtn = document.getElementById('navLiveBtn');
+  if(p.liveUrl && p.status!=='github'){
+    navBtn.href = p.liveUrl;
+    navBtn.style.display='flex';
+    navBtn.style.background=`radial-gradient(circle at 32% 22%,#fff,${accent} 45%)`;
+  } else if(p.liveUrl && p.status==='github'){
+    navBtn.href=p.liveUrl;
+    navBtn.textContent='View repo ↗';
+    navBtn.style.display='flex';
+    navBtn.className='btn btn-ghost';
+  } else {
+    navBtn.style.display='none';
+  }
+
+  // Prev / next
+  const idx=ORDER.indexOf(slug);
+  const prev=idx>0?ORDER[idx-1]:null;
+  const next=idx<ORDER.length-1?ORDER[idx+1]:null;
+  const prevP=prev&&PROJECTS[prev];
+  const nextP=next&&PROJECTS[next];
+
+  // Hero screenshot
+  const heroShot = p.screenshots && p.screenshots[0] ? `screenshots/${p.screenshots[0]}` : '';
+
+  // Screenshots gallery
+  const galleryItems = (p.screenshots||[]).map((s,i)=>{
+    const labels=['Landing page','Destinations','Visas','Costs','Tips','Hidden gems','Videos','Main view','Detail view','Results'];
+    return `<div class="screen-item"><img src="screenshots/${s}" alt="${p.name} screenshot ${i+1}" loading="lazy"><span class="screen-label">${labels[i]||`View ${i+1}`}</span></div>`;
+  }).join('');
+
+  // Features
+  const featCards = (p.features||[]).map(f=>
+    `<div class="feat-card"><h4>${f.name}</h4><p>${f.detail}</p></div>`
+  ).join('');
+
+  // Tech pills
+  const techPills = (p.tech||[]).map(t=>`<span class="tech-pill">${t}</span>`).join('');
+
+  // Flow diagram
+  const flowSVG = drawFlow(p.flow||[], accent);
+
+  root.innerHTML = `
+  <!-- HERO -->
+  <section class="hero section">
+    <div class="hero-bg">
+      ${heroShot?`<img src="${heroShot}" alt="${p.name}" aria-hidden="true">`:''}
+      <div class="hero-bg-grad"></div>
+      <div class="hero-bg-glow"></div>
+    </div>
+    <div class="wrap hero-content">
+      <div>
+        <div class="hero-badges">
+          <span class="badge badge-cat">${p.cat}</span>
+          ${statusBadge(p.status)}
+          ${p.clientWork?'<span class="badge badge-client">Foreign Client ✓</span>':''}
+        </div>
+        <h1 class="hero-title">${p.name}</h1>
+        <p class="hero-tagline">${p.tagline}</p>
+        <div class="hero-actions">
+          ${p.liveUrl&&p.status!=='github'?`<a href="${p.liveUrl}" target="_blank" rel="noopener" class="btn btn-primary" style="background:radial-gradient(circle at 32% 22%,#fff,${accent} 45%);color:#04140d">Open live project ↗</a>`:''}
+          ${p.liveUrl&&p.status==='github'?`<a href="${p.liveUrl}" target="_blank" rel="noopener" class="btn btn-ghost">View on GitHub ↗</a>`:''}
+          <a href="index.html#projects" class="btn btn-ghost">← All projects</a>
+        </div>
+      </div>
+      ${heroShot?`<div class="hero-aside"><img src="${heroShot}" alt="${p.name}" style="width:340px;height:220px;object-fit:cover;border-radius:16px;border:1px solid rgba(170,224,224,.18);box-shadow:0 0 40px -10px color-mix(in srgb,${accent} 30%,transparent);" loading="eager"></div>`:`<div class="hero-ph" style="width:280px;height:200px;border-radius:16px;background:radial-gradient(circle at 35% 30%,color-mix(in srgb,${accent} 30%,transparent),transparent 70%),linear-gradient(140deg,#071a12,#061018);border:1px solid rgba(170,224,224,.14);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.6rem;opacity:.22;color:var(--ink-100);">${p.name[0]}</div>`}
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" style="border-top:1px solid var(--glass-border);">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">About</span>
+        <h2>${p.name}</h2>
+        <p style="font-size:1.02rem;line-height:1.7;max-width:68ch;">${p.desc}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section how-section">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">How it works</span>
+        <h2>The architecture</h2>
+      </div>
+      <div class="flow-wrap reveal">${flowSVG}</div>
+      <div class="steps-list">
+        ${(p.flow||[]).map((s,i)=>`
+          <div class="step-card reveal">
+            <div class="step-num">0${i+1}</div>
+            <h4>${s.label}</h4>
+            <p>${s.detail}</p>
+          </div>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  ${featCards?`<section class="section features-section">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">What it does</span>
+        <h2>Core capabilities</h2>
+      </div>
+      <div class="features-grid">${featCards}</div>
+    </div>
+  </section>`:''}
+
+  <!-- SCREENSHOTS -->
+  ${galleryItems?`<section class="section screens-section">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Screenshots</span>
+        <h2>In the wild</h2>
+      </div>
+    </div>
+    <div class="wrap"><div class="screens-track">${galleryItems}</div></div>
+  </section>`:''}
+
+  <!-- YOUTUBE EXAMPLES -->
+  ${(p.youtubeExamples||p.livePerformance||p.youtubeDemo)?`<section class="section" style="border-top:1px solid var(--glass-border);">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">${p.youtubeExamples?'Output examples':p.livePerformance?'Live performance':'See it in action'}</span>
+        <h2>${p.youtubeExamples?'Made with InfiniteMix':p.livePerformance?'Live at full power':'In action'}</h2>
+        ${p.livePerformance||p.youtubeDemo?`<p style="color:var(--ink-300);margin-top:.6rem;">${p.livePerformance?'A live audio-visual performance — the tool running in real time.':'Watch the full demo below.'}</p>`:''}
+      </div>
+      ${p.youtubeExamples?`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-top:2rem;">${(p.youtubeExamples).map(v=>`<a href="https://youtu.be/${v.id}" target="_blank" rel="noopener" style="display:block;border-radius:14px;overflow:hidden;border:1px solid var(--glass-border);transition:transform .25s,border-color .25s;text-decoration:none;" onmouseover="this.style.transform='translateY(-3px)';this.style.borderColor='rgba(170,224,224,.4)'" onmouseout="this.style.transform='';this.style.borderColor='var(--glass-border)'"><img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg" alt="${v.label}" style="width:100%;display:block;aspect-ratio:16/9;object-fit:cover;"><div style="padding:.75rem 1rem;background:rgba(14,28,38,.85);"><span style="font-family:var(--font-mono);font-size:.72rem;color:var(--ink-300);letter-spacing:.04em;">${v.label}</span></div></a>`).join('')}</div>`:''}
+      ${p.livePerformance||p.youtubeDemo?`<div style="margin-top:2rem;border-radius:16px;overflow:hidden;border:1px solid var(--glass-border);aspect-ratio:16/9;position:relative;"><iframe style="width:100%;height:100%;position:absolute;inset:0;border:none;" src="https://www.youtube.com/embed/${(p.livePerformance||p.youtubeDemo).replace(/.*(?:youtu\.be\/|v=)([^&]+).*/,'$1')}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>`:''}
+    </div>
+  </section>`:''}
+
+  <!-- TECH -->
+  ${techPills?`<section class="section tech-section">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Built with</span>
+        <h2>Tech stack</h2>
+      </div>
+      <div class="tech-pills">${techPills}</div>
+    </div>
+  </section>`:''}
+
+  <!-- CTA -->
+  <section class="cta-strip">
+    <div class="wrap">
+      <div>
+        <h3>Want something like this built?</h3>
+        <p>Bring the idea. We'll figure out the rest.</p>
+      </div>
+      <a href="mailto:contact@unitar.app" class="btn btn-primary" style="background:radial-gradient(circle at 32% 22%,#fff,${accent} 45%);color:#04140d;">Get in touch →</a>
+    </div>
+  </section>
+
+  <!-- PREV / NEXT -->
+  <nav class="proj-nav">
+    <div class="wrap">
+      ${prevP?`<a href="project.html#${prev}" class="pnav-link" onclick="navigate(event,'${prev}')"><span class="dir">← Previous</span><span class="pname">${prevP.name}</span></a>`:'<div></div>'}
+      <a href="index.html#projects" class="btn btn-ghost">All projects</a>
+      ${nextP?`<a href="project.html#${next}" class="pnav-link" style="text-align:right" onclick="navigate(event,'${next}')"><span class="dir">Next →</span><span class="pname">${nextP.name}</span></a>`:'<div></div>'}
+    </div>
+  </nav>
+  `;
+
+  // Scroll to top
+  window.scrollTo({top:0,behavior:'instant'});
+
+  // Reveal observer
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target);}});
+  },{threshold:.1});
+  els.forEach(el=>io.observe(el));
+}
+
+function navigate(e,slug){
+  e.preventDefault();
+  window.location.hash=slug;
+}
+
+function init(){
+  const slug = window.location.hash.slice(1);
+  if(slug&&PROJECTS[slug]) render(slug);
+  else if(slug&&!PROJECTS[slug]){
+    document.getElementById('root').innerHTML=`<div class="four04"><h1>Project not found.</h1><p>Slug "<code>${slug}</code>" doesn't match any project.<br><a href="index.html#projects" style="color:var(--bio-green)">← Back to all projects</a></p></div>`;
+  } else {
+    window.location.href='index.html#projects';
+  }
+}
+
+window.addEventListener('hashchange',()=>render(window.location.hash.slice(1)));
+init();
+</script>
+</body>
+</html>
