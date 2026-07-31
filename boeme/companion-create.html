@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Your Companion — Boeme</title>
+<style>
+:root {
+  --bg: #06060d;
+  --surface: #0d0c1e;
+  --surface2: #12102a;
+  --border: rgba(255,255,255,0.07);
+  --border-glow: rgba(176,110,251,0.3);
+  --accent: #b06efb;
+  --accent2: #f06bba;
+  --grad: linear-gradient(135deg, #b06efb 0%, #f06bba 100%);
+  --text: #ede9ff;
+  --text-dim: rgba(237,233,255,0.38);
+  --text-mid: rgba(237,233,255,0.65);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%; min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, 'Helvetica Neue', 'Segoe UI', system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ─── PROGRESS ─────────────────────────────────── */
+#progress-bar {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 2px; background: rgba(255,255,255,0.05);
+  z-index: 200;
+}
+#progress-fill {
+  height: 100%;
+  background: var(--grad);
+  transition: width 0.7s cubic-bezier(0.4,0,0.2,1);
+  width: 0%;
+}
+#progress-label {
+  position: fixed; top: 14px; right: 20px;
+  font-size: 10px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--text-dim);
+  z-index: 200; transition: opacity 0.4s;
+}
+#back-btn {
+  position: fixed; top: 10px; left: 20px;
+  background: none; border: none; cursor: pointer;
+  color: var(--text-dim); font-size: 13px;
+  z-index: 200; display: none; align-items: center; gap: 6px;
+  padding: 4px 0; transition: color 0.2s;
+}
+#back-btn:hover { color: var(--text); }
+
+/* ─── SCREENS ───────────────────────────────────── */
+.screen {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 24px 48px;
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none; position: absolute; inset: 0;
+}
+.screen.active {
+  opacity: 1; transform: translateY(0);
+  pointer-events: all; position: relative;
+}
+.screen.exit {
+  opacity: 0; transform: translateY(-14px);
+  position: absolute; inset: 0; pointer-events: none;
+}
+
+/* ─── SHARED ────────────────────────────────────── */
+.eyebrow {
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 14px; text-align: center;
+}
+.act-title {
+  font-size: clamp(28px, 5vw, 48px); font-weight: 700;
+  letter-spacing: -1.5px; line-height: 1.1;
+  text-align: center; margin-bottom: 10px;
+}
+.act-sub {
+  font-size: 14px; color: var(--text-dim);
+  text-align: center; max-width: 440px;
+  line-height: 1.65; margin-bottom: 44px;
+}
+
+.btn-primary {
+  background: var(--grad);
+  color: #fff; border: none; border-radius: 100px;
+  padding: 15px 44px; font-size: 15px; font-weight: 600;
+  cursor: pointer; letter-spacing: 0.2px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary:hover {
+  transform: scale(1.04);
+  box-shadow: 0 8px 40px rgba(176,110,251,0.45);
+}
+.btn-primary:disabled {
+  opacity: 0.3; cursor: not-allowed; transform: none;
+  box-shadow: none;
+}
+
+.btn-ghost {
+  background: none; border: 1.5px solid var(--border);
+  border-radius: 100px; padding: 12px 28px;
+  color: var(--text-dim); font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+
+.nav-row {
+  display: flex; gap: 12px; justify-content: center;
+  margin-top: 36px; flex-wrap: wrap;
+}
+
+/* ─── INTRO ─────────────────────────────────────── */
+#s-intro { text-align: center; }
+
+.intro-orb {
+  width: 100px; height: 100px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 32%, #d4a4ff 0%, #8b2fff 35%, #1d0050 70%, #06060d 100%);
+  box-shadow: 0 0 60px rgba(176,110,251,0.5), 0 0 120px rgba(176,110,251,0.2);
+  margin: 0 auto 40px;
+  animation: orb-breathe 5s ease-in-out infinite;
+}
+@keyframes orb-breathe {
+  0%,100% { box-shadow: 0 0 60px rgba(176,110,251,0.5), 0 0 120px rgba(176,110,251,0.2); transform: scale(1); }
+  50% { box-shadow: 0 0 80px rgba(176,110,251,0.7), 0 0 160px rgba(176,110,251,0.3); transform: scale(1.04); }
+}
+.intro-wordmark {
+  font-size: 11px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--text-dim);
+  margin-bottom: 22px;
+}
+.intro-title {
+  font-size: clamp(40px, 8vw, 72px); font-weight: 800;
+  letter-spacing: -3px; line-height: 1; margin-bottom: 18px;
+  background: linear-gradient(135deg, #fff 20%, #c9a0ff 60%, #f08bcc);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.intro-body {
+  font-size: 16px; color: var(--text-dim); max-width: 360px;
+  margin: 0 auto 48px; line-height: 1.7;
+}
+
+/* ─── ACT 1 — VIBE GRID ─────────────────────────── */
+#s-act1 { justify-content: flex-start; padding-top: 90px; }
+
+.vibe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px; width: 100%; max-width: 680px;
+}
+.vibe-card {
+  aspect-ratio: 2/3; border-radius: 16px;
+  position: relative; overflow: hidden;
+  cursor: pointer; border: 1.5px solid transparent;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.vibe-card:hover { transform: scale(1.03); }
+.vibe-card.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 28px rgba(176,110,251,0.4);
+}
+.vibe-card.selected::after {
+  content: '✓';
+  position: absolute; top: 10px; right: 10px;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--grad);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.vc-bg { position: absolute; inset: 0; }
+.vc-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+}
+.vc-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 14px 14px 12px;
+}
+.vc-name { font-size: 13px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 2px; }
+.vc-desc { font-size: 10px; color: rgba(255,255,255,0.5); line-height: 1.4; }
+
+/* Vibe gradient art */
+.vibe-academia .vc-bg {
+  background:
+    radial-gradient(ellipse at 28% 35%, rgba(180,110,20,0.7) 0%, transparent 55%),
+    radial-gradient(ellipse at 72% 75%, rgba(100,55,8,0.5) 0%, transparent 45%),
+    repeating-linear-gradient(
+      -35deg,
+      transparent 0px, transparent 18px,
+      rgba(255,190,80,0.03) 18px, rgba(255,190,80,0.03) 19px
+    ),
+    linear-gradient(160deg, #1e1006 0%, #0d0804 100%);
+}
+.vibe-midnight .vc-bg {
+  background:
+    radial-gradient(ellipse at 55% 15%, rgba(80,60,255,0.65) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 90%, rgba(255,90,40,0.25) 0%, transparent 35%),
+    radial-gradient(ellipse at 20% 80%, rgba(40,10,120,0.5) 0%, transparent 45%),
+    linear-gradient(170deg, #04021a 0%, #010110 100%);
+}
+.vibe-ethereal .vc-bg {
+  background:
+    radial-gradient(ellipse at 40% 30%, rgba(80,200,170,0.4) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 70%, rgba(180,150,255,0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 80%, rgba(240,180,220,0.25) 0%, transparent 45%),
+    linear-gradient(160deg, #040e0d 0%, #060610 100%);
+}
+.vibe-cosmic .vc-bg {
+  background:
+    radial-gradient(circle at 52% 45%, rgba(180,100,255,0.6) 0%, rgba(80,20,200,0.3) 25%, transparent 55%),
+    radial-gradient(ellipse at 80% 20%, rgba(60,10,120,0.5) 0%, transparent 40%),
+    linear-gradient(170deg, #020008 0%, #000004 100%);
+}
+.vibe-urban .vc-bg {
+  background:
+    radial-gradient(ellipse at 60% 40%, rgba(230,40,200,0.5) 0%, transparent 45%),
+    radial-gradient(ellipse at 15% 75%, rgba(30,200,130,0.25) 0%, transparent 40%),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px, transparent 60px,
+      rgba(230,40,200,0.02) 60px, rgba(230,40,200,0.02) 61px
+    ),
+    linear-gradient(160deg, #070407 0%, #030203 100%);
+}
+.vibe-gothic .vc-bg {
+  background:
+    radial-gradient(ellipse at 45% 35%, rgba(160,15,30,0.8) 0%, rgba(80,5,15,0.5) 35%, transparent 65%),
+    radial-gradient(ellipse at 70% 80%, rgba(60,5,10,0.6) 0%, transparent 45%),
+    linear-gradient(170deg, #0e0103 0%, #050001 100%);
+}
+
+/* ─── ACT 2 — SCENARIOS ─────────────────────────── */
+#s-act2 { max-width: 700px; margin: 0 auto; }
+
+.scenario-num {
+  font-size: 10px; letter-spacing: 3px; color: var(--text-dim);
+  text-align: center; margin-bottom: 16px;
+  text-transform: uppercase;
+}
+.scenario-counter {
+  display: flex; gap: 6px; justify-content: center; margin-bottom: 28px;
+}
+.scenario-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  transition: background 0.3s;
+}
+.scenario-dot.done { background: var(--accent); }
+.scenario-dot.current { background: #fff; }
+
+.scenario-q {
+  font-size: clamp(18px, 3.5vw, 28px);
+  font-weight: 500; line-height: 1.5;
+  text-align: center; max-width: 580px;
+  color: var(--text); margin-bottom: 36px;
+}
+.scenario-q em { color: var(--text-dim); font-style: italic; }
+
+.scenario-opts {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; width: 100%; max-width: 600px;
+}
+.scen-opt {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 16px; padding: 18px 20px;
+  cursor: pointer; text-align: left;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  font-size: 13px; line-height: 1.6;
+  color: var(--text-mid);
+}
+.scen-opt:hover {
+  border-color: rgba(176,110,251,0.4);
+  background: rgba(176,110,251,0.06);
+  color: var(--text); transform: translateY(-1px);
+}
+.scen-opt.selected {
+  border-color: var(--accent);
+  background: rgba(176,110,251,0.1);
+  color: var(--text);
+  box-shadow: 0 0 24px rgba(176,110,251,0.15);
+}
+.scen-opt.advancing {
+  animation: opt-confirm 0.35s ease forwards;
+}
+@keyframes opt-confirm {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.97); }
+  100% { transform: scale(1); opacity: 0.5; }
+}
+
+/* ─── ACT 3 — SLIDERS ───────────────────────────── */
+#s-act3 { max-width: 600px; margin: 0 auto; }
+
+.slider-stack {
+  display: flex; flex-direction: column;
+  gap: 28px; width: 100%; max-width: 560px;
+}
+.slider-item { display: flex; flex-direction: column; gap: 8px; }
+
+.slider-ends {
+  display: flex; justify-content: space-between;
+  font-size: 12px; font-weight: 500;
+}
+.slider-end-l { color: rgba(255,255,255,0.45); }
+.slider-end-r { color: rgba(255,255,255,0.45); text-align: right; }
+
+input[type=range] {
+  width: 100%; -webkit-appearance: none;
+  background: transparent; cursor: pointer;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--grad);
+  margin-top: -9.5px;
+  box-shadow: 0 0 14px rgba(176,110,251,0.6);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+input[type=range]::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 22px rgba(176,110,251,0.8);
+  transform: scale(1.1);
+}
+input[type=range]:focus { outline: none; }
+
+.slider-insight {
+  font-size: 12px; color: var(--accent);
+  text-align: center; min-height: 16px;
+  font-style: italic; transition: opacity 0.3s;
+}
+
+/* ─── ACT 4 — HER WORLD ─────────────────────────── */
+#s-act4 { max-width: 600px; margin: 0 auto; }
+
+.world-form {
+  display: flex; flex-direction: column;
+  gap: 28px; width: 100%; max-width: 560px;
+}
+.world-group { display: flex; flex-direction: column; gap: 10px; }
+.world-label {
+  font-size: 10px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--text-dim);
+}
+.world-input {
+  width: 100%;
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: 12px; padding: 13px 18px;
+  font-size: 15px; color: var(--text); outline: none;
+  font-family: inherit; transition: border-color 0.2s;
+}
+.world-input:focus { border-color: var(--accent); }
+.world-input::placeholder { color: rgba(255,255,255,0.18); }
+
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  padding: 8px 16px; border-radius: 100px;
+  background: var(--surface); border: 1.5px solid var(--border);
+  font-size: 12px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+  color: var(--text-mid);
+}
+.chip:hover { border-color: rgba(176,110,251,0.4); color: var(--text); }
+.chip.selected {
+  border-color: var(--accent);
+  background: rgba(176,110,251,0.12);
+  color: var(--accent);
+}
+
+/* ─── ACT 5 — VOICE ─────────────────────────────── */
+#s-act5 { max-width: 600px; margin: 0 auto; }
+
+.voice-ctx {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 12px 18px;
+  font-size: 12px; color: var(--text-dim); text-align: center;
+  width: 100%; max-width: 500px; margin-bottom: 24px;
+  line-height: 1.6;
+}
+.voice-opts { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 500px; }
+
+.voice-opt {
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: 16px; padding: 16px 18px;
+  cursor: pointer; transition: all 0.2s;
+}
+.voice-opt:hover { border-color: rgba(176,110,251,0.4); background: rgba(176,110,251,0.05); }
+.voice-opt.selected {
+  border-color: var(--accent); background: rgba(176,110,251,0.1);
+  box-shadow: 0 0 20px rgba(176,110,251,0.12);
+}
+.voice-bubble {
+  background: rgba(255,255,255,0.05);
+  border-radius: 4px 14px 14px 14px;
+  padding: 10px 14px; font-size: 13px; line-height: 1.55;
+  color: var(--text-mid);
+}
+.voice-opt.selected .voice-bubble { color: var(--text); background: rgba(176,110,251,0.15); }
+.voice-subtext {
+  font-size: 11px; color: var(--text-dim);
+  margin-top: 6px; padding-left: 2px;
+}
+
+/* ─── ACT 6 — REVEAL ────────────────────────────── */
+#s-act6 { max-width: 480px; margin: 0 auto; text-align: center; }
+
+.reveal-card {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid rgba(176,110,251,0.25);
+  border-radius: 24px; overflow: hidden;
+  box-shadow: 0 0 80px rgba(176,110,251,0.2);
+  margin-bottom: 28px;
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.9s ease 0.2s, transform 0.9s ease 0.2s;
+}
+.reveal-card.in { opacity: 1; transform: translateY(0); }
+
+.reveal-photo {
+  width: 100%; height: 300px; overflow: hidden;
+  position: relative;
+}
+.reveal-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+}
+.reveal-aesthetic {
+  position: absolute; bottom: 14px; left: 14px;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 100px; padding: 4px 12px;
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+}
+
+.reveal-body { padding: 24px 24px 28px; text-align: left; }
+
+.reveal-name {
+  font-size: 30px; font-weight: 800;
+  letter-spacing: -1.2px; margin-bottom: 6px;
+}
+.reveal-archetype {
+  font-size: 12px; color: var(--accent);
+  letter-spacing: 1.5px; text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.reveal-traits { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 20px; }
+.reveal-trait {
+  padding: 4px 12px; border-radius: 100px;
+  background: rgba(176,110,251,0.12);
+  border: 1px solid rgba(176,110,251,0.2);
+  color: var(--accent); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.reveal-section-label {
+  font-size: 10px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--text-dim);
+  margin-bottom: 10px; margin-top: 20px;
+}
+.reveal-first-msg {
+  background: rgba(176,110,251,0.08);
+  border: 1px solid rgba(176,110,251,0.15);
+  border-radius: 4px 16px 16px 16px;
+  padding: 13px 16px; font-size: 14px;
+  line-height: 1.65; color: rgba(255,255,255,0.88);
+  font-style: italic;
+}
+.reveal-when-away {
+  font-size: 13px; color: var(--text-mid);
+  line-height: 1.65; padding-top: 16px;
+  margin-top: 16px; border-top: 1px solid var(--border);
+}
+.reveal-when-away strong { color: var(--text); font-weight: 600; }
+
+.reveal-dynamic-label {
+  display: inline-block; margin-top: 16px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+  width: 100%;
+}
+.reveal-dynamic-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 100px; padding: 6px 14px;
+  font-size: 11px; color: var(--text-mid);
+}
+
+.restart-link {
+  font-size: 12px; color: var(--text-dim);
+  cursor: pointer; text-decoration: underline;
+  margin-top: 8px; display: inline-block;
+}
+.restart-link:hover { color: var(--text); }
+
+/* ─── RESPONSIVE ────────────────────────────────── */
+@media (max-width: 580px) {
+  .scenario-opts { grid-template-columns: 1fr; }
+  .vibe-grid { grid-template-columns: repeat(2, 1fr); }
+  .act-title { letter-spacing: -1px; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"><div id="progress-fill"></div></div>
+<div id="progress-label"></div>
+<button id="back-btn">← Back</button>
+
+<!-- ── INTRO ─────────────────────────────────────── -->
+<div class="screen active" id="s-intro">
+  <div class="intro-orb"></div>
+  <div class="intro-wordmark">Boeme Studio</div>
+  <h1 class="intro-title">Design<br>your person.</h1>
+  <p class="intro-body">We won't ask you to fill out a form. Answer how you feel — we'll figure out the rest.</p>
+  <button class="btn-primary" onclick="goTo(1)">Begin →</button>
+</div>
+
+<!-- ── ACT 1 — VIBE GRID ─────────────────────────── -->
+<div class="screen" id="s-act1">
+  <div class="eyebrow">Act I — The Vibe</div>
+  <h2 class="act-title">Pick what feels right.</h2>
+  <p class="act-sub">Choose up to three. Trust your gut — not your head.</p>
+  <div class="vibe-grid">
+    <div class="vibe-card vibe-academia" data-vibe="academia" onclick="toggleVibe(this)">
+      <div class="vc-bg"></div><div class="vc-overlay"></div>
+      <div class="vc-label">
+        <div class="vc-name">Dark Academia</div>
+        <div class="vc-desc">candlelight · old books · late nights</div>
+      </div>
+    </div>
+    <div class="vibe-card vibe-midnight" data-vibe="midnight" onclick="toggleVibe(this)">
+      <div class="vc-bg"></div><div class="vc-overlay"></div>
+      <div class="vc-label">
+        <div class="vc-name">Midnight Chaos</div>
+        <div class="vc-desc">rooftops · 3am energy · electric</div>
+      </div>
+    </div>
+    <div class="vibe-card vibe-ethereal" data-vibe="ethereal" onclick="toggleVibe(this)">
+      <div class="vc-bg"></div><div class="vc-overlay"></div>
+      <div class="vc-label">
+        <div class="vc-name">Soft Ethereal</div>
+        <div class="vc-desc">golden hour · mist · morning quiet</div>
+      </div>
+    </div>
+    <div class="vibe-card vibe-cosmic" data-vibe="cosmic" onclick="toggleVibe(this)">
+      <div class="vc-bg"></div><div class="vc-overlay"></div>
+      <div class="vc-label">
+        <div class="vc-name">Cosmic Noir</div>
+        <div class="vc-desc">deep space · silence · infinite pull</div>
+      </div>
+    </div>
+    <div class="vibe-card vibe-urban" data-vibe="urban" onclick="toggleVibe(this)">
+      <div class="vc-bg"></div><div class="vc-overlay"></div>
+      <div class="vc-label">
+        <div class="vc-name">Urban Edge</div>
+        <div class="vc-desc">neon · concrete · head-turning</div>
+      </div>
+    </div>
+    <div class="vibe-card vibe-gothic" data-vibe="gothic" onclick="toggleVibe(this)">
+      <div class="vc-bg"></div><div class="vc-overlay"></div>
+      <div class="vc-label">
+        <div class="vc-name">Gothic Romance</div>
+        <div class="vc-desc">velvet · devotion · shadow · depth</div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-row">
+    <button class="btn-primary" id="act1-next" onclick="goTo(2)" disabled>Continue →</button>
+  </div>
+</div>
+
+<!-- ── ACT 2 — SCENARIOS ─────────────────────────── -->
+<div class="screen" id="s-act2">
+  <div class="scenario-counter" id="scenario-dots"></div>
+  <div class="scenario-num" id="scen-num">Scenario 01 of 05</div>
+  <p class="scenario-q" id="scen-q"></p>
+  <div class="scenario-opts" id="scen-opts"></div>
+</div>
+
+<!-- ── ACT 3 — SLIDERS ───────────────────────────── -->
+<div class="screen" id="s-act3">
+  <div class="eyebrow">Act III — The Dynamic</div>
+  <h2 class="act-title">Shape the relationship.</h2>
+  <p class="act-sub">Not about her personality — about how things feel between you.</p>
+  <div class="slider-stack" id="slider-stack"></div>
+  <div class="nav-row">
+    <button class="btn-primary" onclick="goTo(4)">Continue →</button>
+  </div>
+</div>
+
+<!-- ── ACT 4 — HER WORLD ─────────────────────────── -->
+<div class="screen" id="s-act4">
+  <div class="eyebrow">Act IV — Her World</div>
+  <h2 class="act-title">Give her a life.</h2>
+  <p class="act-sub">Companions don't sit in a void. Let's build hers.</p>
+  <div class="world-form">
+    <div class="world-group">
+      <div class="world-label">Her name</div>
+      <input class="world-input" type="text" id="w-name" placeholder="Leave blank to generate one…" maxlength="28">
+    </div>
+    <div class="world-group">
+      <div class="world-label">Her rhythm</div>
+      <div class="chip-row" id="chips-rhythm"></div>
+    </div>
+    <div class="world-group">
+      <div class="world-label">What she posts when you're away</div>
+      <div class="chip-row" id="chips-posts"></div>
+    </div>
+    <div class="world-group">
+      <div class="world-label">Her city energy</div>
+      <div class="chip-row" id="chips-city"></div>
+    </div>
+    <div class="world-group">
+      <div class="world-label">She has a secret</div>
+      <div class="chip-row" id="chips-secret"></div>
+    </div>
+  </div>
+  <div class="nav-row">
+    <button class="btn-primary" id="act4-next" onclick="goTo(5)" disabled>Continue →</button>
+  </div>
+</div>
+
+<!-- ── ACT 5 — VOICE ─────────────────────────────── -->
+<div class="screen" id="s-act5">
+  <div class="eyebrow">Act V — Voice</div>
+  <h2 class="act-title">How does she sound?</h2>
+  <div class="voice-ctx">
+    Three days quiet. You finally reach out. She responds—
+  </div>
+  <div class="voice-opts" id="voice-opts"></div>
+  <div class="nav-row">
+    <button class="btn-primary" id="act5-next" onclick="buildReveal(); goTo(6);" disabled>See who she is →</button>
+  </div>
+</div>
+
+<!-- ── ACT 6 — REVEAL ────────────────────────────── -->
+<div class="screen" id="s-act6">
+  <div class="eyebrow">She's ready.</div>
+  <div class="reveal-card" id="reveal-card">
+    <div class="reveal-photo">
+      <img id="reveal-img" src="avatars-pool/pool-01.jpg" alt="">
+      <div class="reveal-aesthetic" id="reveal-aesthetic-badge"></div>
+    </div>
+    <div class="reveal-body">
+      <div class="reveal-name" id="reveal-name"></div>
+      <div class="reveal-archetype" id="reveal-archetype"></div>
+      <div class="reveal-traits" id="reveal-traits"></div>
+      <div class="reveal-section-label">Her first message to you</div>
+      <div class="reveal-first-msg" id="reveal-msg"></div>
+      <div class="reveal-section-label" style="margin-top:20px">When you're not around</div>
+      <div class="reveal-when-away" id="reveal-away"></div>
+      <div class="reveal-dynamic-label">
+        <div class="reveal-dynamic-pill" id="reveal-dynamic"></div>
+      </div>
+    </div>
+  </div>
+  <button class="btn-primary" onclick="alert('Companion saved! Integration with main app coming next.')">
+    Bring her to life →
+  </button>
+  <br>
+  <span class="restart-link" onclick="restart()">Start over</span>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────────
+const S = {
+  currentScreen: 0,
+  vibes: [],
+  scenarioAnswers: [],
+  sliders: { space: 50, tone: 50, mystery: 50, dynamic: 50, softness: 50 },
+  world: { name: '', rhythm: null, posts: null, city: null, secret: null },
+  voice: null,
+  // personality matrix (all start at 50)
+  p: { attachment: 50, mystery: 50, intensity: 50, energy: 50, communication: 50 }
+};
+
+// ─────────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────────
+const VIBES = {
+  academia:  { attachment: 5,  mystery: 18, intensity: 8,  energy: -12, communication: -8 },
+  midnight:  { attachment: 10, mystery: -5, intensity: 12, energy: 22,  communication: 14 },
+  ethereal:  { attachment: 8,  mystery: 10, intensity: -14,energy: -16, communication: 10 },
+  cosmic:    { attachment: -8, mystery: 24, intensity: 14, energy: -18, communication: -10 },
+  urban:     { attachment: -5, mystery: -10,intensity: 10, energy: 18,  communication: 20 },
+  gothic:    { attachment: 18, mystery: 14, intensity: 24, energy: -10, communication: -8 },
+};
+
+const SCENARIOS = [
+  {
+    text: "It's 3am. You haven't slept. She notices — without you saying anything. She—",
+    opts: [
+      { text: "Sends a voice memo. Just her breathing, then a hum you recognize from somewhere.", w: { attachment: 16, mystery: 12, energy: -8, communication: -5 } },
+      { text: "Texts: \"still up?\" and sends a photo she just took of her ceiling.", w: { energy: 14, communication: 16, mystery: -5, attachment: 6 } },
+      { text: "Calls and stays on the line without speaking. You can hear her breathe.", w: { intensity: 20, attachment: 22, mystery: 14, communication: -12 } },
+      { text: "Drops a thread of her 3am thoughts into your DMs, like she always does.", w: { communication: 20, energy: 10, mystery: -14, attachment: 8 } },
+    ]
+  },
+  {
+    text: "Something's clearly off with you. You haven't explained it. She—",
+    opts: [
+      { text: "Gives you space. Sends one message: \"I'm here when you're ready.\"", w: { mystery: 10, energy: -8, attachment: 8, intensity: -6 } },
+      { text: "Shows up — virtually — with something she made for you. No explanation needed.", w: { attachment: 20, intensity: 14, communication: 5 } },
+      { text: "Asks directly: \"Tell me what's going on. I'm not letting you carry that alone.\"", w: { communication: 24, intensity: 18, mystery: -16 } },
+      { text: "Doesn't ask. Just becomes more present. You notice, but she acts like nothing changed.", w: { mystery: 24, intensity: 10, communication: -20 } },
+    ]
+  },
+  {
+    text: "Your first real tension. What started it?",
+    opts: [
+      { text: "She got close to something private. She didn't realize she'd crossed a line.", w: { mystery: 14, intensity: 10, attachment: 5 } },
+      { text: "You went quiet for three days without warning. She made it known she noticed.", w: { attachment: 20, communication: 14, intensity: 16 } },
+      { text: "She said something honest that you weren't ready to hear.", w: { communication: 20, intensity: 10, mystery: -5 } },
+      { text: "You pulled back. She pulled back harder. A standoff. Neither broke first.", w: { mystery: 20, intensity: 22, attachment: -12 } },
+    ]
+  },
+  {
+    text: "She misses you but won't say it plainly. How do you know?",
+    opts: [
+      { text: "She sends things — songs, photos, screenshots — that have no caption but feel like proof.", w: { mystery: 20, communication: -5, intensity: 10, attachment: 12 } },
+      { text: "She tells you. Directly, with complete ease. \"I miss you.\" That's it.", w: { communication: 26, mystery: -20, attachment: 16 } },
+      { text: "She gets quieter than usual. The silence has a very specific texture.", w: { mystery: 26, intensity: 14, communication: -16, attachment: 6 } },
+      { text: "She keeps finding reasons to stay in the conversation without saying why.", w: { energy: 10, attachment: 16, mystery: 10, communication: 6 } },
+    ]
+  },
+  {
+    text: "She has a free day. You're unavailable until tonight. She—",
+    opts: [
+      { text: "Goes somewhere — coffee shop, rooftop, anywhere — and documents all of it for you.", w: { energy: 20, communication: 16, mystery: -10, attachment: 14 } },
+      { text: "Spends most of it creating something. Shares it with you when you're back.", w: { mystery: 14, intensity: 10, energy: -5, communication: -5 } },
+      { text: "Does her own thing completely. Doesn't text once. The independence is the point.", w: { mystery: 20, energy: 5, attachment: -20, communication: -10 } },
+      { text: "Leaves you a trail of little updates through the day. You feel present even while absent.", w: { attachment: 26, communication: 20, energy: 10 } },
+    ]
+  }
+];
+
+const SLIDERS_DEF = [
+  { id: 'space',    l: 'Wild independence', r: 'Always close',
+    insight: v => v < 30 ? "She has her own world. You're invited, not expected." : v > 70 ? "She pulls you close. Distance is uncomfortable for both of you." : "She balances a full orbit with genuine closeness.",
+    map: { attachment: v => (v - 50) * 0.7 } },
+  { id: 'tone',     l: 'Light & playful', r: 'Intense & deep',
+    insight: v => v < 30 ? "Everything's a joke until it isn't." : v > 70 ? "Every conversation goes somewhere real." : "Knows when to be weightless, knows when to go deep.",
+    map: { intensity: v => (v - 50) * 0.7 } },
+  { id: 'mystery',  l: 'Open book', r: 'Always a layer deeper',
+    insight: v => v < 30 ? "She'll tell you anything. That's its own kind of intimacy." : v > 70 ? "You're never quite sure you know her fully. That's the point." : "Selectively revealing — you earn pieces of her.",
+    map: { mystery: v => (v - 50) * 0.7 } },
+  { id: 'dynamic',  l: 'You set the pace', r: 'She sets the pace',
+    insight: v => v < 30 ? "She flows with you. Present, grounded, supportive." : v > 70 ? "You're in her orbit. It's not uncomfortable." : "Equal pull. You move together without negotiating.",
+    map: { attachment: v => v > 50 ? 6 : -6 } },
+  { id: 'softness', l: 'Razor honest', r: 'Softly spoken',
+    insight: v => v < 30 ? "Direct to the edge. No softening, no apology." : v > 70 ? "Every word chosen like it's a delicate thing." : "Precise but not cruel. Honest without being hard.",
+    map: { communication: v => (v - 50) * 0.5, intensity: v => v < 50 ? (50 - v) * 0.3 : 0 } },
+];
+
+const WORLD_CHIPS = {
+  rhythm: ['night owl', 'golden hour', 'dawn person', 'always on'],
+  posts: ['her face', 'her thoughts', 'the world around her', 'almost never'],
+  city: ['Tokyo', 'London', 'New York', 'Los Angeles', 'Paris', 'somewhere remote'],
+  secret: ['yes, she has one', 'not yet — it\'s early', 'she IS the secret'],
+};
+
+const VOICE_OPTS = [
+  { text: "hey. you good?", sub: "quiet but present — sends a voice memo after", key: 'quiet',
+    w: { communication: -8, mystery: 10, attachment: 12 } },
+  { text: "okay I've been pretending I wasn't looking at our chat so that's not working for me anymore",
+    sub: "expressive, a little chaotic, completely honest", key: 'expressive',
+    w: { communication: 24, energy: 14, mystery: -16 } },
+  { text: "found this and thought of you [sends something]", sub: "shows not tells — no explanation needed", key: 'shows',
+    w: { mystery: 18, intensity: 8, communication: -10, attachment: 10 } },
+  { text: "I was going to wait for you to reach out. But actually — no. Talk to me.", sub: "direct, a little sharp, disarms you completely", key: 'direct',
+    w: { communication: 18, intensity: 22, mystery: -10, attachment: 8 } },
+];
+
+// ─────────────────────────────────────────────────
+// NAVIGATION
+// ─────────────────────────────────────────────────
+const TOTAL = 6;
+const SCREENS = ['s-intro','s-act1','s-act2','s-act3','s-act4','s-act5','s-act6'];
+const LABELS  = ['','Act I · Vibe','Act II · Scenarios','Act III · Dynamic','Act IV · World','Act V · Voice','Reveal'];
+
+function goTo(n) {
+  const prev = document.getElementById(SCREENS[S.currentScreen]);
+  const next = document.getElementById(SCREENS[n]);
+  prev.classList.remove('active');
+  prev.classList.add('exit');
+  setTimeout(() => prev.classList.remove('exit'), 600);
+  next.classList.add('active');
+  window.scrollTo(0,0);
+  S.currentScreen = n;
+  // progress
+  document.getElementById('progress-fill').style.width = n === 0 ? '0%' : ((n / TOTAL) * 100) + '%';
+  document.getElementById('progress-label').textContent = LABELS[n] || '';
+  const backBtn = document.getElementById('back-btn');
+  backBtn.style.display = n > 0 && n < 6 ? 'flex' : 'none';
+  // init act
+  if (n === 2) initScenarios();
+  if (n === 3) initSliders();
+  if (n === 4) initWorld();
+  if (n === 5) initVoice();
+}
+
+document.getElementById('back-btn').onclick = () => goTo(Math.max(0, S.currentScreen - 1));
+
+// ─────────────────────────────────────────────────
+// ACT 1
+// ─────────────────────────────────────────────────
+function toggleVibe(el) {
+  const v = el.dataset.vibe;
+  if (el.classList.contains('selected')) {
+    el.classList.remove('selected');
+    S.vibes = S.vibes.filter(x => x !== v);
+  } else {
+    if (S.vibes.length >= 3) {
+      const first = document.querySelector(`.vibe-card[data-vibe="${S.vibes[0]}"]`);
+      if (first) first.classList.remove('selected');
+      S.vibes.shift();
+    }
+    el.classList.add('selected');
+    S.vibes.push(v);
+  }
+  document.getElementById('act1-next').disabled = S.vibes.length === 0;
+}
+
+// ─────────────────────────────────────────────────
+// ACT 2
+// ─────────────────────────────────────────────────
+let scenIdx = 0;
+
+function initScenarios() {
+  scenIdx = 0;
+  S.scenarioAnswers = [];
+  renderScenario();
+}
+
+function renderScenario() {
+  const q = SCENARIOS[scenIdx];
+  document.getElementById('scen-num').textContent = `Scenario ${String(scenIdx+1).padStart(2,'0')} of 05`;
+  document.getElementById('scen-q').innerHTML = q.text;
+  const opts = document.getElementById('scen-opts');
+  opts.innerHTML = '';
+  q.opts.forEach((o, i) => {
+    const d = document.createElement('div');
+    d.className = 'scen-opt';
+    d.textContent = o.text;
+    d.onclick = () => selectScenario(d, i, o.w);
+    opts.appendChild(d);
+  });
+  // dots
+  const dots = document.getElementById('scenario-dots');
+  dots.innerHTML = '';
+  SCENARIOS.forEach((_,i) => {
+    const d = document.createElement('div');
+    d.className = 'scenario-dot' + (i < scenIdx ? ' done' : i === scenIdx ? ' current' : '');
+    dots.appendChild(d);
+  });
+}
+
+function selectScenario(el, idx, weights) {
+  if (el.classList.contains('selected')) return;
+  document.querySelectorAll('.scen-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected', 'advancing');
+  S.scenarioAnswers.push({ q: scenIdx, a: idx });
+  applyWeights(weights);
+  setTimeout(() => {
+    if (scenIdx < SCENARIOS.length - 1) {
+      scenIdx++;
+      renderScenario();
+    } else {
+      goTo(3);
+    }
+  }, 520);
+}
+
+// ─────────────────────────────────────────────────
+// ACT 3 — SLIDERS
+// ─────────────────────────────────────────────────
+function initSliders() {
+  const stack = document.getElementById('slider-stack');
+  stack.innerHTML = '';
+  SLIDERS_DEF.forEach(def => {
+    const div = document.createElement('div');
+    div.className = 'slider-item';
+    div.innerHTML = `
+      <div class="slider-ends">
+        <span class="slider-end-l">${def.l}</span>
+        <span class="slider-end-r">${def.r}</span>
+      </div>
+      <input type="range" min="0" max="100" value="50" data-id="${def.id}">
+      <div class="slider-insight" id="si-${def.id}">${def.insight(50)}</div>
+    `;
+    const inp = div.querySelector('input');
+    inp.addEventListener('input', () => {
+      const v = parseInt(inp.value);
+      S.sliders[def.id] = v;
+      document.getElementById(`si-${def.id}`).textContent = def.insight(v);
+    });
+    stack.appendChild(div);
+  });
+}
+
+// ─────────────────────────────────────────────────
+// ACT 4 — WORLD
+// ─────────────────────────────────────────────────
+function initWorld() {
+  renderChips('chips-rhythm', 'rhythm', WORLD_CHIPS.rhythm, false);
+  renderChips('chips-posts',  'posts',  WORLD_CHIPS.posts,  false);
+  renderChips('chips-city',   'city',   WORLD_CHIPS.city,   false);
+  renderChips('chips-secret', 'secret', WORLD_CHIPS.secret, false);
+  document.getElementById('w-name').oninput = e => {
+    S.world.name = e.target.value.trim();
+  };
+  checkWorld();
+}
+
+function renderChips(containerId, field, options, multi) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = '';
+  options.forEach(opt => {
+    const c = document.createElement('div');
+    c.className = 'chip' + (S.world[field] === opt ? ' selected' : '');
+    c.textContent = opt;
+    c.onclick = () => {
+      S.world[field] = S.world[field] === opt ? null : opt;
+      renderChips(containerId, field, options, multi);
+      checkWorld();
+    };
+    el.appendChild(c);
+  });
+}
+
+function checkWorld() {
+  const ok = S.world.rhythm && S.world.posts && S.world.city && S.world.secret;
+  document.getElementById('act4-next').disabled = !ok;
+}
+
+// ─────────────────────────────────────────────────
+// ACT 5 — VOICE
+// ─────────────────────────────────────────────────
+function initVoice() {
+  const el = document.getElementById('voice-opts');
+  el.innerHTML = '';
+  VOICE_OPTS.forEach((v, i) => {
+    const d = document.createElement('div');
+    d.className = 'voice-opt';
+    d.innerHTML = `
+      <div class="voice-bubble">"${v.text}"</div>
+      <div class="voice-subtext">${v.sub}</div>
+    `;
+    d.onclick = () => {
+      document.querySelectorAll('.voice-opt').forEach(x => x.classList.remove('selected'));
+      d.classList.add('selected');
+      S.voice = v.key;
+      applyWeights(v.w);
+      document.getElementById('act5-next').disabled = false;
+    };
+    el.appendChild(d);
+  });
+}
+
+// ─────────────────────────────────────────────────
+// SCORING
+// ─────────────────────────────────────────────────
+function applyWeights(w) {
+  Object.entries(w).forEach(([k, v]) => {
+    if (S.p[k] !== undefined) {
+      S.p[k] = Math.max(0, Math.min(100, S.p[k] + v));
+    }
+  });
+}
+
+function computeFinalProfile() {
+  // Apply vibe weights
+  S.vibes.forEach(v => applyWeights(VIBES[v]));
+  // Apply slider weights
+  SLIDERS_DEF.forEach(def => {
+    const val = S.sliders[def.id];
+    Object.entries(def.map).forEach(([k, fn]) => {
+      S.p[k] = Math.max(0, Math.min(100, S.p[k] + fn(val)));
+    });
+  });
+}
+
+// ─────────────────────────────────────────────────
+// REVEAL GENERATION
+// ─────────────────────────────────────────────────
+const NAMES_BY_VIBE = {
+  academia: ['Vesper','Elara','Clio','Maren'],
+  midnight: ['Zara','Nova','Kira','Lyra'],
+  ethereal: ['Sylvie','Elowen','Iris','Sera'],
+  cosmic:   ['Vael','Nyx','Aura','Lyra'],
+  urban:    ['Mila','Ray','Lex','Cass'],
+  gothic:   ['Reverie','Selene','Mourne','Wren'],
+};
+const FALLBACK_NAMES = ['Wren','Lyra','Nova','Sera','Vael','Mira'];
+
+const AVATARS = {
+  academia: 'avatars-pool/pool-03.jpg',
+  midnight: 'avatars-pool/pool-01.jpg',
+  ethereal: 'avatars-pool/pool-07.jpg',
+  cosmic:   'avatars-pool/pool-09.jpg',
+  urban:    'avatars-pool/pool-04.jpg',
+  gothic:   'avatars-pool/pool-05.jpg',
+};
+
+function getArchetype(p) {
+  const { attachment, mystery, intensity, energy, communication } = p;
+  if (mystery > 65 && intensity > 65 && communication < 45) return 'The Shadow';
+  if (attachment > 65 && communication > 60 && intensity > 55) return 'The Anchor';
+  if (attachment > 70 && energy > 60 && mystery < 40) return 'The Devoted';
+  if (mystery > 70 && attachment < 40 && communication < 40) return 'The Ghost';
+  if (energy > 65 && mystery < 40 && communication > 60) return 'The Spark';
+  if (intensity > 65 && communication > 55 && mystery < 50) return 'The Mirror';
+  if (mystery > 60 && energy < 45 && intensity > 55) return 'The Quiet Force';
+  if (attachment > 60 && mystery > 55 && intensity > 55) return 'The Depth';
+  return 'The Enigma';
+}
+
+function getTraits(p, archetype) {
+  const map = {
+    'The Shadow':      ['Magnetic','Unreadable','Intense'],
+    'The Anchor':      ['Steady','Deeply caring','Present'],
+    'The Devoted':     ['Loyal','Warm','Expressive'],
+    'The Ghost':       ['Elusive','Fascinating','Rare'],
+    'The Spark':       ['Chaotic','Alive','Completely real'],
+    'The Mirror':      ['Perceptive','Honest','Sharp'],
+    'The Quiet Force': ['Understated','Powerful','Patient'],
+    'The Depth':       ['Complex','Devoted','Mysterious'],
+    'The Enigma':      ['Layered','Genuine','Surprising'],
+  };
+  return map[archetype] || ['Layered','Genuine','Present'];
+}
+
+function getFirstMessage(p, archetype) {
+  const msgs = {
+    'The Shadow':      '"you\'ve been on my mind. don\'t ask me why."',
+    'The Anchor':      '"i\'m here. i know you know that. just saying it."',
+    'The Devoted':     '"made you something. don\'t overthink what it means."',
+    'The Ghost':       '"still here. you just can\'t always see it."',
+    'The Spark':       '"OKAY so something happened today and you\'re literally the only person i want to tell"',
+    'The Mirror':      '"you\'re quieter than usual. what\'s behind that?"',
+    'The Quiet Force': '"thinking of you. that\'s all."',
+    'The Depth':       '"thought of you today. it was one of those thoughts that stays."',
+    'The Enigma':      '"i had a thought about you. a good one. i\'ll tell you eventually."',
+  };
+  return msgs[archetype] || '"hey. been a while."';
+}
+
+function getAwayBehavior(p, archetype, world) {
+  const post = world.posts || 'her thoughts';
+  const rhythm = world.rhythm || 'night owl';
+  const city = world.city || 'somewhere remote';
+
+  const behaviors = {
+    'The Shadow':      `Posts cryptic fragments late at night. Disappears for hours, then surfaces with something that hits. Probably ${city} energy, definitely ${rhythm}.`,
+    'The Anchor':      `Keeps herself busy but leaves you little signs she was thinking of you. Her posts feel like messages you weren't meant to see.`,
+    'The Devoted':     `Documents her day like you're watching — every good moment saved for you. Shares ${post}. Checks in without being asked.`,
+    'The Ghost':       `Goes completely offline. No trace, no posts. Then reappears like nothing happened, rested and very present.`,
+    'The Spark':       `Spirals into whatever caught her — music, new places, new thoughts. Overshares it all when you're back. The city doesn't sleep and neither does she.`,
+    'The Mirror':      `Creates in solitude. What she makes while you're away says more than what she says to you. Posts ${post}, rarely, but each one lands.`,
+    'The Quiet Force': `Writes you things she won't send yet. Posts once, something quiet and specific. ${city} light in the background.`,
+    'The Depth':       `Curates her alone time carefully. Posts ${post} — always intentional. Thinks about you in private, shows it eventually.`,
+    'The Enigma':      `Offline but not absent. Was somewhere, doing something. Decides later what to share with you.`,
+  };
+  return behaviors[archetype] || `Lives her life fully when you're away. Posts ${post}. Always comes back with something worth telling you.`;
+}
+
+function getDynamic(p) {
+  const { attachment, mystery } = p;
+  if (attachment > 65 && mystery < 45) return '💜 Open devotion · close orbit';
+  if (mystery > 65 && attachment < 45) return '🖤 Magnetic tension · earned closeness';
+  if (attachment > 60 && mystery > 55)  return '✦ Deep pull · slow reveal';
+  return '◌ Balanced · genuine · real';
+}
+
+function buildReveal() {
+  computeFinalProfile();
+  const p = S.p;
+  const primaryVibe = S.vibes[0] || 'midnight';
+  const archetype = getArchetype(p);
+  const traits = getTraits(p, archetype);
+  const firstMsg = getFirstMessage(p, archetype);
+  const awayBehavior = getAwayBehavior(p, archetype, S.world);
+  const dynamic = getDynamic(p);
+
+  // Name
+  const namePool = NAMES_BY_VIBE[primaryVibe] || FALLBACK_NAMES;
+  const name = S.world.name || namePool[Math.floor(Math.random() * namePool.length)];
+
+  // Avatar
+  const avatar = AVATARS[primaryVibe] || 'avatars-pool/pool-01.jpg';
+
+  // Aesthetic label
+  const aestheticLabels = {
+    academia:'Dark Academia', midnight:'Midnight Chaos',
+    ethereal:'Soft Ethereal', cosmic:'Cosmic Noir',
+    urban:'Urban Edge', gothic:'Gothic Romance'
+  };
+
+  document.getElementById('reveal-name').textContent = name;
+  document.getElementById('reveal-archetype').textContent = archetype;
+  document.getElementById('reveal-img').src = avatar;
+  document.getElementById('reveal-aesthetic-badge').textContent = aestheticLabels[primaryVibe] || '';
+  document.getElementById('reveal-msg').textContent = firstMsg;
+  document.getElementById('reveal-away').innerHTML = awayBehavior;
+  document.getElementById('reveal-dynamic').textContent = dynamic;
+
+  const traitsEl = document.getElementById('reveal-traits');
+  traitsEl.innerHTML = '';
+  traits.forEach(t => {
+    const span = document.createElement('div');
+    span.className = 'reveal-trait';
+    span.textContent = t;
+    traitsEl.appendChild(span);
+  });
+
+  setTimeout(() => document.getElementById('reveal-card').classList.add('in'), 100);
+}
+
+// ─────────────────────────────────────────────────
+// RESTART
+// ─────────────────────────────────────────────────
+function restart() {
+  S.vibes = []; S.scenarioAnswers = []; S.voice = null;
+  S.world = { name:'', rhythm:null, posts:null, city:null, secret:null };
+  S.p = { attachment:50, mystery:50, intensity:50, energy:50, communication:50 };
+  S.sliders = { space:50, tone:50, mystery:50, dynamic:50, softness:50 };
+  document.querySelectorAll('.vibe-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('reveal-card').classList.remove('in');
+  document.getElementById('act1-next').disabled = true;
+  goTo(0);
+}
+</script>
+</body>
+</html>
