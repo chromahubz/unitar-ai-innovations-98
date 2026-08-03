@@ -433,7 +433,7 @@
           <div class="kicker">AI Companion</div>
           <h3>Boeme</h3>
           <p>An AI companion with persistent personality and emotional memory — one that remembers who you are and what you've been through. Built from scratch, no template.</p>
-          <a class="case-link" href="https://boeme-ai-companion.vercel.app" target="_blank" rel="noopener">Open project →</a>
+          <a class="case-link" href="project.html#boeme">Open project →</a>
         </div>
       </article>
       <article class="case reveal">
@@ -442,7 +442,7 @@
           <div class="kicker">Video Editor</div>
           <h3>VidBlade</h3>
           <p>A drag-and-drop video editor built for the timeline-averse. The simplest editing flow ever shipped — professional output, zero learning curve, no install required.</p>
-          <a class="case-link" href="https://vidblade-editor.vercel.app" target="_blank" rel="noopener">Open project →</a>
+          <a class="case-link" href="project.html#vidblade">Open project →</a>
         </div>
       </article>
       <article class="case reveal">
@@ -451,7 +451,7 @@
           <div class="kicker">Music Tool</div>
           <h3>InfiniteMix</h3>
           <p>Auto DJ mixing with BPM analysis, smart transitions, and professional output — the kind of content that goes viral, made without needing to know a thing about music production.</p>
-          <a class="case-link" href="https://infinitemixappsumo.vercel.app" target="_blank" rel="noopener">Open project →</a>
+          <a class="case-link" href="project.html#infinitemix">Open project →</a>
         </div>
       </article>
     </div>
@@ -660,7 +660,7 @@
         </div>
 
         <div class="proj-card">
-          <div class="proj-thumb ph ph-creative"><span class="ph-initials">QR</span><span class="proj-status-badge badge-live">Live</span></div>
+          <div class="proj-thumb"><img src="screenshots/artistic-qr.png" alt="Artistic QR Code Gallery" loading="lazy"><span class="proj-status-badge badge-live">Live</span></div>
           <div class="proj-body">
             <div class="proj-name">Artistic QR Code Gallery</div>
             <div class="proj-desc">30 AI-generated QR codes that are visually stunning and fully scannable. Each one is a different art style — watercolour, glitch, mosaic, neon. All of them work.</div>
@@ -1055,16 +1055,15 @@ document.querySelectorAll('.proj-card').forEach((card, i) => {
   if (!slug) return;
   const detailUrl = `project.html#${slug}`;
   card.style.cursor = 'pointer';
-  // Add "Details" link into proj-actions
-  const actions = card.querySelector('.proj-actions');
-  if (actions) {
-    const dLink = document.createElement('a');
-    dLink.href = detailUrl;
-    dLink.className = 'proj-link ghost';
-    dLink.textContent = 'Details →';
-    actions.appendChild(dLink);
-  }
-  // Make whole card click go to detail (unless clicking an existing link)
+  // Redirect all existing action buttons to the detail page (external URL lives on project.html)
+  card.querySelectorAll('.proj-actions .proj-link').forEach(link => {
+    link.href = detailUrl;
+    link.removeAttribute('target');
+    link.removeAttribute('rel');
+    link.textContent = 'Details →';
+    link.classList.remove('ghost');
+  });
+  // Make thumbnail click go to detail page
   card.addEventListener('click', e => {
     if (e.target.closest('a')) return;
     window.location.href = detailUrl;
