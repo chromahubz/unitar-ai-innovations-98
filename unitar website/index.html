@@ -512,7 +512,7 @@
         </div>
 
         <div class="proj-card">
-          <div class="proj-thumb ph ph-flagship"><span class="ph-initials">Cosmofic</span><span class="proj-status-badge badge-wip">WIP</span></div>
+          <div class="proj-thumb"><img src="screenshots/cosmofic.png" alt="Cosmofic" loading="lazy"><span class="proj-status-badge badge-wip">WIP</span></div>
           <div class="proj-body">
             <div class="proj-name">Cosmofic</div>
             <div class="proj-desc">Full AI video creation system — storyboard to final cut in one flow. Chat-to-edit interface, AI image and video generation, no external tools required.</div>
@@ -1087,8 +1087,14 @@ document.querySelectorAll('.proj-card').forEach((card, i) => {
 // Graceful image fallback for missing screenshots
 document.querySelectorAll('.proj-thumb img').forEach(img => {
   img.addEventListener('error', function() {
-    this.style.display = 'none';
-    this.parentElement.style.background = 'linear-gradient(135deg,rgba(109,255,193,.12),rgba(82,224,255,.08))';
+    const thumb = this.parentElement;
+    const label = this.alt || '';
+    this.remove();
+    thumb.classList.add('ph', 'ph-flagship');
+    const init = document.createElement('span');
+    init.className = 'ph-initials';
+    init.textContent = label;
+    thumb.insertBefore(init, thumb.firstChild);
   });
 });
 </script>
