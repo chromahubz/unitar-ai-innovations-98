@@ -854,6 +854,7 @@ liveUrl:'https://github.com/UnitarLab/GifCityScraper',
 accent:'#52e0ff'},
 
 dimensio:{name:'Dimensio',cat:'Tools',status:'wip',clientWork:false,
+driveDemo:'https://drive.google.com/file/d/1xlq76LfC_37lsGpmzlh-EoBgVygVpg98/preview',
 tagline:'Cinematic parallax — depth layering for images that feel alive.',
 desc:'Dimensio takes a flat image and creates a cinematic parallax effect by separating it into depth layers. Subject, midground, and background are peeled apart, given independent motion, and composited back into an animated output that makes still images feel three-dimensional.',
 flow:[
@@ -1304,16 +1305,17 @@ function render(slug){
     <div class="wrap"><div class="screens-track">${galleryItems}</div></div>
   </section>`:''}
 
-  <!-- YOUTUBE EXAMPLES -->
-  ${(p.youtubeExamples||p.livePerformance||p.youtubeDemo)?`<section class="section" style="border-top:1px solid var(--glass-border);">
+  <!-- VIDEO / DEMO -->
+  ${(p.youtubeExamples||p.livePerformance||p.youtubeDemo||p.driveDemo)?`<section class="section" style="border-top:1px solid var(--glass-border);">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="eyebrow">${p.youtubeExamples?'Output examples':p.livePerformance?'Live performance':'See it in action'}</span>
-        <h2>${p.youtubeExamples?'Made with InfiniteMix':p.livePerformance?'Live at full power':'In action'}</h2>
-        ${p.livePerformance||p.youtubeDemo?`<p style="color:var(--ink-300);margin-top:.6rem;">${p.livePerformance?'A live audio-visual performance — the tool running in real time.':'Watch the full demo below.'}</p>`:''}
+        <span class="eyebrow">${p.youtubeExamples?'Output examples':p.livePerformance?'Live performance':p.driveDemo?'Demo':'See it in action'}</span>
+        <h2>${p.youtubeExamples?'Made with InfiniteMix':p.livePerformance?'Live at full power':p.driveDemo?'See the effect in action':'In action'}</h2>
+        <p style="color:var(--ink-300);margin-top:.6rem;">${p.livePerformance?'A live audio-visual performance — the tool running in real time.':p.driveDemo?'Cinematic parallax depth — subjects float, backgrounds recede. Watch the full demo.':'Watch the full demo below.'}</p>
       </div>
       ${p.youtubeExamples?`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-top:2rem;">${(p.youtubeExamples).map(v=>`<a href="https://youtu.be/${v.id}" target="_blank" rel="noopener" style="display:block;border-radius:14px;overflow:hidden;border:1px solid var(--glass-border);transition:transform .25s,border-color .25s;text-decoration:none;" onmouseover="this.style.transform='translateY(-3px)';this.style.borderColor='rgba(170,224,224,.4)'" onmouseout="this.style.transform='';this.style.borderColor='var(--glass-border)'"><img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg" alt="${v.label}" style="width:100%;display:block;aspect-ratio:16/9;object-fit:cover;"><div style="padding:.75rem 1rem;background:rgba(14,28,38,.85);"><span style="font-family:var(--font-mono);font-size:.72rem;color:var(--ink-300);letter-spacing:.04em;">${v.label}</span></div></a>`).join('')}</div>`:''}
-      ${p.livePerformance||p.youtubeDemo?`<div style="margin-top:2rem;border-radius:16px;overflow:hidden;border:1px solid var(--glass-border);aspect-ratio:16/9;position:relative;"><iframe style="width:100%;height:100%;position:absolute;inset:0;border:none;" src="https://www.youtube.com/embed/${(p.livePerformance||p.youtubeDemo).replace(/.*(?:youtu\.be\/|v=)([^&]+).*/,'$1')}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>`:''}
+      ${(p.livePerformance||p.youtubeDemo)?`<div style="margin-top:2rem;border-radius:16px;overflow:hidden;border:1px solid var(--glass-border);aspect-ratio:16/9;position:relative;"><iframe style="width:100%;height:100%;position:absolute;inset:0;border:none;" src="https://www.youtube.com/embed/${(p.livePerformance||p.youtubeDemo).replace(/.*(?:youtu\.be\/|v=)([^&]+).*/,'$1')}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>`:''}
+      ${p.driveDemo?`<div style="margin-top:2rem;border-radius:16px;overflow:hidden;border:1px solid var(--glass-border);aspect-ratio:16/9;position:relative;box-shadow:0 0 40px -10px rgba(82,224,255,.2);"><iframe style="width:100%;height:100%;position:absolute;inset:0;border:none;" src="${p.driveDemo}" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>`:''}
     </div>
   </section>`:''}
 

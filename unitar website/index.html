@@ -106,7 +106,7 @@
   .rain{position:absolute;inset:0;overflow:hidden;opacity:.18;pointer-events:none;}
   .rain span{position:absolute;top:-10%;width:1px;height:140px;background:linear-gradient(180deg,transparent,var(--bio-cyan),transparent);animation:fall linear infinite;}
   @keyframes fall{0%{transform:translateY(-20%);}100%{transform:translateY(140vh);}}
-  .timeline{position:relative;max-width:760px;}
+  .timeline{position:relative;max-width:760px;margin-inline:auto;}
   .timeline::before{content:'';position:absolute;left:21px;top:6px;bottom:6px;width:1px;background:linear-gradient(180deg,var(--bio-cyan),var(--dusk-purple) 60%,transparent);opacity:.5;}
   .step{position:relative;display:grid;grid-template-columns:44px 1fr;gap:1.6rem;padding-bottom:2.6rem;}
   .step:last-child{padding-bottom:0;}
@@ -412,10 +412,10 @@
 <section class="section process" id="process">
   <div class="rain" aria-hidden="true"></div>
   <div class="wrap" style="position:relative;">
-    <div class="section-head reveal">
-      <span class="eyebrow">How We Work</span>
+    <div class="section-head reveal" style="max-width:760px;margin-inline:auto;text-align:center;">
+      <span class="eyebrow" style="justify-content:center;">How We Work</span>
       <h2>Fast. Focused. Finished.</h2>
-      <p>We don't pad timelines. Every project moves through the same five stages — from the first conversation to a live URL with real users on it.</p>
+      <p style="margin-inline:auto;">We don't pad timelines. Every project moves through the same five stages — from the first conversation to a live URL with real users on it.</p>
     </div>
     <div class="timeline">
       <div class="step reveal"><div class="node">01</div><div><h3>Scope</h3><p>We start with the real problem, not the brief. One conversation to understand what you actually need, what constraints exist, and what "done" looks like.</p></div></div>
